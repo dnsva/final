@@ -18,7 +18,8 @@ public class SlotInfo {
     public static int takenSlots = 0;
 
     private static JFrame slotInfoFrame = new JFrame();
-    private static JFrame slotAddFrame = new JFrame(); //for slot creation
+
+    //private static JFrame slotAddFrame = new JFrame(); //for slot creation
 
    // private JTextField nameField;
     private static DefaultListModel<String> slotListModel;
@@ -29,10 +30,16 @@ public class SlotInfo {
 
     public static void CreateInfoFrame() {
         slotInfoFrame.setTitle("By Anna Denisova");
+        //slotInfoFrame.getContentPane().setBackground( Color.red );
+       // slotInfoFrame.getContentPane().setBackground(new java.awt.Color(204, 166, 166));
+
         slotInfoFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT);
         slotInfoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         slotInfoFrame.setLocationRelativeTo(null);
         slotInfoFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
+
+        //Container c = slotInfoFrame.getContentPane();
+        //c.setBackground(Color.red);
 
         /* 2 Panels.
         1st panel to show slots
@@ -47,7 +54,22 @@ public class SlotInfo {
         slotList = new JList<>(slotListModel); //The list of things in SlotListModel
         listPanel.add(new JScrollPane(slotList));
 
+        listPanel.setForeground(Color.red);
+
+        /*
+        try{
+            // Assuming you have a JPanel named myPanel and an ImageIcon named imageIcon
+
+            JLabel backgroundImageLabel = new JLabel(new ImageIcon(ImageIO.read(new File("src/GameSlots/91_strawberrycake_dish.png"))));
+            listPanel.setLayout(new BorderLayout());
+            listPanel.add(backgroundImageLabel, BorderLayout.CENTER);
+
+            // Make the JLabel non-opaque to allow other components on top
+           // backgroundImageLabel.setOpaque(false);
+        }catch(Exception ignored){}
+        */
         slotInfoFrame.getContentPane().add(listPanel, BorderLayout.CENTER); //Add this panel to the frame
+        listPanel.setBackground(Color.pink);
 
         //PANEL 2 - BUTTONS!!!!!!!!!
         /*
@@ -144,6 +166,24 @@ public class SlotInfo {
             // get icons
             ImageIcon icon1 =  new ImageIcon("src/GameSlots/31_chocolatecake_dish.png");
             ImageIcon icon2 = new ImageIcon("src/GameSlots/23_cheesecake_dish.png");
+
+            // Show icon1 for slot name input
+            Object nameObj = JOptionPane.showInputDialog(slotInfoFrame, "Enter slot name:", "Slot Name", JOptionPane.QUESTION_MESSAGE, icon1, null, null);
+
+            // Check for cancellation
+            if (nameObj == null) {
+                return; // User canceled, exit method
+            }
+
+            String name = (String) nameObj; // Cast to String
+
+            // Handle empty input
+            if (name.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(slotInfoFrame, "Slot name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            /*
             // Show icon1 for slot name input
             String name = (String) JOptionPane.showInputDialog(slotInfoFrame, "Enter slot name:", "Slot Name", JOptionPane.QUESTION_MESSAGE, icon1, null, null);
            // String name = (nameObj == null) ? null : (String) nameObj; // Cast to String if not null
@@ -155,6 +195,8 @@ public class SlotInfo {
                 JOptionPane.showMessageDialog(slotInfoFrame, "Slot name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
                 return; // Return if slot name is empty or user cancels
             }
+            */
+
 
             // Prompt the user for slot difficulty
             String[] difficultyOptions = {"Easy", "Medium", "Hard"};
@@ -218,11 +260,24 @@ public class SlotInfo {
             String difficulty = slotDifficulties[selectedIndex]; //get from array
             String date = slotCreationDates[selectedIndex]; //get from array
             ImageIcon icon =  new ImageIcon("src/GameSlots/91_strawberrycake_dish.png");
-            String newName = (String) JOptionPane.showInputDialog(slotInfoFrame,
+
+
+            Object newNameObj = JOptionPane.showInputDialog(slotInfoFrame,
                     "Enter new name for the slot",
                     "New Slot Name", // Title
                     JOptionPane.QUESTION_MESSAGE,
                     icon, null, null);
+
+            // Check for cancellation
+            if (newNameObj == null) {
+                return; // User canceled, exit method
+            }
+            String newName = (String) newNameObj; //Cast to strinig
+            // Handle empty input
+            if (newName.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(slotInfoFrame, "Slot name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             if(newName != null){
                 slotListModel.set(selectedIndex, String.format("%s (%s) - Created on: %s", newName, difficulty, date));
