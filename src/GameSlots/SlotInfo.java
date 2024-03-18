@@ -14,12 +14,12 @@ public class SlotInfo {
     public static String [] slotNames = new String[3];
     public static String [] slotDifficulties = new String[3];
     public static String [] slotCreationDates = new String[3];
+    public static String [] slotCharacters = new String[3];
+    private static String selectedCharacter = ""; //used in character selection
 
     public static int takenSlots = 0;
 
     private static JFrame slotInfoFrame = new JFrame();
-
-    //private static JFrame slotAddFrame = new JFrame(); //for slot creation
 
    // private JTextField nameField;
     private static DefaultListModel<String> slotListModel;
@@ -28,18 +28,14 @@ public class SlotInfo {
     private static int WINDOWWIDTH = 500;
     private static int WINDOWHEIGHT = 300;
 
-    public static void CreateInfoFrame() {
+    public static void createInfoFrame() {
         slotInfoFrame.setTitle("By Anna Denisova");
         //slotInfoFrame.getContentPane().setBackground( Color.red );
        // slotInfoFrame.getContentPane().setBackground(new java.awt.Color(204, 166, 166));
-
         slotInfoFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT);
         slotInfoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         slotInfoFrame.setLocationRelativeTo(null);
         slotInfoFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
-
-        //Container c = slotInfoFrame.getContentPane();
-        //c.setBackground(Color.red);
 
         /* 2 Panels.
         1st panel to show slots
@@ -56,18 +52,6 @@ public class SlotInfo {
 
         listPanel.setForeground(Color.red);
 
-        /*
-        try{
-            // Assuming you have a JPanel named myPanel and an ImageIcon named imageIcon
-
-            JLabel backgroundImageLabel = new JLabel(new ImageIcon(ImageIO.read(new File("src/GameSlots/91_strawberrycake_dish.png"))));
-            listPanel.setLayout(new BorderLayout());
-            listPanel.add(backgroundImageLabel, BorderLayout.CENTER);
-
-            // Make the JLabel non-opaque to allow other components on top
-           // backgroundImageLabel.setOpaque(false);
-        }catch(Exception ignored){}
-        */
         slotInfoFrame.getContentPane().add(listPanel, BorderLayout.CENTER); //Add this panel to the frame
         listPanel.setBackground(Color.pink);
 
@@ -118,10 +102,10 @@ public class SlotInfo {
         slotInfoFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH); //Add this panel to the frame
     }
 
-    public static void ShowInfoFrame(){
+    public static void showInfoFrame(){
         slotInfoFrame.setVisible(true);
     }
-    public static void HideInfoFrame(){
+    public static void hideInfoFrame(){
         slotInfoFrame.setVisible(false);
     }
 
@@ -136,27 +120,6 @@ public class SlotInfo {
     }
 
     public static void addSlot(){
-
-        // Load JPEG image
-        /*
-        File file = new File("23_cheescake_dish.png");
-        Image img = ImageIO.read(file);
-        // Convert image to ImageIcon
-        ImageIcon icon1 = new ImageIcon(img);
-        file = new File("31_chocolate_cake_dish.png");
-        img = ImageIO.read(file);
-        ImageIcon icon2 = new ImageIcon(img);
-        */
-
-        /*
-        ImageIcon icon = null, icon2 = null;
-        try {
-            icon = new ImageIcon(ImageIO.read(new File("23_cheescake_dish.png")));
-            icon2 = new ImageIcon(ImageIO.read(new File("31_chocolatecake_dish.png")));
-        }catch(Exception e){
-            //i dont care
-        }
-        */
 
         //The folling code adds a new slot to the list without getting
         //input from the user. It just uses "asd" for each field for test purpsoes
@@ -183,21 +146,6 @@ public class SlotInfo {
                 return;
             }
 
-            /*
-            // Show icon1 for slot name input
-            String name = (String) JOptionPane.showInputDialog(slotInfoFrame, "Enter slot name:", "Slot Name", JOptionPane.QUESTION_MESSAGE, icon1, null, null);
-           // String name = (nameObj == null) ? null : (String) nameObj; // Cast to String if not null
-
-            // Prompt the user for slot name
-
-           // String name = JOptionPane.showInputDialog(slotInfoFrame, "Enter slot name:");
-            if (name == null || name.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(slotInfoFrame, "Slot name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-                return; // Return if slot name is empty or user cancels
-            }
-            */
-
-
             // Prompt the user for slot difficulty
             String[] difficultyOptions = {"Easy", "Medium", "Hard"};
 
@@ -211,31 +159,109 @@ public class SlotInfo {
             // Get the current date and time
             String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
-            //add to global arrays
-            takenSlots++;
-            slotNames[takenSlots-1] = name;
-            slotDifficulties[takenSlots-1] = difficulty;
-            slotCreationDates[takenSlots-1] = date;
 
-            // Add the slot information to the list
-            String slotDetails = String.format("%s (%s) - Created on: %s", name, difficulty, date);
-            slotListModel.addElement(slotDetails);
 
-            /*
-            TESTS
-            takenSlots++;
+            //----------------------------------------
 
-            String name = "asd";
-            String difficulty = "asd";
-            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            JFrame characterSelectFrame = new JFrame(); //for slot creation
+            //Now, character selection
+            //characterSelectFrame
 
-            slotNames[takenSlots-1] = name;
-            slotDifficulties[takenSlots-1] = difficulty;
-            slotCreationDates[takenSlots-1] = date;
+            characterSelectFrame.setVisible(true);
+            characterSelectFrame.setTitle("By Anna Denisova");
+            characterSelectFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT);
+            characterSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            characterSelectFrame.setLocationRelativeTo(null);
+            characterSelectFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
 
-            String slotDetails = String.format("%s (%s) - Created on: %s", name, difficulty, date);
-            slotListModel.addElement(slotDetails);
-            */
+            hideInfoFrame();
+
+            //------------------------------------------
+
+            String[] characterNames = {"Wizard", "Mime", "Warrior", "Doctor", "Farmer"};
+            String[] descriptions = {
+                    "Master of Arcane Arts. Weak in close combat.",
+                    "A silent but deadly performer. Confuses enemies with tricks.",
+                    "Strong and fearless fighter. Leads the charge on the battlefield.",
+                    "Heals allies and weakens enemies with medical knowledge.",
+                    "Hardworking and resourceful. Provides support with crops and livestock."
+            };
+
+            JPanel panel = new JPanel(new GridLayout(characterNames.length * 2, 1, 5, 5));
+
+            for (int i = 0; i < characterNames.length; i++) {
+                JLabel nameLabel = new JLabel(characterNames[i], JLabel.CENTER);
+                //nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD));
+                panel.add(nameLabel);
+
+                JLabel descriptionLabel = new JLabel(descriptions[i]);
+                descriptionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                panel.add(descriptionLabel);
+            }
+
+            JPanel buttonPanel = new JPanel();
+            ButtonGroup group = new ButtonGroup();
+            for (String characterName : characterNames) {
+                JRadioButton button = new JRadioButton(characterName);
+                button.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                       selectedCharacter = ((JRadioButton) e.getSource()).getText();
+                    }
+                });
+                group.add(button);
+                buttonPanel.add(button);
+            }
+
+            JButton confirmButton = new JButton("Confirm");
+            confirmButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (selectedCharacter!= null) {
+                        int confirmation = JOptionPane.showConfirmDialog(
+                                characterSelectFrame,
+                                "Confirm selection of " + selectedCharacter + "?",
+                                "Confirmation",
+                                JOptionPane.YES_NO_OPTION
+                        );
+                        if (confirmation == JOptionPane.YES_OPTION) {
+
+                            //add to global arrays
+                            takenSlots++;
+                            slotNames[takenSlots-1] = name;
+                            slotDifficulties[takenSlots-1] = difficulty;
+                            slotCreationDates[takenSlots-1] = date;
+                            slotCharacters[takenSlots-1] = selectedCharacter; //add to the array
+
+                            // Add the slot information to the list
+                            String slotDetails = String.format("%s (%s) (%s) - Created on: %s", name, difficulty, selectedCharacter, date);
+                            slotListModel.addElement(slotDetails);
+
+                            showInfoFrame();
+                            characterSelectFrame.setVisible(false);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(characterSelectFrame, "Please select a character!");
+                    }
+                }
+            });
+
+            buttonPanel.add(confirmButton);
+
+            characterSelectFrame.getContentPane().add(panel, BorderLayout.CENTER);
+            characterSelectFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+            characterSelectFrame.pack();
+
+
+
+
+
+
+            //showInfoFrame();
+            //characterSelectFrame.setVisible(false);
+
+            //System.out.println("Selected character: " + selectedCharacter);
+
         }else{
             JOptionPane.showMessageDialog(slotInfoFrame, "You can only have 3 slots", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -260,7 +286,7 @@ public class SlotInfo {
             String difficulty = slotDifficulties[selectedIndex]; //get from array
             String date = slotCreationDates[selectedIndex]; //get from array
             ImageIcon icon =  new ImageIcon("src/GameSlots/91_strawberrycake_dish.png");
-
+            String character = slotCharacters[selectedIndex]; //get from array
 
             Object newNameObj = JOptionPane.showInputDialog(slotInfoFrame,
                     "Enter new name for the slot",
@@ -280,7 +306,7 @@ public class SlotInfo {
             }
 
             if(newName != null){
-                slotListModel.set(selectedIndex, String.format("%s (%s) - Created on: %s", newName, difficulty, date));
+                slotListModel.set(selectedIndex, String.format("%s (%s) (%s) - Created on: %s", newName, character, difficulty, date));
             }
         }else{
             JOptionPane.showMessageDialog(slotInfoFrame, "Please select a slot first", "Error", JOptionPane.ERROR_MESSAGE);
@@ -288,9 +314,9 @@ public class SlotInfo {
     }
 
     public static void main(String[] args){
-        CreateInfoFrame();
-        ShowInfoFrame();
-      //  HideInfoFrame();
+        createInfoFrame();
+        showInfoFrame();
+      // hideInfoFrame();
     }
 
 }
