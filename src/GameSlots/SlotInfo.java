@@ -140,8 +140,17 @@ public class SlotInfo {
         //input from the user. It just uses "asd" for each field for test purpsoes
 
         if(takenSlots < 3) {
+
+            // get icons
+            ImageIcon icon1 =  new ImageIcon("src/GameSlots/31_chocolatecake_dish.png");
+            ImageIcon icon2 = new ImageIcon("src/GameSlots/23_cheesecake_dish.png");
+            // Show icon1 for slot name input
+            String name = (String) JOptionPane.showInputDialog(slotInfoFrame, "Enter slot name:", "Slot Name", JOptionPane.QUESTION_MESSAGE, icon1, null, null);
+           // String name = (nameObj == null) ? null : (String) nameObj; // Cast to String if not null
+
             // Prompt the user for slot name
-            String name = JOptionPane.showInputDialog(slotInfoFrame, "Enter slot name:");
+
+           // String name = JOptionPane.showInputDialog(slotInfoFrame, "Enter slot name:");
             if (name == null || name.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(slotInfoFrame, "Slot name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
                 return; // Return if slot name is empty or user cancels
@@ -149,7 +158,10 @@ public class SlotInfo {
 
             // Prompt the user for slot difficulty
             String[] difficultyOptions = {"Easy", "Medium", "Hard"};
-            String difficulty = (String) JOptionPane.showInputDialog(slotInfoFrame, "Select difficulty:", "Difficulty", JOptionPane.QUESTION_MESSAGE, null, difficultyOptions, difficultyOptions[0]);
+
+            String difficulty = (String) JOptionPane.showInputDialog(slotInfoFrame, "Select difficulty:", "Difficulty", JOptionPane.QUESTION_MESSAGE, icon2, difficultyOptions, difficultyOptions[0]);
+
+            //String difficulty = (String) JOptionPane.showInputDialog(slotInfoFrame, "Select difficulty:", "Difficulty", JOptionPane.QUESTION_MESSAGE, null, difficultyOptions, difficultyOptions[0]);
             if (difficulty == null) {
                 return; // Return if user cancels
             }
@@ -205,8 +217,13 @@ public class SlotInfo {
 
             String difficulty = slotDifficulties[selectedIndex]; //get from array
             String date = slotCreationDates[selectedIndex]; //get from array
+            ImageIcon icon =  new ImageIcon("src/GameSlots/91_strawberrycake_dish.png");
+            String newName = (String) JOptionPane.showInputDialog(slotInfoFrame,
+                    "Enter new name for the slot",
+                    "New Slot Name", // Title
+                    JOptionPane.QUESTION_MESSAGE,
+                    icon, null, null);
 
-            String newName = JOptionPane.showInputDialog(slotInfoFrame, "Enter new name for the slot");
             if(newName != null){
                 slotListModel.set(selectedIndex, String.format("%s (%s) - Created on: %s", newName, difficulty, date));
             }
@@ -218,6 +235,7 @@ public class SlotInfo {
     public static void main(String[] args){
         CreateInfoFrame();
         ShowInfoFrame();
+      //  HideInfoFrame();
     }
 
 }
