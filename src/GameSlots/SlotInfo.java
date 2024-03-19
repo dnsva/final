@@ -169,7 +169,7 @@ public class SlotInfo {
 
             characterSelectFrame.setVisible(true);
             characterSelectFrame.setTitle("By Anna Denisova");
-            characterSelectFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT);
+            characterSelectFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT+150);
             characterSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             characterSelectFrame.setLocationRelativeTo(null);
             characterSelectFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
@@ -179,25 +179,80 @@ public class SlotInfo {
             //------------------------------------------
 
             String[] characterNames = {"Wizard", "Mime", "Warrior", "Doctor", "Farmer"};
-            String[] descriptions = {
-                    "Master of Arcane Arts. Weak in close combat.",
-                    "A silent but deadly performer. Confuses enemies with tricks.",
-                    "Strong and fearless fighter. Leads the charge on the battlefield.",
-                    "Heals allies and weakens enemies with medical knowledge.",
-                    "Hardworking and resourceful. Provides support with crops and livestock."
-            };
+            selectedCharacter = null;
 
-            JPanel panel = new JPanel(new GridLayout(characterNames.length * 2, 1, 5, 5));
+            JPanel panel = new JPanel();
 
-            for (int i = 0; i < characterNames.length; i++) {
-                JLabel nameLabel = new JLabel(characterNames[i], JLabel.CENTER);
-                //nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD));
+            //panel.setSize(WINDOWWIDTH, WINDOWHEIGHT+200);
+
+            JTextArea namesAndDescriptions = new JTextArea();
+            namesAndDescriptions.setSize(WINDOWWIDTH, WINDOWHEIGHT + 130);
+
+            String nameAndDescriptionsString = "";
+
+            namesAndDescriptions.setEditable(false);
+            //namesAndDescriptions.setOpaque(false); // Make it transparent like a label
+            namesAndDescriptions.setLineWrap(true); // Enable line wrapping
+            namesAndDescriptions.setFocusable(false); //nocursor
+            namesAndDescriptions.setFont(new Font("Courier", Font.PLAIN, 14));
+            //namesAndDescriptions.setColumns(WINDOWWIDTH);
+
+            nameAndDescriptionsString += " -------------------------------------------------------------" +
+                                        "| WIZARD                                                     |" +
+                                        "| - Start game with [curse/potion name]                      |" +
+                                        "| - 25% off all monster curses                               |" +
+                                        "| - Default attack power: 10                                 |" +
+                                        "| MIME                                                       |" +
+                                        "| - Useless and weak                                         |" +
+                                        "| - Gets 1 free apple                                        |" +
+                                        "| - Default attack power: 1                                  |" +
+                                        "| WARRIOR                                                    |" +
+                                        "| - Start game with [weapon name]                            |" +
+                                        "| - 25% off all weapons                                      |" +
+                                        "| - Default attack power: 15                                 |" +
+                                        "| DOCTOR                                                     |" +
+                                        "| - Start game with [healing potion]                         |" +
+                                        "| - 25% off all healing potions                              |" +
+                                        "| - Default attack power: 10                                 |" +
+                                        "| FARMER                                                     |" +
+                                        "| - Can't fight                                              |" +
+                                        "| - Start game with all the food                             |" +
+                                        "| - Default attack power: 0                                  |" +
+                                        " -------------------------------------------------------------";
+
+
+            namesAndDescriptions.setText(nameAndDescriptionsString);
+            namesAndDescriptions.setBackground(Color.pink);
+
+            panel.add(namesAndDescriptions);
+
+
+            //for (int i = 0; i < characterNames.length; i++) {
+                /*JLabel nameLabel = new JLabel(characterNames[i], JLabel.CENTER);
+                nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD));
                 panel.add(nameLabel);
+                */
+                //JTextArea nameArea = new JTextArea(characterNames[i]);
+               // nameArea.setAlignmentX(Component.CENTER_ALIGNMENT);
+                //nameArea.setFont(nameArea.getFont().deriveFont(Font.BOLD));
+                //panel.add(nameArea);
 
+               // JTextArea descriptionArea = new JTextArea(descriptions[i]);
+                //descriptionArea.setLineWrap(true);
+               // descriptionArea.setAlignmentX(Component.CENTER_ALIGNMENT);
+               // panel.add(descriptionArea);
+
+                /*
                 JLabel descriptionLabel = new JLabel(descriptions[i]);
                 descriptionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panel.add(descriptionLabel);
-            }
+                */
+
+
+                //JLabel descriptionLabel2 = new JLabel("sdfasdfasdfasdf");
+                //descriptionLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
+                //panel.add(descriptionLabel2);
+            //}
 
             JPanel buttonPanel = new JPanel();
             ButtonGroup group = new ButtonGroup();
@@ -217,7 +272,7 @@ public class SlotInfo {
             confirmButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (selectedCharacter!= null) {
+                    if (selectedCharacter != null) {
                         int confirmation = JOptionPane.showConfirmDialog(
                                 characterSelectFrame,
                                 "Confirm selection of " + selectedCharacter + "?",
@@ -250,7 +305,7 @@ public class SlotInfo {
 
             characterSelectFrame.getContentPane().add(panel, BorderLayout.CENTER);
             characterSelectFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-            characterSelectFrame.pack();
+            //characterSelectFrame.pack();
 
 
 
@@ -267,6 +322,13 @@ public class SlotInfo {
         }
     }
 
+   // private static String getRemainingWidthSpaces(int textWidth){
+        //String spaces = "";
+        //for(int i = 0; i < WINDOWWIDTH - textWidth; ++i){
+           //spaces += " ";
+        //}
+       // return spaces;
+    //}
     public static void deleteSlot(){
         int selectedIndex = slotList.getSelectedIndex();
         if(selectedIndex != -1) {
