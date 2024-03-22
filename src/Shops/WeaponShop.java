@@ -140,6 +140,8 @@ public class WeaponShop {
         weaponShopPanel.add(purchaseButton, BorderLayout.SOUTH);
 
         weaponShopFrame.getContentPane().add(weaponShopPanel, BorderLayout.WEST);
+
+        weaponShopFrame.getContentPane().add(Game.SideBar.getPanel(), BorderLayout.EAST);
        // weaponShopFrame.getContentPane().add(newPannel, BorderLayout.WEST);
 
 
