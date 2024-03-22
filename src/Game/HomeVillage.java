@@ -26,6 +26,16 @@ public class HomeVillage {
 
         JPanel homeVillagePanel = new JPanel();
         homeVillagePanel.setLayout(new BoxLayout(homeVillagePanel, BoxLayout.Y_AXIS));
+        //homeVillagePanel.setSize(600, GameVars.WINDOWHEIGHT);
+
+        JLabel titleLabel = new JLabel("Village");
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setForeground(Color.white);
+
+        homeVillagePanel.add(Box.createVerticalStrut(20)); //add space ebtween
+        homeVillagePanel.add(titleLabel);
+        homeVillagePanel.add(Box.createVerticalStrut(20)); //add space ebtween
+        homeVillagePanel.setBackground(Color.blue);
 
 
         JButton apothecaryButton = new JButton("Apothecary");
@@ -52,22 +62,22 @@ public class HomeVillage {
             }
         });
 
-       // homeVillagePanel.add(Box.createVerticalGlue());
-        homeVillagePanel.add(apothecaryButton);
-        homeVillagePanel.add(armourShopButton);
-        homeVillagePanel.add(foodMarket);
-        homeVillagePanel.add(weaponShopButton);
-        homeVillagePanel.add(dungeonButton);
-        homeVillagePanel.add(exitButton);
+        JButton[] buttons = {apothecaryButton, armourShopButton, foodMarket, weaponShopButton, dungeonButton, exitButton};
+        for(JButton button : buttons){
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+            homeVillagePanel.add(button);
+            homeVillagePanel.add(Box.createVerticalStrut(10));
+        }
 
-
-
-
+        homeVillagePanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT));
 
         homeVillageFrame.add(homeVillagePanel, BorderLayout.WEST);
         homeVillageFrame.add(SideBar.getPanel(), BorderLayout.EAST);
 
-        homeVillageFrame.setVisible(true);
+        homeVillageFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310));
+        homeVillageFrame.pack();
+       // homeVillageFrame.setVisible(true);
+
 
     }
 
@@ -84,6 +94,7 @@ public class HomeVillage {
     public static void main(String[] args){
         new GameSlots.SlotInfo();
         new HomeVillage();
+        showHomeVillage();
     }
 
 }

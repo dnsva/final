@@ -176,7 +176,7 @@ public class WeaponShop {
     }
 
     public static void hideWeaponShop() { //THIS HIDES THE FRAME
-
+        Game.HomeVillage.showHomeVillage();
         weaponShopFrame.setVisible(false); //ok
     }
 
