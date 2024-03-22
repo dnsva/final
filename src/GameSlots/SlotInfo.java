@@ -28,7 +28,7 @@ public class SlotInfo {
     private static int WINDOWWIDTH = 500;
     private static int WINDOWHEIGHT = 300;
 
-    public static void createInfoFrame() {
+    public SlotInfo() {
         slotInfoFrame.setTitle("By Anna Denisova");
         //slotInfoFrame.getContentPane().setBackground( Color.red );
        // slotInfoFrame.getContentPane().setBackground(new java.awt.Color(204, 166, 166));
@@ -376,7 +376,7 @@ public class SlotInfo {
     }
 
     public static void main(String[] args){
-        createInfoFrame();
+        new SlotInfo();
         showInfoFrame();
       // hideInfoFrame();
     }
