@@ -5,6 +5,8 @@ import Items.Item;
 
 public class GameVars {
 
+    public static String difficulyLevel = "Easy"; //depends on slot selection
+
     public static String characterType;
 
     public static ArrayList<Item> inventory = new ArrayList<Item>();

@@ -15,9 +15,44 @@ public class WeaponShop {
 
     Weapon[] weaponList = {
 
-            new Items.Weapon("name", 100, "desc", 10, 25),
-            new Items.Weapon("Axe", 150, "A heavy axe for smashing enemies", 15, 20),
-            new Items.Weapon("Sword", 200, "A sharp sword for slicing enemies", 20, 15)
+            /*CODE EXPLANATION OF THIS:
+            GameVars.difficultyLevel.equals("Easy") ? 1 :
+                      GameVars.difficultyLevel.equals("Medium") ? 2 : 3;
+            This uses a ternary operator that determines values based on difficulty. Used for damage and miss percentage.
+
+            Also for number of uses? maybe? if implemented at all
+             */
+            new Items.Weapon("name", 10, "desc", 10, 25),
+
+            new Items.Weapon("Dagger",
+                    10,
+                    "Finely crafted by a local master",
+                    GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 10 : 5,
+                    GameVars.difficulyLevel.equals("Easy") ? 20 : GameVars.difficulyLevel.equals("Medium") ? 30 : 40
+            ),
+
+            new Items.Weapon("Axe",
+                    15,
+                    "For smashing enemies",
+                    GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 10 : 5,
+                    GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 25 : 30),
+            new Items.Weapon("Katana",
+                    50,
+                    "Imported from Japanese masters",
+                    GameVars.difficulyLevel.equals("Easy") ? 30 : GameVars.difficulyLevel.equals("Medium") ? 20 : 15,
+                    GameVars.difficulyLevel.equals("Easy") ? 20 : GameVars.difficulyLevel.equals("Medium") ? 30 : 40
+                    ),
+            new Items.Weapon("Lightning Bow & Arrow",
+                    100,
+                    "Shoots lightning arrows and electrocutes enemies",
+                    GameVars.difficulyLevel.equals("Easy") ? 35 : GameVars.difficulyLevel.equals("Medium") ? 30 : 25,
+                    GameVars.difficulyLevel.equals("Easy") ? 5 : GameVars.difficulyLevel.equals("Medium") ? 10 : 25
+                    ),
+            new Items.Weapon("Scythe",
+                    1000,
+                    "Harvests souls",
+                    100,
+                    90)
     };
 
     //character balance is retrieved from using Game.GameVars.balance !!!!!
@@ -42,8 +77,8 @@ public class WeaponShop {
         weaponShopFrame = new JFrame("Weapon Shop");
         weaponShopFrame.setVisible(true);
         weaponShopFrame.setTitle("By Anna Denisova");
-        weaponShopPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT+200);
-        weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+200);
+        weaponShopPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
+        weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+290);
         weaponShopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         weaponShopFrame.setLocationRelativeTo(null);
         weaponShopFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
@@ -65,29 +100,17 @@ public class WeaponShop {
         namesAndDescriptions.setFont(new Font("Courier", Font.PLAIN, 14));
         //namesAndDescriptions.setColumns(WINDOWWIDTH);
 
-        nameAndDescriptionsString += " -------------------------------------------------------------" +
-                "| WIZARD                                                     |" +
-                "| - Start game with [curse/potion name]                      |" +
-                "| - 25% off all monster curses                               |" +
-                "| - Default attack power: 10                                 |" +
-                "| MIME                                                       |" +
-                "| - Useless and weak                                         |" +
-                "| - Gets 1 free apple                                        |" +
-                "| - Default attack power: 1                                  |" +
-                "| WARRIOR                                                    |" +
-                "| - Start game with [weapon name]                            |" +
-                "| - 25% off all weapons                                      |" +
-                "| - Default attack power: 15                                 |" +
-                "| DOCTOR                                                     |" +
-                "| - Start game with [healing potion]                         |" +
-                "| - 25% off all healing potions                              |" +
-                "| - Default attack power: 10                                 |" +
-                "| FARMER                                                     |" +
-                "| - Can't fight                                              |" +
-                "| - Start game with all the food                             |" +
-                "| - Default attack power: 0                                  |" +
-                " -------------------------------------------------------------";
+        nameAndDescriptionsString += " ------------------------------------------------------------ " +
+                "| AVAILABLE ITEMS                                            |";  //string length - "| space and space | (4) dont count. this is equal to 59 here.
 
+        for(int i = 0; i  < weaponList.length; ++i){
+            nameAndDescriptionsString += "| " + (weaponList[i].name).toUpperCase() + returnStringWithSpaces(weaponList[i].name, 59-(((Integer)weaponList[i].price)).toString().length()-1 /*minus three cause price */) + "$" + weaponList[i].price + " |" +
+                    "| - " + weaponList[i].description + returnStringWithSpaces(weaponList[i].description, 59-2) + " |" +
+                    "| - Damage: " + weaponList[i].damage + returnStringWithSpaces(((Integer)weaponList[i].damage).toString(), 59-10) + " |" +
+                    "| - Miss Rate: " + weaponList[i].missPercentage + "%" + returnStringWithSpaces(((Integer)weaponList[i].missPercentage).toString(), 59-14) + " |";
+        }
+
+        nameAndDescriptionsString += " ------------------------------------------------------------ ";
 
         namesAndDescriptions.setText(nameAndDescriptionsString);
         namesAndDescriptions.setBackground(Color.pink);
@@ -96,6 +119,7 @@ public class WeaponShop {
 
         // Display balance
         balanceLabel = new JLabel("Balance: $" + balance);
+        balanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
         //panel.add(balanceLabel);
 
         // Display available weapons in a combo box
@@ -126,16 +150,17 @@ public class WeaponShop {
         JButton purchaseButton;
         */
 
-        JPanel newPannel = new JPanel();
-        newPannel.add(balanceLabel);
-        newPannel.add(weaponComboBox);
+        JPanel newPanel = new JPanel(new BorderLayout(20, 10));
+        newPanel.add(balanceLabel, BorderLayout.CENTER);
+        newPanel.add(weaponComboBox, BorderLayout.SOUTH);
         //rewrite the prev 3 lines so that the balanceLabel is ABOVE weaponCombobox
-        newPannel.setLayout(new BoxLayout(newPannel, BoxLayout.Y_AXIS));
+
+       // newPannel.setLayout(new BoxLayout(newPannel, BoxLayout.Y_AXIS));
 
 
         //the following code distributes nameAndDescriptions, balanceLabel and weaponComboBox and Purchase Weapon using getContentPane and BorderLayout.
         weaponShopPanel.add(namesAndDescriptions, BorderLayout.NORTH);
-        weaponShopPanel.add(newPannel, BorderLayout.CENTER);
+        weaponShopPanel.add(newPanel, BorderLayout.CENTER);
         //weaponShopFrame.getContentPane().add(weaponComboBox, BorderLayout.CENTER);
         weaponShopPanel.add(purchaseButton, BorderLayout.SOUTH);
 
@@ -153,6 +178,14 @@ public class WeaponShop {
 
     }
 
+    private String returnStringWithSpaces(String string, int length) {
+        int spaces = length - string.length();
+        String newString = "";
+        for (int i = 0; i < spaces-1; i++) { //minus 1 just ebcause
+            newString += " ";
+        }
+        return newString;
+    }
     private void purchaseWeapon() {
         // Get the selected weapon
         int selectedWeaponIndex = weaponComboBox.getSelectedIndex();
