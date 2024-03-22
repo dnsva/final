@@ -23,6 +23,7 @@ public class WeaponShop {
     //character balance is retrieved from using Game.GameVars.balance !!!!!
 
     double balance = Game.GameVars.balance;
+    private static JPanel weaponShopPanel;
     private static JFrame weaponShopFrame;
 
     JTextArea namesAndDescriptions;
@@ -36,11 +37,13 @@ public class WeaponShop {
     public WeaponShop() {
 
         // Create the main frame
-        weaponShopFrame = new JFrame("Weapon Shop");
+        weaponShopPanel = new JPanel(new BorderLayout());
 
+        weaponShopFrame = new JFrame("Weapon Shop");
         weaponShopFrame.setVisible(true);
         weaponShopFrame.setTitle("By Anna Denisova");
-        weaponShopFrame.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT+200);
+        weaponShopPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT+200);
+        weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+200);
         weaponShopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         weaponShopFrame.setLocationRelativeTo(null);
         weaponShopFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
@@ -131,10 +134,13 @@ public class WeaponShop {
 
 
         //the following code distributes nameAndDescriptions, balanceLabel and weaponComboBox and Purchase Weapon using getContentPane and BorderLayout.
-        weaponShopFrame.getContentPane().add(namesAndDescriptions, BorderLayout.NORTH);
-        weaponShopFrame.getContentPane().add(newPannel, BorderLayout.CENTER);
+        weaponShopPanel.add(namesAndDescriptions, BorderLayout.NORTH);
+        weaponShopPanel.add(newPannel, BorderLayout.CENTER);
         //weaponShopFrame.getContentPane().add(weaponComboBox, BorderLayout.CENTER);
-        weaponShopFrame.getContentPane().add(purchaseButton, BorderLayout.SOUTH);
+        weaponShopPanel.add(purchaseButton, BorderLayout.SOUTH);
+
+        weaponShopFrame.getContentPane().add(weaponShopPanel, BorderLayout.WEST);
+       // weaponShopFrame.getContentPane().add(newPannel, BorderLayout.WEST);
 
 
         //weaponShopFrame.getContentPane().add(panel, BorderLayout.CENTER);
