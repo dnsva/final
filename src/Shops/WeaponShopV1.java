@@ -1,75 +1,102 @@
 package Shops;
 
-import Game.GameVars;
 import Items.Weapon;
+import Game.GameVars;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WeaponShop {
 
-    Weapon[] weaponList = { //An array of all available weapons in the shop
-            new Weapon("name", 10, "desc", 10, 25),
-            new Weapon("Dagger",
+public class WeaponShopV1 {
+
+    Weapon[] weaponList = {
+
+            /*CODE EXPLANATION OF THIS:
+            GameVars.difficultyLevel.equals("Easy") ? 1 :
+                      GameVars.difficultyLevel.equals("Medium") ? 2 : 3;
+            This uses a ternary operator that determines values based on difficulty. Used for damage and miss percentage.
+
+            Also for number of uses? maybe? if implemented at all
+             */
+            new Items.Weapon("name", 10, "desc", 10, 25),
+
+            new Items.Weapon("Dagger",
                     10,
                     "Finely crafted by a local master",
                     GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 10 : 5,
-                    GameVars.difficulyLevel.equals("Easy") ? 20 : GameVars.difficulyLevel.equals("Medium") ? 30 : 40),
-            new Weapon("Axe",
+                    GameVars.difficulyLevel.equals("Easy") ? 20 : GameVars.difficulyLevel.equals("Medium") ? 30 : 40
+            ),
+
+            new Items.Weapon("Axe",
                     15,
                     "For smashing enemies",
                     GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 10 : 5,
                     GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 25 : 30),
-            new Weapon("Katana",
+            new Items.Weapon("Katana",
                     50,
                     "Imported from Japanese masters",
                     GameVars.difficulyLevel.equals("Easy") ? 30 : GameVars.difficulyLevel.equals("Medium") ? 20 : 15,
                     GameVars.difficulyLevel.equals("Easy") ? 20 : GameVars.difficulyLevel.equals("Medium") ? 30 : 40
                     ),
-            new Weapon("Lightning Bow & Arrow",
+            new Items.Weapon("Lightning Bow & Arrow",
                     100,
                     "Shoots lightning arrows and electrocutes enemies",
                     GameVars.difficulyLevel.equals("Easy") ? 35 : GameVars.difficulyLevel.equals("Medium") ? 30 : 25,
                     GameVars.difficulyLevel.equals("Easy") ? 5 : GameVars.difficulyLevel.equals("Medium") ? 10 : 25
                     ),
-            new Weapon("Scythe",
+            new Items.Weapon("Scythe",
                     1000,
                     "Harvests souls",
                     100,
                     90)
     };
 
-    //double balance = GameVars.balance; //character balance is retrieved from using Game.GameVars.balance !!!!!
-    private static JFrame weaponShopFrame; //the most important thing in this entire file
-    /* -> */ private JLabel balanceLabel; //a label that displays balance
-    /* -> */ private JComboBox<String> weaponComboBox; //a combo box that displays available weapons
+    //character balance is retrieved from using Game.GameVars.balance !!!!!
 
-    public WeaponShop() {
+    double balance = Game.GameVars.balance;
+    private static JPanel weaponShopPanel;
+    private static JFrame weaponShopFrame;
 
-        //setup frame details
+    JTextArea namesAndDescriptions;
+    private JLabel balanceLabel;
+    private JComboBox<String> weaponComboBox;
+    JButton purchaseButton;
+    private JTextArea weaponDescriptionTextArea;
+    //Make a constructor that sets up the JFrame and panels.
+    //You only need to make this once which is why is a constructor.
+
+    public WeaponShopV1() {
+
+        // Create the main frame
+        weaponShopPanel = new JPanel(new BorderLayout());
+
         weaponShopFrame = new JFrame("Weapon Shop");
+        //weaponShopFrame.setVisible(true);
         weaponShopFrame.setTitle("By Anna Denisova");
-        weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310);
+        weaponShopPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
+        weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+290);
         weaponShopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         weaponShopFrame.setLocationRelativeTo(null);
         weaponShopFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
 
-        // Create the main panel
-        JPanel weaponShopPanel = new JPanel(new BorderLayout());
-        weaponShopPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
+
+        // Create a panel
+        //JPanel panel = new JPanel();
 
         //text
-        JTextArea namesAndDescriptions = new JTextArea();
-        namesAndDescriptions.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT + 10);
+        namesAndDescriptions = new JTextArea();
+        namesAndDescriptions.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT + 130);
 
         String nameAndDescriptionsString = "";
 
         namesAndDescriptions.setEditable(false);
+        //namesAndDescriptions.setOpaque(false); // Make it transparent like a label
         namesAndDescriptions.setLineWrap(true); // Enable line wrapping
         namesAndDescriptions.setFocusable(false); //nocursor
         namesAndDescriptions.setFont(new Font("Courier", Font.PLAIN, 14));
+        //namesAndDescriptions.setColumns(WINDOWWIDTH);
 
         nameAndDescriptionsString += " ------------------------------------------------------------ " +
                 "| AVAILABLE ITEMS                                            |";  //string length - "| space and space | (4) dont count. this is equal to 59 here.
@@ -86,50 +113,67 @@ public class WeaponShop {
         namesAndDescriptions.setText(nameAndDescriptionsString);
         namesAndDescriptions.setBackground(Color.pink);
 
+        //panel.add(namesAndDescriptions);
+
         // Display balance
-        balanceLabel = new JLabel("Balance: $" + GameVars.balance);
+        balanceLabel = new JLabel("Balance: $" + balance);
         balanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        balanceLabel.setBackground(Color.CYAN);
-        balanceLabel.setOpaque(true);
+        //panel.add(balanceLabel);
 
         // Display available weapons in a combo box
         weaponComboBox = new JComboBox<>();
         for (Weapon weapon : weaponList) {
             weaponComboBox.addItem(weapon.name + " - $" + weapon.price);
         }
+        //panel.add(weaponComboBox);
 
         // Create purchase button
-        JButton purchaseButton = new JButton("Purchase");
+        purchaseButton = new JButton("Purchase");
         purchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 purchaseWeapon();
             }
         });
+        //panel.add(purchaseButton);
 
-        JButton exitButton = new JButton("Exit Shop");
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                hideWeaponShop();
-            }
-        });
+
+        // Add panel to the frame
+        //weaponShopFrame.add(panel);
+
+            /*
+        JTextArea namesAndDescriptions;
+        private JLabel balanceLabel;
+        private JComboBox<String> weaponComboBox;
+        JButton purchaseButton;
+        */
 
         JPanel newPanel = new JPanel(new BorderLayout(20, 10));
         newPanel.add(balanceLabel, BorderLayout.CENTER);
         newPanel.add(weaponComboBox, BorderLayout.SOUTH);
+        //rewrite the prev 3 lines so that the balanceLabel is ABOVE weaponCombobox
 
-        JPanel buttonPanel = new JPanel(new BorderLayout());
-        buttonPanel.add(purchaseButton, BorderLayout.NORTH);
-        buttonPanel.add(exitButton, BorderLayout.SOUTH);
+       // newPannel.setLayout(new BoxLayout(newPannel, BoxLayout.Y_AXIS));
+
 
         //the following code distributes nameAndDescriptions, balanceLabel and weaponComboBox and Purchase Weapon using getContentPane and BorderLayout.
         weaponShopPanel.add(namesAndDescriptions, BorderLayout.NORTH);
         weaponShopPanel.add(newPanel, BorderLayout.CENTER);
-        weaponShopPanel.add(buttonPanel, BorderLayout.SOUTH);
+        //weaponShopFrame.getContentPane().add(weaponComboBox, BorderLayout.CENTER);
+        weaponShopPanel.add(purchaseButton, BorderLayout.SOUTH);
 
         weaponShopFrame.getContentPane().add(weaponShopPanel, BorderLayout.WEST);
+
         weaponShopFrame.getContentPane().add(Game.SideBar.getPanel(), BorderLayout.EAST);
+       // weaponShopFrame.getContentPane().add(newPannel, BorderLayout.WEST);
+
+
+        //weaponShopFrame.getContentPane().add(panel, BorderLayout.CENTER);
+       // weaponShopFrame.getContentPane().add(balanceLabel, BorderLayout.SOUTH);
+
+        weaponShopFrame.setVisible(true);
+
+
     }
 
     private String returnStringWithSpaces(String string, int length) {
@@ -142,46 +186,45 @@ public class WeaponShop {
     }
     private void purchaseWeapon() {
         // Get the selected weapon
-        int selectedWeaponIndex = weaponComboBox.getSelectedIndex(); //the weapons are indexed from 0 to whatever
-
-        if (selectedWeaponIndex == -1) { //ERROR CHECK HERE FOR IF NOTHING SELECTED
-            JOptionPane.showMessageDialog(null, "Please select a weapon to purchase."); //err message
-            return; //get out of fn
+        int selectedWeaponIndex = weaponComboBox.getSelectedIndex();
+        if (selectedWeaponIndex == -1) {
+            JOptionPane.showMessageDialog(null, "Please select a weapon to purchase.");
+            return;
         }
+        Weapon selectedWeapon = weaponList[selectedWeaponIndex];
 
-        Weapon selectedWeapon = weaponList[selectedWeaponIndex]; //stores the weapon in a weapon object
+        // Check if the player has enough balance to purchase the weapon
+        if (balance >= selectedWeapon.price) {
+            // Deduct the price from the balance
+            balance -= selectedWeapon.price;
 
-        if (GameVars.balance >= selectedWeapon.price) { //Check if the player has enough balance to purchase the weapon
-            GameVars.balance -= selectedWeapon.price; //Deduct the price from the balance
-            GameVars.inventory.add(selectedWeapon); //Add the purchased weapon to the inventory
+            // Add the purchased weapon to the inventory
+            GameVars.inventory.add(selectedWeapon);
 
-          //  System.out.println("INVENTORY: ");
-          //  for(int i = 0; i < GameVars.inventory.size(); ++i){
-          //      System.out.println(GameVars.inventory.get(i).name);
-          // }
-
-            updateBalanceLabel(); //Update balance label
-            JOptionPane.showMessageDialog(null, "Purchase successful!"); //:)
-        } else { //If not enough money
-            JOptionPane.showMessageDialog(null, "Insufficient funds!"); //No purchase allowed
+            // Update balance label
+            updateBalanceLabel();
+            JOptionPane.showMessageDialog(null, "Purchase successful!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Insufficient funds!");
         }
     }
 
-    private void updateBalanceLabel() { //Update for when something is bought
-        balanceLabel.setText("Balance: $" + GameVars.balance); //Reset the balance label
+    private void updateBalanceLabel() {
+        balanceLabel.setText("Balance: $" + balance);
     }
 
-    public static void showWeaponShop() { //THIS SHOWS THE FRAME
-        weaponShopFrame.setVisible(true); //ok
+    public static void showWeaponShop() {
+        weaponShopFrame.setVisible(true);
     }
 
-    public static void hideWeaponShop() { //THIS HIDES THE FRAME
-
-        weaponShopFrame.setVisible(false); //ok
+    public static void hideWeaponShop() {
+        weaponShopFrame.setVisible(false);
     }
 
     public static void main(String[] args) {
-        new WeaponShop();
+        // Example usage
+       // double initialBalance = 500; // Initial balance of the player
+        new WeaponShopV1();
         showWeaponShop();
     }
 }
