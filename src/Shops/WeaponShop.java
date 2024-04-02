@@ -43,7 +43,6 @@ public class WeaponShop {
 
     //double balance = GameVars.balance; //character balance is retrieved from using Game.GameVars.balance !!!!!
     private static JFrame weaponShopFrame; //the most important thing in this entire file
-    /* -> */ private JLabel balanceLabel; //a label that displays balance
     /* -> */ private JComboBox<String> weaponComboBox; //a combo box that displays available weapons
 
     public WeaponShop() {
@@ -86,12 +85,6 @@ public class WeaponShop {
         namesAndDescriptions.setText(nameAndDescriptionsString);
         namesAndDescriptions.setBackground(Color.pink);
 
-        // Display balance
-        balanceLabel = new JLabel("Balance: $" + GameVars.balance);
-        balanceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        balanceLabel.setBackground(Color.CYAN);
-        balanceLabel.setOpaque(true);
-
         // Display available weapons in a combo box
         weaponComboBox = new JComboBox<>();
         for (Weapon weapon : weaponList) {
@@ -116,7 +109,6 @@ public class WeaponShop {
         });
 
         JPanel newPanel = new JPanel(new BorderLayout(20, 10));
-        newPanel.add(balanceLabel, BorderLayout.CENTER);
         newPanel.add(weaponComboBox, BorderLayout.SOUTH);
 
         JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -160,15 +152,14 @@ public class WeaponShop {
           //      System.out.println(GameVars.inventory.get(i).name);
           // }
 
-            updateBalanceLabel(); //Update balance label
+            //YOU NEED TO UPDATE THE SIDEBAR AS NOW THE INVENTORY HAS CHANGED AND THE BALANCE HAS CHANGED
+            Game.SideBar.updatePanel(); //Update the sidebar
+            weaponShopFrame.getContentPane().add(Game.SideBar.getPanel(), BorderLayout.EAST);
+            //-----------------------------------
             JOptionPane.showMessageDialog(null, "Purchase successful!"); //:)
         } else { //If not enough money
             JOptionPane.showMessageDialog(null, "Insufficient funds!"); //No purchase allowed
         }
-    }
-
-    private void updateBalanceLabel() { //Update for when something is bought
-        balanceLabel.setText("Balance: $" + GameVars.balance); //Reset the balance label
     }
 
     public static void showWeaponShop() { //THIS SHOWS THE FRAME
