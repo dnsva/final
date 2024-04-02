@@ -72,7 +72,11 @@ public class HomeVillage {
         homeVillagePanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT));
 
         homeVillageFrame.add(homeVillagePanel, BorderLayout.WEST);
-        homeVillageFrame.add(SideBar.getPanel(), BorderLayout.EAST);
+
+       // homeVillageFrame.add(SideBar.getPanel(), BorderLayout.EAST);
+        //homeVillageFrame.add(SideBar.sideBarPanel, BorderLayout.EAST);
+
+        homeVillageFrame.add(SideBar.getPanel(), BorderLayout.CENTER);
 
         homeVillageFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310));
         homeVillageFrame.pack();
@@ -92,9 +96,10 @@ public class HomeVillage {
     }
 
     public static void main(String[] args){
-        new GameSlots.SlotInfo();
-        new HomeVillage();
-        showHomeVillage();
+        //new GameSlots.SlotInfo();
+       // new HomeVillage();
+        //new SideBar();
+       // showHomeVillage();
     }
 
 }

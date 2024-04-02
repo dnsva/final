@@ -114,6 +114,14 @@ public class SlotInfo {
         if(selectedIndex != -1) {
             //-------
             //the name is names[selectedIndex]
+            //slot selected.
+
+            /* code to load in slot memory if it exists, otherwise load in basic
+            values that are defualt.
+             */
+
+            hideInfoFrame();
+            Game.HomeVillage.showHomeVillage();
         }else{
             JOptionPane.showMessageDialog(slotInfoFrame, "Please select a slot first", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -376,8 +384,8 @@ public class SlotInfo {
     }
 
     public static void main(String[] args){
-        new SlotInfo();
-        showInfoFrame();
+        //new SlotInfo();
+       // showInfoFrame();
       // hideInfoFrame();
     }
 

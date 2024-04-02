@@ -181,7 +181,7 @@ public class WeaponShop {
     }
 
     public static void main(String[] args) {
-        new WeaponShop();
-        showWeaponShop();
+       // new WeaponShop();
+       // showWeaponShop();
     }
 }
