@@ -100,6 +100,8 @@ public class SideBar {
             balanceLabel = new JLabel(), poisonedLabel = new JLabel(), paralyzedLabel = new JLabel(),
             confusedLabel = new JLabel(), weaponLabel = new JLabel(), armourLabel = new JLabel();
 
+    static JButton inventoryButton = new JButton("Inventory");
+
     public SideBar(){
         //hey = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel hi = new JLabel("<html><b><u>T</u>wo</b><br> <br> lines</html>");
@@ -138,6 +140,12 @@ public class SideBar {
         weaponLabel.setText("Weapon: " + GameVars.currWeapon);
         armourLabel.setText("Armour: " + GameVars.currArmour);
 
+        // Initialize inventory button
+        inventoryButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Inventory.showInventory();
+            }
+        });
         sideBarPanel.add(healthLabel);
         sideBarPanel.add(sanityLabel);
         sideBarPanel.add(hungerLabel);

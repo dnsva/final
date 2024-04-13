@@ -13,8 +13,11 @@ public class HomeVillage {
 
     public HomeVillage() {
 
-        //init all classes here:
+        //init all necessary classes here:
         new Shops.WeaponShop();
+
+        //new Game.Inventory(); //init inventory window
+
         //-----------
 
         homeVillageFrame = new JFrame("Home Village");
