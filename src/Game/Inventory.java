@@ -11,13 +11,11 @@ import java.awt.*;
 public class Inventory extends JFrame {
     private ArrayList<String> healthItems = new ArrayList<>();
     private ArrayList<String> weaponItems = new ArrayList<>();
-
-
     private ArrayList<String> armourItems = new ArrayList<>();
 
-    private JLabel healthInventoryItems;
-    private JLabel weaponInventoryItems;
-    private JLabel armourInventoryItems;
+    private JTextArea healthInventoryItemsTextArea;
+    private JTextArea weaponInventoryItemsTextArea;
+    private JTextArea armourInventoryItemsTextArea;
 
     String currentHealthItem = "DFSDFSDF";
     String currentWeaponItem = "nothign";
@@ -45,7 +43,14 @@ public class Inventory extends JFrame {
 
         JPanel panel = new JPanel(new GridLayout(1, 3));
 
-        healthInventoryItems = new JLabel("Healtasdasßh ItemAAAs:\n");
+        currentHealthItemLabel.setText("Current Health Item: " + currentHealthItem);
+        currentWeaponItemLabel.setText("Current Weapon Item: " + currentWeaponItem);
+        currentArmourItemLabel.setText("Current Armour Item: " + currentArmourItem);
+
+        healthInventoryItemsTextArea = new JTextArea("Healtasdasßh ItemAAAs:\n");
+        weaponInventoryItemsTextArea = new JTextArea("Weap))ASdaon Items:\n");
+        armourInventoryItemsTextArea = new JTextArea("Armour Items:\n");
+
         JButton healthButton = new JButton("Select Health Item");
         healthButton.addActionListener(new ActionListener() {
             @Override
@@ -54,7 +59,7 @@ public class Inventory extends JFrame {
             }
         });
 
-        weaponInventoryItems = new JLabel("Weap))ASdaon Items:\n");
+
         JButton weaponButton = new JButton("Select Weapon Item");
         weaponButton.addActionListener(new ActionListener() {
             @Override
@@ -63,7 +68,7 @@ public class Inventory extends JFrame {
             }
         });
 
-        armourInventoryItems = new JLabel("Armour Items:\n");
+
         JButton armourButton = new JButton("Select Armour Item");
         armourButton.addActionListener(new ActionListener() {
             @Override
@@ -72,21 +77,16 @@ public class Inventory extends JFrame {
             }
         });
 
-        panel.add(healthInventoryItems);
-        panel.add(weaponInventoryItems);
-        panel.add(armourInventoryItems);
+        panel.add(healthInventoryItemsTextArea);
+        panel.add(weaponInventoryItemsTextArea);
+        panel.add(armourInventoryItemsTextArea);
         add(panel, BorderLayout.CENTER);
 
         JPanel selectPanel = new JPanel(new GridLayout(1, 3));
 
-        currentHealthItemLabel.setText("Health Item: " + currentHealthItem);
-        currentWeaponItemLabel.setText("Weapon Item: " + currentWeaponItem);
-        currentArmourItemLabel.setText("Armour Item: " + currentArmourItem);
-
         selectPanel.add(currentHealthItemLabel);
         selectPanel.add(currentWeaponItemLabel);
         selectPanel.add(currentArmourItemLabel);
-
         add(selectPanel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 3));
@@ -103,9 +103,9 @@ public class Inventory extends JFrame {
 
     private void updateCurrentSelectedItems(){
 
-        currentHealthItemLabel.setText("Health Item: " + currentHealthItem);
-        currentWeaponItemLabel.setText("Weapon Item: " + currentWeaponItem);
-        currentArmourItemLabel.setText("Armour Item: " + currentArmourItem);
+        currentHealthItemLabel.setText("Current Health Item: " + currentHealthItem);
+        currentWeaponItemLabel.setText("Current Weapon Item: " + currentWeaponItem);
+        currentArmourItemLabel.setText("Current Armour Item: " + currentArmourItem);
 
     }
 
@@ -158,9 +158,9 @@ public class Inventory extends JFrame {
 
 
     private void updateItemsList() {
-        healthInventoryItems.setText("Health Items:\n" + (healthItems.isEmpty() ? "No active item in this column" : String.join("\n", healthItems)));
-        weaponInventoryItems.setText("Weapon Items:\n" + (weaponItems.isEmpty() ? "No active item in this column" : String.join("\n", weaponItems)));
-        armourInventoryItems.setText("Armour Items:\n" + (armourItems.isEmpty() ? "No active item in this column" : String.join("\n", armourItems)));
+        healthInventoryItemsTextArea.setText("Health Items:\n" + (healthItems.isEmpty() ? "No active item in this column" : String.join("\n", healthItems)));
+        weaponInventoryItemsTextArea.setText("Weapon Items:\n" + (weaponItems.isEmpty() ? "No active item in this column" : String.join("\n", weaponItems)));
+        armourInventoryItemsTextArea.setText("Armour Items:\n" + (armourItems.isEmpty() ? "No active item in this column" : String.join("\n", armourItems)));
     }
 }
 
