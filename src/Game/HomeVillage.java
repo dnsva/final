@@ -10,11 +10,13 @@ import java.awt.event.ActionListener;
 public class HomeVillage {
 
     private static JFrame homeVillageFrame;
+    public static SideBar homeVillageSideBar = new SideBar();
 
     public HomeVillage() {
 
         new Inventory(); //this is a frame, taken care of by sidebar
-        new SideBar(); //this is a panel. this is added to other frames as needed
+
+        // homeVillageSideBar = new SideBar(); //this is a panel. this is added to other frames as needed
 
         //init all necessary classes here:
         //new Shops.WeaponShop();
@@ -79,7 +81,7 @@ public class HomeVillage {
 
         homeVillageFrame.add(homeVillagePanel, BorderLayout.WEST);
 
-        homeVillageFrame.add(SideBar.getPanel(), BorderLayout.EAST);
+        homeVillageFrame.add(homeVillageSideBar.getPanel(), BorderLayout.EAST);
         //homeVillageFrame.add(SideBar.sideBarPanel, BorderLayout.EAST);
 
         //1!//homeVillageFrame.add(SideBar.getPanel(), BorderLayout.CENTER);

@@ -16,6 +16,8 @@ import AnnaTools.*;
 //however, this class is also used to add stuff to the gamevars list
 public class Inventory {
 
+
+
     private static Frame inventoryFrame = new JFrame();
     private ArrayList<Items.Item> weaponItems = new ArrayList<>();
     private ArrayList<Items.Item> armourItems = new ArrayList<>();
@@ -34,6 +36,9 @@ public class Inventory {
     JLabel currentArmourItemLabel = new JLabel();
 
     public Inventory() {
+
+        //for temp items:
+        new GameVars();
 
         inventoryFrame.setTitle("Inventory");
         inventoryFrame.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
@@ -153,6 +158,10 @@ public class Inventory {
         currentWeaponItemLabel.setText("Current Weapon Item: " + currWeaponString);
         currentArmourItemLabel.setText("Current Armour Item: " + currArmourString);
 
+
+
+        //-----------------------------------------------
+
     }
 
     private void updateItemsList() {
@@ -179,6 +188,11 @@ public class Inventory {
 
     public static void hideInventory(){
         inventoryFrame.setVisible(false);
+
+        //------------------UPDATE ALL THE SIDE BARS------
+        HomeVillage.homeVillageSideBar.updatePanel();
+        Shops.WeaponShop.weaponShopSideBar.updatePanel();
+
     }
 
     //Methods used by other classes:

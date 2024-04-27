@@ -1,6 +1,7 @@
 package Shops;
 
 import Game.GameVars;
+import Game.SideBar;
 import Items.Weapon;
 
 import javax.swing.*;
@@ -9,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WeaponShop {
+
+    public static SideBar weaponShopSideBar = new SideBar();
 
     Weapon[] weaponList = { //An array of all available weapons in the shop
             new Weapon("name", 10, "desc", 10, 25),
@@ -45,18 +48,6 @@ public class WeaponShop {
     private static JFrame weaponShopFrame; //the most important thing in this entire file
     /* -> */ private JComboBox<String> weaponComboBox; //a combo box that displays available weapons
 
-    public WeaponShop(){
-        weaponShopFrame = new JFrame("Weapon Shop");
-        weaponShopFrame.setTitle("By Anna Denisova");
-        weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310);
-        weaponShopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        weaponShopFrame.setLocationRelativeTo(null);
-        weaponShopFrame.setLayout(new BorderLayout()); //Make the layout border
-
-        weaponShopFrame.add(Game.SideBar.getPanel(), BorderLayout.EAST);
-    }
-
-    /*
     public WeaponShop() {
 
         //setup frame details
@@ -66,7 +57,6 @@ public class WeaponShop {
         weaponShopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         weaponShopFrame.setLocationRelativeTo(null);
         weaponShopFrame.setLayout(new BorderLayout()); //Make the layout border
-
 
         // Create the main panel
         JPanel weaponShopPanel = new JPanel(new BorderLayout());
@@ -137,9 +127,8 @@ public class WeaponShop {
         weaponShopFrame.add(weaponShopPanel, BorderLayout.WEST);
 
 
-        weaponShopFrame.add(Game.SideBar.getPanel(), BorderLayout.EAST);
+        weaponShopFrame.add(weaponShopSideBar.getPanel(), BorderLayout.EAST);
     }
-    */
 
     private String returnStringWithSpaces(String string, int length) {
         int spaces = length - string.length();
@@ -170,8 +159,8 @@ public class WeaponShop {
           // }
 
             //YOU NEED TO UPDATE THE SIDEBAR AS NOW THE INVENTORY HAS CHANGED AND THE BALANCE HAS CHANGED
-            Game.SideBar.updatePanel(); //Update the sidebar
-            weaponShopFrame.getContentPane().add(Game.SideBar.getPanel(), BorderLayout.EAST);
+            weaponShopSideBar.updatePanel(); //Update the sidebar
+            weaponShopFrame.getContentPane().add(weaponShopSideBar.getPanel(), BorderLayout.EAST);
             //-----------------------------------
             JOptionPane.showMessageDialog(null, "Purchase successful!"); //:)
         } else { //If not enough money
