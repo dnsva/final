@@ -1,73 +1,23 @@
-
-import Game.*;
-import GameSlots.*;
-import Shops.*;
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.io.*;
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.util.ArrayList;
-import javax.swing.*;
-import java.awt.*;
-
+import Game.HomeVillage;
+import Game.SideBar;
 
 public class MAIN_RUNNER {
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args){
+        GameSlots.SlotInfo slotInfoObject = new GameSlots.SlotInfo();
+        GameSlots.SlotInfo.showInfoFrame();
 
-        SlotInfo slotInfoObject = new GameSlots.SlotInfo();
+       // new Game.SideBar(); //this is a panel. this is added to other frames as needed
 
-        //the folllowing code creates and initializes an arraylist with strings "a", "b", and "c"
-        ArrayList<String> hi = new ArrayList<String>();
-        hi.add("a");
-        hi.add("b");
-        hi.add("c");
-
-        ArrayList<String> hi2 = new ArrayList<String>();
-        hi2.add("a2");
-        hi2.add("b2");
-        hi2.add("c2");
 
         /*
-        // Create a JTextArea with HTML content
-        JFrame frame = new JFrame("HTML Text Area Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-
-        // Create a JEditorPane with HTML content
-        JEditorPane editorPane = new JEditorPane();
-        editorPane.setEditable(false);
-        editorPane.setContentType("text/html");
-
-        String htmlContent = "<html><b>Hello</b> <i>World!</i><br>"
-                + "<h2>&#128507;</h2></html>";
-
-        //EMOJIS WORK
-
-        editorPane.setText(htmlContent);
-
-        editorPane.getCaret().setVisible(false);
-        JScrollPane scrollPane = new JScrollPane(editorPane);
-        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-
-        frame.setVisible(true);
+        Now, with the info from game slots, load the info into GameVars using
+        maybe a constructor in GameVars. Right now there is no gameVars constructor
          */
 
-        new Game.GameVars();
-        new Game.Inventory();
 
-        //new Game.SideBar(); //has to be created before HomeVillage or anything that uses it
 
-       // new Game.HomeVillage();
-
-       // WeaponShop weaponShopObject = new Shops.WeaponShop();
-       // Game.HomeVillage.showHomeVillage();
-       // GameSlots.SlotInfo.showInfoFrame();
+        new HomeVillage(); //OK
+        new Shops.WeaponShop();
     }
-
-
 }

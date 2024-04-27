@@ -15,8 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
+import java.lang.*;
 
-public class SideBar {
+
+public class SideBar{
 
 
     /*
@@ -143,7 +145,7 @@ public class SideBar {
         // Initialize inventory button
         inventoryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //Inventory.showInventory();
+                Inventory.showInventory();
             }
         });
         sideBarPanel.add(healthLabel);
@@ -155,6 +157,8 @@ public class SideBar {
         sideBarPanel.add(confusedLabel);
         sideBarPanel.add(weaponLabel);
         sideBarPanel.add(armourLabel);
+
+        sideBarPanel.add(inventoryButton);
 
        // sideBarPanel.add(healthLabel);
 
@@ -180,19 +184,13 @@ public class SideBar {
         weaponLabel.setText("Weapon: " + GameVars.currWeapon);
         armourLabel.setText("Armour: " + GameVars.currArmour);
     }
+
+
     public static JPanel getPanel(){
-
-       // JPanel hey = new JPanel();
-
-      //  hey = new JPanel();
-
-       // JTextArea hello = new JTextArea("Hi from Game.SideBar!!!!!");
-       // hey.add(hello);
-
-       // return hey;
-
         return sideBarPanel;
-
     }
+
+    //for the interface and so that one panel can be used in two places
+
 
 }

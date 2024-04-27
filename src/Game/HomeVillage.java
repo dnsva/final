@@ -13,10 +13,13 @@ public class HomeVillage {
 
     public HomeVillage() {
 
-        //init all necessary classes here:
-        new Shops.WeaponShop();
+        new Inventory(); //this is a frame, taken care of by sidebar
+        new SideBar(); //this is a panel. this is added to other frames as needed
 
-        //new Game.Inventory(); //init inventory window
+        //init all necessary classes here:
+        //new Shops.WeaponShop();
+        //then also add all other shops here too
+
 
         //-----------
 
@@ -76,10 +79,10 @@ public class HomeVillage {
 
         homeVillageFrame.add(homeVillagePanel, BorderLayout.WEST);
 
-       // homeVillageFrame.add(SideBar.getPanel(), BorderLayout.EAST);
+        homeVillageFrame.add(SideBar.getPanel(), BorderLayout.EAST);
         //homeVillageFrame.add(SideBar.sideBarPanel, BorderLayout.EAST);
 
-        homeVillageFrame.add(SideBar.getPanel(), BorderLayout.CENTER);
+        //1!//homeVillageFrame.add(SideBar.getPanel(), BorderLayout.CENTER);
 
         homeVillageFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310));
         homeVillageFrame.pack();

@@ -9,12 +9,14 @@ import javax.swing.*;
 import java.awt.*;
 
 import Items.*;
+import AnnaTools.*;
 
+//this class does not store the inventoy list. the list is stored in gameVars
+//this class is just a window that displays the inventory
+//however, this class is also used to add stuff to the gamevars list
 public class Inventory {
 
-    private JFrame inventoryFrame = new JFrame();
-
-    //private ArrayList<String> healthItems = new ArrayList<>();
+    private static Frame inventoryFrame = new JFrame();
     private ArrayList<Items.Item> weaponItems = new ArrayList<>();
     private ArrayList<Items.Item> armourItems = new ArrayList<>();
 
@@ -35,28 +37,14 @@ public class Inventory {
 
         inventoryFrame.setTitle("Inventory");
         inventoryFrame.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
-        inventoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        inventoryFrame.setVisible(true);
+        //inventoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         findWeaponsAndArmour(); //this function will go through Gamevars.inventory and will
         //find all the weapons and armour and add them to the respective lists weaponItems and
         //armourItems
 
-        //----for now, just add some items to the inventory
-       /*
-        weaponItems.add("Sword");
-
-        weaponItems.add("Axe");
-        weaponItems.add("Bow");
-        armourItems.add("Helmet");
-        armourItems.add("Chestplate");
-        armourItems.add("Leggings");
-
-
-        */
         //-----------------------
 
-        //JPanel listPanel = new JPanel(new GridLayout(1, 3));
         JPanel listPanel = new JPanel(new GridLayout(1, 1));
         JPanel currentItemPanel = new JPanel(new GridLayout(1, 2));
         JPanel selectionButtonPanel = new JPanel(new GridLayout(1, 2));
@@ -68,17 +56,6 @@ public class Inventory {
         updateCurrentSelectedItems(); //this updates the little messages with what is currently selected
         updateItemsList(); //this updates the list of things in your inventory
 
-        /*
-        JButton healthButton = new JButton("Select Health Item");
-
-        healthButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                selectItem(healthItems, "Health");
-            }
-        });
-        */
-
         JButton weaponButton = new JButton("Select Weapon Item");
         weaponButton.addActionListener(new ActionListener() {
             @Override
@@ -86,7 +63,6 @@ public class Inventory {
                 selectItem( weaponItems, "Weapon");
             }
         });
-
 
         JButton armourButton = new JButton("Select Armour Item");
         armourButton.addActionListener(new ActionListener() {
@@ -100,22 +76,17 @@ public class Inventory {
         closeInventoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inventoryFrame.setVisible(false);
+                hideInventory();
             }
         });
 
-        //currentItemPanel.add(currentHealthItemLabel);
         currentItemPanel.add(currentWeaponItemLabel);
         currentItemPanel.add(currentArmourItemLabel);
         inventoryFrame.add(currentItemPanel, BorderLayout.NORTH);
 
         listPanel.add(allInventoryItemsTextArea);
-        //listPanel.add(healthInventoryItemsTextArea);
-        //listPanel.add(weaponInventoryItemsTextArea);
-        //listPanel.add(armourInventoryItemsTextArea);
         inventoryFrame.add(listPanel, BorderLayout.CENTER);
 
-        //selectionButtonPanel.add(healthButton);
         selectionButtonPanel.add(weaponButton);
         selectionButtonPanel.add(armourButton);
 
@@ -150,16 +121,9 @@ public class Inventory {
                 null,
                 itemsString.toArray(),
                 null);
+
         // Update selected item in the respective inventory
         switch (itemType) {
-            /*
-            case "Health":
-                if(selectedItem != null) {
-                    currentHealthItem = selectedItem;
-                    updateCurrentSelectedItems();
-                }
-                break;
-             */
             case "Weapon":
                 if(selectedItem != null){
                     currWeaponString = selectedItem;
@@ -170,7 +134,6 @@ public class Inventory {
                     }
                     updateCurrentSelectedItems();
                 }
-
                 break;
             case "Armour":
                 if(selectedItem != null){
@@ -182,31 +145,22 @@ public class Inventory {
                     }
                     updateCurrentSelectedItems();
                 }
-
                 break;
         }
     }
 
     private void updateCurrentSelectedItems(){
-
-        //currentHealthItemLabel.setText("Current Health Item: " + currentHealthItem);
         currentWeaponItemLabel.setText("Current Weapon Item: " + currWeaponString);
         currentArmourItemLabel.setText("Current Armour Item: " + currArmourString);
 
     }
 
     private void updateItemsList() {
-
         String allItemsTEXT = "Inventory Items:\n";
         for (Items.Item item : GameVars.inventory) {
             allItemsTEXT += item + "\n";
         }
-
         allInventoryItemsTextArea.setText(allItemsTEXT);
-        //allInventoryItemsTextArea.setText("Inventory Items:\n" + (GameVars.inventory.isEmpty() ? "Nothing" : String.join("\n", GameVars.inventory)));
-        //healthInventoryItemsTextArea.setText("Health Items:\n" + (healthItems.isEmpty() ? "Nothing" : String.join("\n", healthItems)));
-        //weaponInventoryItemsTextArea.setText("Weapon Items:\n" + (weaponItems.isEmpty() ? "Nothing" : String.join("\n", weaponItems)));
-        //armourInventoryItemsTextArea.setText("Armour Items:\n" + (armourItems.isEmpty() ? "Nothing" : String.join("\n", armourItems)));
     }
 
     private void findWeaponsAndArmour() {
@@ -217,5 +171,24 @@ public class Inventory {
                 armourItems.add((Armour)item);
             }
         }
+    }
+
+    public static void showInventory(){
+        inventoryFrame.setVisible(true);
+    }
+
+    public static void hideInventory(){
+        inventoryFrame.setVisible(false);
+    }
+
+    //Methods used by other classes:
+
+    public static void addItem(Item item){
+        GameVars.inventory.add(item);
+        AnnaTools.ItemInsertSort.insertSort(GameVars.inventory);
+    }
+
+    public static void removeItem(Item item){
+        GameVars.inventory.remove(item);
     }
 }

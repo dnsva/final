@@ -45,6 +45,18 @@ public class WeaponShop {
     private static JFrame weaponShopFrame; //the most important thing in this entire file
     /* -> */ private JComboBox<String> weaponComboBox; //a combo box that displays available weapons
 
+    public WeaponShop(){
+        weaponShopFrame = new JFrame("Weapon Shop");
+        weaponShopFrame.setTitle("By Anna Denisova");
+        weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310);
+        weaponShopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        weaponShopFrame.setLocationRelativeTo(null);
+        weaponShopFrame.setLayout(new BorderLayout()); //Make the layout border
+
+        weaponShopFrame.add(Game.SideBar.getPanel(), BorderLayout.EAST);
+    }
+
+    /*
     public WeaponShop() {
 
         //setup frame details
@@ -53,7 +65,8 @@ public class WeaponShop {
         weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310);
         weaponShopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         weaponShopFrame.setLocationRelativeTo(null);
-        weaponShopFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
+        weaponShopFrame.setLayout(new BorderLayout()); //Make the layout border
+
 
         // Create the main panel
         JPanel weaponShopPanel = new JPanel(new BorderLayout());
@@ -74,7 +87,7 @@ public class WeaponShop {
                 "| AVAILABLE ITEMS                                            |";  //string length - "| space and space | (4) dont count. this is equal to 59 here.
 
         for(int i = 0; i  < weaponList.length; ++i){
-            nameAndDescriptionsString += "| " + (weaponList[i].name).toUpperCase() + returnStringWithSpaces(weaponList[i].name, 59-(((Integer)weaponList[i].price)).toString().length()-1 /*minus three cause price */) + "$" + weaponList[i].price + " |" +
+            nameAndDescriptionsString += "| " + (weaponList[i].name).toUpperCase() + returnStringWithSpaces(weaponList[i].name, 59-(((Integer)weaponList[i].price)).toString().length()-1 ) + "$" + weaponList[i].price + " |" +
                     "| - " + weaponList[i].description + returnStringWithSpaces(weaponList[i].description, 59-2) + " |" +
                     "| - Damage: " + weaponList[i].damage + returnStringWithSpaces(((Integer)weaponList[i].damage).toString(), 59-10) + " |" +
                     "| - Miss Rate: " + weaponList[i].missPercentage + "%" + returnStringWithSpaces(((Integer)weaponList[i].missPercentage).toString(), 59-14) + " |";
@@ -120,9 +133,13 @@ public class WeaponShop {
         weaponShopPanel.add(newPanel, BorderLayout.CENTER);
         weaponShopPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        weaponShopFrame.getContentPane().add(weaponShopPanel, BorderLayout.WEST);
-        weaponShopFrame.getContentPane().add(Game.SideBar.getPanel(), BorderLayout.EAST);
+
+        weaponShopFrame.add(weaponShopPanel, BorderLayout.WEST);
+
+
+        weaponShopFrame.add(Game.SideBar.getPanel(), BorderLayout.EAST);
     }
+    */
 
     private String returnStringWithSpaces(String string, int length) {
         int spaces = length - string.length();
