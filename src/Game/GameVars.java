@@ -1,7 +1,7 @@
 package Game;
 
-import java.util.ArrayList;
-import Items.Item;
+import java.util.*;
+import Items.*;
 
 public class GameVars {
 
@@ -10,6 +10,8 @@ public class GameVars {
     public static String characterType;
 
     public static ArrayList<Item> inventory = new ArrayList<Item>();
+
+
 
     public static int WINDOWWIDTH = 500;
     public static int SIDEBARWIDTH = 300;
@@ -25,7 +27,13 @@ public class GameVars {
     public static boolean isParalyzed = false;
     public static boolean isConfused = false;
 
-    public static String currWeapon = "None";
-    public static String currArmour = "None";
+    public static Items.Weapon currWeapon = null;
+    public static Items.Armour currArmour = null;
 
+    //Temp code:
+    public GameVars(){
+        inventory.add(new Items.Weapon("Sword", 10, "sdfsdf", 10, 10));
+        inventory.add(new Items.Weapon("Axe", 10, "sdfsd", 10, 10));
+        inventory.add(new Items.Armour("Helmet", 10, 10));
+    }
 }
