@@ -4,8 +4,11 @@ import Game.SideBar;
 public class MAIN_RUNNER {
 
     public static void main(String[] args){
-        GameSlots.SlotInfo slotInfoObject = new GameSlots.SlotInfo();
-        GameSlots.SlotInfo.showInfoFrame();
+        //GameSlots.SlotInfo slotInfoObject = new GameSlots.SlotInfo();
+        //GameSlots.SlotInfo.showInfoFrame();
+
+        new HomeVillage();
+        Game.HomeVillage.showHomeVillage();
 
        // new Game.SideBar(); //this is a panel. this is added to other frames as needed
 

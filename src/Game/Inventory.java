@@ -41,7 +41,8 @@ public class Inventory {
         new GameVars();
 
         inventoryFrame.setTitle("Inventory");
-        inventoryFrame.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
+        inventoryFrame.setLocationRelativeTo(null);
+        inventoryFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310);
         //inventoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         findWeaponsAndArmour(); //this function will go through Gamevars.inventory and will
