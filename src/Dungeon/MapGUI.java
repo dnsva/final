@@ -80,6 +80,7 @@ public class MapGUI {
     }
     public static void main(String[] args){
         //new GameSlots.SlotInfo();
+
         // new HomeVillage();
         //new SideBar();
         // showHomeVillage();

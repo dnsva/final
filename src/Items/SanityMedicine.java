@@ -7,8 +7,7 @@ public class SanityMedicine extends Item{
     int sanityAddition;
 
     public SanityMedicine(String name, int price, int sanityAddition){
-        this.name = name;
-        this.price = price;
+        super(name, price);
         this.sanityAddition = sanityAddition;
     }
 

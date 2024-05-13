@@ -3,6 +3,7 @@ package Items;
 public class Armour extends Item{
 
     int damageSubtractorPercentage;
+    String type;
 
     public Armour(String name, int price, int damageSubtractorPercentage){
         super(name, price);

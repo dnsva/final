@@ -7,8 +7,7 @@ public class HealingMedicine extends Item{
     int healthAddition;
 
     public HealingMedicine(String name, int price, int healthAddition){
-        this.name = name;
-        this.price = price;
+        super(name, price);
         this.healthAddition = healthAddition;
     }
 

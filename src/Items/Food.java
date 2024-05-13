@@ -10,8 +10,7 @@ public class Food extends Item {
     //add to hunger
 
     public Food(String name, int price, int hungerRestore){
-        this.name = name;
-        this.price = price;
+        super(name, price);
         this.hungerRestore = hungerRestore;
     }
 
