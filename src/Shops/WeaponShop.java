@@ -53,7 +53,7 @@ public class WeaponShop {
         //setup frame details
         weaponShopFrame = new JFrame("Weapon Shop");
         weaponShopFrame.setTitle("By Anna Denisova");
-        weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310);
+        weaponShopFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         weaponShopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         weaponShopFrame.setLocationRelativeTo(null);
         weaponShopFrame.setLayout(new BorderLayout()); //Make the layout border
@@ -64,7 +64,7 @@ public class WeaponShop {
 
         //text
         JTextArea namesAndDescriptions = new JTextArea();
-        namesAndDescriptions.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT + 10);
+        namesAndDescriptions.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
 
         String nameAndDescriptionsString = "";
 

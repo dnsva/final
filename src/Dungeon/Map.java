@@ -1,8 +1,7 @@
 package Dungeon;
 
-import Game.GameVars;
-
-import java.util.*;
+import Game.*;
+import Items.*;
 
 public class Map {
 
@@ -13,25 +12,26 @@ public class Map {
      2 : LEVEL INCOMPLETE
      3 : BOSS
      4 : SIDE QUEST
+     5 : KEY
      */
 
-    //rows - 8
-    //cols - 5
+    //rows - 5
+    //cols - 8
 
     public static int[][] map = {
-            {4, -1, 0, 2, 0, 2, 0, 3},
+            {4, -1, 0, 2, 0, 5, 0, 3},
             {0, -1, 0, -1, -1, -1, -1, -1},
-            {0, 0, 2, 0, 0, 0, 0, 4},
-            {-1,-1, -1, -1, -1, 2, -1, -1},
-            {0, 0, 0, 2, 0, 0, 0, 4}
+            {0, 0, 5, 0, 0, 2, 0, 5},
+            {-1, -1, -1, -1, -1, -1, -1, 2},
+            {0, 0, 0, 2, 0, 0, 0, 0}
     };
 
     public static int[][] questIDs = {
-            {10, 0, 0, 20, 0, 30, 0, 40},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 20, 0, 0, 0, 0, 0, 50},
-            {0, 0, 0, 0, 0, 60, 0, 0},
-            {0, 0, 0, 70, 0, 0, 0, 80}
+            {10, 0, 0, 20, 0, 3, 0, 100}, //multiples of 10 are quests
+            {0, 0, 0, 0, 0, 0, 0, 0, 0}, //1,2,3 - key 1,2,3,
+            {0, 0, 2, 0, 0, 30, 0, 1},
+            {0, 0, 0, 0, 40, 0, 0, 0},
+            {0, 0, 0, 50, 0, 0, 0, 0}
     };
 
     static int playerRow = map.length-1;
@@ -58,6 +58,22 @@ public class Map {
             //process
             map[row][col] = 1;
             System.out.println("Side Quest Complete");
+        }
+        if(map[row][col] == 5){
+            System.out.println("Key Found");
+            //process
+            map[row][col] = 0;  //KEYY!!!!
+
+            if(questIDs[row][col] == 1){
+                GameVars.inventory.add(new DungeonKey("Key 1"));
+            }else if(questIDs[row][col] == 2){
+                GameVars.inventory.add(new DungeonKey("Key 2"));
+            }else if(questIDs[row][col] == 3){
+                GameVars.inventory.add(new DungeonKey("Key 3"));
+            }
+
+
+            System.out.println("Key Used");
         }
 
 
@@ -87,7 +103,7 @@ public class Map {
         checkCell(playerRow, playerCol);
     }
     static String getMapAsciiString(){
-        String mapString = "<html>";
+        String mapString = "<html><p style=\"font-size:30; text-align: center;\" >";
 
         for(int i = 0; i < map[0].length + 2; i++){
             //wall
@@ -112,6 +128,8 @@ public class Map {
                     mapString += "&#x1F7E3;";
                 }else if(map[i][j] == 4) { //side quest
                     mapString += "&#x1f535;";
+                }else if(map[i][j] == 5) { //key
+                    mapString += "&#x1F511;";
                 }
 
             }
@@ -125,16 +143,15 @@ public class Map {
         }
         mapString += "<br>";
 
-        mapString += "</html>";
+        mapString += "</p></html>";
 
         return mapString;
     }
 
     public static void main(String[] args) {
         Map m = new Map();
-        /*
+
         System.out.print(m.getMapAsciiString());
-        m.moveRight();
         System.out.print(m.getMapAsciiString());
         m.moveRight();
         System.out.print(m.getMapAsciiString());
@@ -151,7 +168,7 @@ public class Map {
         m.moveLeft();
         System.out.print(m.getMapAsciiString());
 
-         */
+
     }
 
 

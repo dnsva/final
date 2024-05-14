@@ -27,29 +27,28 @@ public class HomeVillage {
 
         homeVillageFrame = new JFrame("Home Village");
         homeVillageFrame.setTitle("By Anna Denisova");
-        homeVillageFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310);
+        homeVillageFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         homeVillageFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         homeVillageFrame.setLocationRelativeTo(null);
         homeVillageFrame.getContentPane().setLayout(new BorderLayout());
 
         JPanel homeVillagePanel = new JPanel();
         homeVillagePanel.setLayout(new BoxLayout(homeVillagePanel, BoxLayout.Y_AXIS));
-        //homeVillagePanel.setSize(600, GameVars.WINDOWHEIGHT);
 
         JLabel titleLabel = new JLabel("Village");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setForeground(Color.white);
 
-        homeVillagePanel.add(Box.createVerticalStrut(20)); //add space ebtween
+        homeVillagePanel.add(Box.createVerticalStrut(20)); //add space between
         homeVillagePanel.add(titleLabel);
-        homeVillagePanel.add(Box.createVerticalStrut(20)); //add space ebtween
+        homeVillagePanel.add(Box.createVerticalStrut(20)); //add space between
         homeVillagePanel.setBackground(Color.blue);
 
 
-        JButton apothecaryButton = new JButton("Apothecary");
-        JButton armourShopButton = new JButton("Armour Shop");
-        JButton foodMarket = new JButton("Food Market");
-        JButton weaponShopButton = new JButton("Weapon Shop");
+        JButton apothecaryButton = new JButton("Apothecary"); //NOT IMPLEMENTED
+        JButton armourShopButton = new JButton("Armour Shop"); //NOT IMPLEMENTED
+        JButton foodMarket = new JButton("Food Market"); //NOT IMPLEMENTED
+        JButton weaponShopButton = new JButton("Weapon Shop"); //IMPLEMENTED
         weaponShopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,9 +58,9 @@ public class HomeVillage {
             }
         });
 
-        JButton dungeonButton = new JButton("Dungeon");
+        JButton dungeonButton = new JButton("Dungeon"); //NOT IMPLEMENTED
 
-        JButton exitButton = new JButton("Exit");
+        JButton exitButton = new JButton("Exit"); //IMPLEMENTED
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,35 +71,27 @@ public class HomeVillage {
 
         JButton[] buttons = {apothecaryButton, armourShopButton, foodMarket, weaponShopButton, dungeonButton, exitButton};
         for(JButton button : buttons){
-            button.setAlignmentX(Component.CENTER_ALIGNMENT);
-            homeVillagePanel.add(button);
-            homeVillagePanel.add(Box.createVerticalStrut(10));
+            button.setAlignmentX(Component.CENTER_ALIGNMENT); //Align the button to center
+            homeVillagePanel.add(button); //ADD ALL THE BUTTONS TO THE PANNEL
+            homeVillagePanel.add(Box.createVerticalStrut(10)); //create space in between each button
         }
 
-        homeVillagePanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT));
+        homeVillagePanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT)); //idk what this changes
 
         homeVillageFrame.add(homeVillagePanel, BorderLayout.WEST);
 
         homeVillageFrame.add(homeVillageSideBar.getPanel(), BorderLayout.EAST);
-        //homeVillageFrame.add(SideBar.sideBarPanel, BorderLayout.EAST);
 
-        //1!//homeVillageFrame.add(SideBar.getPanel(), BorderLayout.CENTER);
-
-        homeVillageFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310));
+        homeVillageFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT));
         homeVillageFrame.pack();
        // homeVillageFrame.setVisible(true);
-
-
     }
-
     public static void showHomeVillage(){
         homeVillageFrame.setVisible(true);
     }
 
     public static void hideHomeVillage(){
-
         homeVillageFrame.setVisible(false);
-
     }
 
     public static void main(String[] args){
@@ -109,5 +100,4 @@ public class HomeVillage {
         //new SideBar();
        // showHomeVillage();
     }
-
 }

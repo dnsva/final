@@ -13,7 +13,7 @@ public class GameVars {
 
     public static int WINDOWWIDTH = 500;
     public static int SIDEBARWIDTH = 180;
-    public static int WINDOWHEIGHT = 300;
+    public static int WINDOWHEIGHT = 610;
 
     //int day = 0;
     public static int health = 100;

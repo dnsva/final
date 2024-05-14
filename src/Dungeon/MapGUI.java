@@ -14,14 +14,14 @@ public class MapGUI {
 
     private static JFrame mapFrame;
     public static SideBar mapGUISideBar = new SideBar();
-
+    boolean exitFlag; //this is used to check if the exit button has been pressed
     public static JEditorPane mapEditorPane;
 
     public MapGUI() {
 
         mapFrame = new JFrame("Dungeon Map");
         mapFrame.setTitle("By Anna Denisova");
-        mapFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310);
+        mapFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         mapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mapFrame.setLocationRelativeTo(null);
         mapFrame.getContentPane().setLayout(new BorderLayout());
@@ -47,22 +47,90 @@ public class MapGUI {
         mapAsciiPanel.add(mapEditorPane);
 
         JButton exitButton = new JButton("Exit");
+
+        /*
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+        DO THIS
+        JButton b=new JButton(new ImageIcon("D:\\icon.png"));
+         */
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Game.HomeVillage.showHomeVillage();
+                //Game.HomeVillage.showHomeVillage(); //UNCOMMENT THSI ALTER
                 hideMapGUI();
             }
         });
 
+        JButton upButton = new JButton("Up");
+        upButton.setSize(100, 100);
+        upButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Map.moveUp();
+                updateMapGUIAscii();
+            }
+        });
+
+        JButton downButton = new JButton("Down");
+        downButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Map.moveDown();
+                updateMapGUIAscii();
+            }
+        });
+
+        JButton leftButton = new JButton("Left");
+        leftButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Map.moveLeft();
+                updateMapGUIAscii();
+            }
+        });
+
+        JButton rightButton = new JButton("Right");
+        rightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Map.moveRight();
+                updateMapGUIAscii();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3));
+
+        buttonPanel.add(leftButton);
+
+        JPanel buttonPanelUpDown = new JPanel(new GridLayout(2, 1));
+        buttonPanelUpDown.add(upButton);
+        buttonPanelUpDown.add(downButton);
+
+        buttonPanel.add(buttonPanelUpDown);
+
+        //rightButton.setSize(100, 100);
+        buttonPanel.add(rightButton);
+
+       // buttonPanel.add(exitButton);
+
+        //---------------------
+
         mapAsciiPanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT));
+        mapAsciiPanel.add(buttonPanel);
+
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mapAsciiPanel.add(exitButton);
+
 
         mapFrame.add(mapAsciiPanel, BorderLayout.WEST);
 
+        //mapFrame.add(exitButton, BorderLayout.SOUTH);
+
         mapFrame.add(mapGUISideBar.getPanel(), BorderLayout.EAST);
 
-        mapFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT+310));
-        mapFrame.pack();
+        mapFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT));
+        //mapFrame.pack();
     }
 
     public static void showMapGUI(){
@@ -93,6 +161,11 @@ public class MapGUI {
         m.moveRight();
         updateMapGUIAscii();
         showMapGUI();
+
+        //while(true){
+          //  m.moveRight();
+            //updateMapGUIAscii();
+        //}
     }
 
 }
