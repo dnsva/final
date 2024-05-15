@@ -2,7 +2,6 @@ package Dungeon;
 
 import Game.*;
 import Items.*;
-
 public class Map {
 
     /*
@@ -18,6 +17,13 @@ public class Map {
     //rows - 5
     //cols - 8
 
+    static Quest10 quest10Object = new Quest10();
+    static Quest20 quest20Object = new Quest20();
+    static Quest30 quest30Object = new Quest30();
+    static Quest40 quest40Object = new Quest40();
+    static Quest50 quest50Object = new Quest50();
+    static FinalBoss finalBossObject = new FinalBoss();
+
     public static int[][] map = {
             {4, -1, 0, 2, 0, 5, 0, 3},
             {0, -1, 0, -1, -1, -1, -1, -1},
@@ -30,7 +36,7 @@ public class Map {
             {10, 0, 0, 20, 0, 3, 0, 100}, //multiples of 10 are quests
             {0, 0, 0, 0, 0, 0, 0, 0, 0}, //1,2,3 - key 1,2,3,
             {0, 0, 2, 0, 0, 30, 0, 1},
-            {0, 0, 0, 0, 40, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 40},
             {0, 0, 0, 50, 0, 0, 0, 0}
     };
 
@@ -38,27 +44,43 @@ public class Map {
     static int playerCol = 0;
 
     static void checkCell(int row, int col){
+
         if(map[row][col] == 1){
             System.out.println("Level Complete");
         }
-        if(map[row][col] == 2){
+        if(map[row][col] == 2 || map[row][col] == 3 || map[row][col] == 4){
             System.out.println("Level Incomplete");
+
+            //PULL UP WINDOW
+            if(questIDs[row][col] == 10){
+                quest10Object.showQuest10();
+                MapGUI.hideMapGUI();
+            }else if(questIDs[row][col] == 20) {
+                quest20Object.showQuest20();
+                MapGUI.hideMapGUI();
+            }else if(questIDs[row][col] == 30){
+                quest30Object.showQuest30();
+                MapGUI.hideMapGUI();
+            }else if(questIDs[row][col] == 40){
+                quest40Object.showQuest40();
+                MapGUI.hideMapGUI();
+            }else if(questIDs[row][col] == 50){
+                quest50Object.showQuest50();
+                MapGUI.hideMapGUI();
+            }else if(questIDs[row][col] == 100){
+                finalBossObject.showFinalBoss();
+                MapGUI.hideMapGUI();
+            }
             //process
             map[row][col] = 1;
             System.out.println("Level Complete");
         }
-        if(map[row][col] == 3){
-            System.out.println("Boss Fight");
+        //if(map[row][col] == 3){
+          //  System.out.println("Boss Fight");
             //process
-            map[row][col] = 1;
-            System.out.println("Boss Defeated");
-        }
-        if(map[row][col] == 4) {
-            System.out.println("Side Quest");
-            //process
-            map[row][col] = 1;
-            System.out.println("Side Quest Complete");
-        }
+          //  map[row][col] = 1;
+         //  System.out.println("Boss Defeated");
+        //}
         if(map[row][col] == 5){
             System.out.println("Key Found");
             //process
@@ -148,6 +170,7 @@ public class Map {
         return mapString;
     }
 
+
     public static void main(String[] args) {
         Map m = new Map();
 
@@ -167,6 +190,8 @@ public class Map {
         System.out.print(m.getMapAsciiString());
         m.moveLeft();
         System.out.print(m.getMapAsciiString());
+
+
 
 
     }

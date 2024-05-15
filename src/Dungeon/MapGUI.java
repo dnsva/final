@@ -59,6 +59,7 @@ public class MapGUI {
             public void actionPerformed(ActionEvent e) {
                 //Game.HomeVillage.showHomeVillage(); //UNCOMMENT THSI ALTER
                 hideMapGUI();
+
             }
         });
 
@@ -154,13 +155,15 @@ public class MapGUI {
         // showHomeVillage();
 
         new MapGUI();
-        Map m = new Map();
-        m.moveRight();
-        m.moveRight();
-        m.moveRight();
-        m.moveRight();
+        //Map m = new Map();
+        //m.moveRight();
+        //m.moveRight();
+        //m.moveRight();
+        //m.moveRight();
         updateMapGUIAscii();
         showMapGUI();
+
+       // Map.quest10Object.showQuest10();
 
         //while(true){
           //  m.moveRight();
