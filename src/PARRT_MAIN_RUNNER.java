@@ -47,8 +47,8 @@ public class PARRT_MAIN_RUNNER {
         frame.setVisible(true);
          */
 
-        new Game.GameVars();
-        new Game.Inventory();
+        //new Game.GameVars();
+        //new Game.Inventory();
 
         //new Game.SideBar(); //has to be created before HomeVillage or anything that uses it
 

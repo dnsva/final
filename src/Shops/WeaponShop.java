@@ -45,7 +45,7 @@ public class WeaponShop {
     };
 
     //double balance = GameVars.balance; //character balance is retrieved from using Game.GameVars.balance !!!!!
-    private static JFrame weaponShopFrame; //the most important thing in this entire file
+    public static JFrame weaponShopFrame; //the most important thing in this entire file
     /* -> */ private JComboBox<String> weaponComboBox; //a combo box that displays available weapons
 
     public WeaponShop() {
@@ -152,6 +152,7 @@ public class WeaponShop {
         if (GameVars.balance >= selectedWeapon.price) { //Check if the player has enough balance to purchase the weapon
             GameVars.balance -= selectedWeapon.price; //Deduct the price from the balance
             GameVars.inventory.add(selectedWeapon); //Add the purchased weapon to the inventory
+
 
           //  System.out.println("INVENTORY: ");
           //  for(int i = 0; i < GameVars.inventory.size(); ++i){

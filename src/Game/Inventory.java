@@ -9,36 +9,35 @@ import javax.swing.*;
 import java.awt.*;
 
 import Items.*;
+import Shops.*;
+import Dungeon.*;
 import AnnaTools.*;
+
+import static Game.HomeVillage.homeVillageFrame;
+import static Game.HomeVillage.homeVillageSideBar;
+import static Shops.WeaponShop.weaponShopFrame;
+import static Shops.WeaponShop.weaponShopSideBar;
 
 //this class does not store the inventoy list. the list is stored in gameVars
 //this class is just a window that displays the inventory
 //however, this class is also used to add stuff to the gamevars list
 public class Inventory {
 
-
-
     private static Frame inventoryFrame = new JFrame();
-    private ArrayList<Items.Item> weaponItems = new ArrayList<>();
-    private ArrayList<Items.Item> armourItems = new ArrayList<>();
+    private static ArrayList<Items.Item> weaponItems = new ArrayList<>();
+    private static ArrayList<Items.Item> armourItems = new ArrayList<>();
 
-    private JTextArea healthInventoryItemsTextArea = new JTextArea();
-    private JTextArea weaponInventoryItemsTextArea = new JTextArea();
-    private JTextArea armourInventoryItemsTextArea = new JTextArea();
-    private JTextArea allInventoryItemsTextArea = new JTextArea();
+    private static JTextArea allInventoryItemsTextArea = new JTextArea();
 
    // String currentHealthItem = "DFSDFSDF";
-    String currWeaponString = null;
-    String currArmourString = null;
+    static String currWeaponString = "none";
+    static String currArmourString = "none";
 
     //JLabel currentHealthItemLabel = new JLabel();
-    JLabel currentWeaponItemLabel = new JLabel();
-    JLabel currentArmourItemLabel = new JLabel();
+    static JLabel currentWeaponItemLabel = new JLabel();
+    static JLabel currentArmourItemLabel = new JLabel();
 
     public Inventory() {
-
-        //for temp items:
-        new GameVars();
 
         inventoryFrame.setTitle("Inventory");
         inventoryFrame.setLocationRelativeTo(null);
@@ -101,10 +100,9 @@ public class Inventory {
 
         inventoryFrame.add(buttonPanel, BorderLayout.SOUTH);
 
-        updateItemsList();
     }
 
-    private void selectItem(ArrayList<Item> items, String itemType) {
+    private static void selectItem(ArrayList<Item> items, String itemType) {
         if (items.isEmpty()) {
             JOptionPane.showMessageDialog(inventoryFrame,
                     "Cannot select " + itemType + " item because there are none.",
@@ -139,6 +137,7 @@ public class Inventory {
                         }
                     }
                     updateCurrentSelectedItems();
+                    updateItemsList();
                 }
                 break;
             case "Armour":
@@ -150,22 +149,21 @@ public class Inventory {
                         }
                     }
                     updateCurrentSelectedItems();
+                    updateItemsList();
                 }
                 break;
         }
     }
 
-    private void updateCurrentSelectedItems(){
+    private static void updateCurrentSelectedItems(){
         currentWeaponItemLabel.setText("Current Weapon Item: " + currWeaponString);
         currentArmourItemLabel.setText("Current Armour Item: " + currArmourString);
 
-
-
-        //-----------------------------------------------
+        //update sidebars?
 
     }
 
-    private void updateItemsList() {
+    private static void updateItemsList() {
         String allItemsTEXT = "Inventory Items:\n";
         for (Items.Item item : GameVars.inventory) {
             allItemsTEXT += item + "\n";
@@ -173,7 +171,7 @@ public class Inventory {
         allInventoryItemsTextArea.setText(allItemsTEXT);
     }
 
-    private void findWeaponsAndArmour() {
+    private static void findWeaponsAndArmour() {
         for (Item item : GameVars.inventory) {
             if (item instanceof Weapon) {
                 weaponItems.add((Weapon)item);
@@ -184,16 +182,29 @@ public class Inventory {
     }
 
     public static void showInventory(){
+        updateItemsList();
+        findWeaponsAndArmour();
         inventoryFrame.setVisible(true);
+        updateAllSidePanels();
     }
 
     public static void hideInventory(){
         inventoryFrame.setVisible(false);
+        updateAllSidePanels();
+    }
 
-        //------------------UPDATE ALL THE SIDE BARS------
-        HomeVillage.homeVillageSideBar.updatePanel();
-        Shops.WeaponShop.weaponShopSideBar.updatePanel();
+    public static void updateAllSidePanels(){
+        System.out.println("ABOUT TO UPDATE ALL SIDE PANELS...");
+        System.out.println("GAME VARS BEFORE: " + GameVars.currArmour + " " + GameVars.currWeapon);
 
+
+        homeVillageSideBar.updatePanel();
+        homeVillageFrame.getContentPane().add(homeVillageSideBar.getPanel(), BorderLayout.EAST);
+
+        weaponShopSideBar.updatePanel();
+        weaponShopFrame.add(weaponShopSideBar.getPanel(), BorderLayout.EAST);
+
+        System.out.println("GAME VARS AFTER: " + GameVars.currArmour + " " + GameVars.currWeapon);
     }
 
     //Methods used by other classes:

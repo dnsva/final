@@ -384,8 +384,8 @@ public class SlotInfo {
     }
 
     public static void main(String[] args){
-        //new SlotInfo();
-       // showInfoFrame();
+      //  new SlotInfo();
+     //   showInfoFrame();
       // hideInfoFrame();
     }
 

@@ -84,6 +84,7 @@ public class SideBar{
     }
 
     public void updatePanel(){
+
         healthLabel.setText("Health: " + GameVars.health);
         sanityLabel.setText("Sanity: " + GameVars.sanity);
         hungerLabel.setText("Hunger: " + GameVars.hunger);
@@ -91,8 +92,14 @@ public class SideBar{
         poisonedLabel.setText("Poisoned: " + GameVars.isPoisoned);
         paralyzedLabel.setText("Paralyzed: " + GameVars.isParalyzed);
         confusedLabel.setText("Confused: " + GameVars.isConfused);
+
+        System.out.println("\tThe weapon label update: " + GameVars.currWeapon);
         weaponLabel.setText("Weapon: " + GameVars.currWeapon);
+        System.out.println("\tThe armour label update: " + GameVars.currArmour);
         armourLabel.setText("Armour: " + GameVars.currArmour);
+
+
+
     }
 
     public JPanel getPanel(){

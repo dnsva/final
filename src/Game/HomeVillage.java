@@ -3,24 +3,33 @@ package Game;
 import javax.swing.*;
 import java.awt.*;
 
+import Dungeon.MapGUI;
 import GameSlots.SlotInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HomeVillage {
 
-    private static JFrame homeVillageFrame;
+    public static JFrame homeVillageFrame;
+
     public static SideBar homeVillageSideBar = new SideBar();
 
     public HomeVillage() {
 
         new Inventory(); //this is a frame, taken care of by sidebar
-
         // homeVillageSideBar = new SideBar(); //this is a panel. this is added to other frames as needed
+        homeVillageSideBar = new SideBar();
+
+        /* TEMPOARRYAYRYRY */
+        GameVars.inventory.add(new Items.Weapon("Sword", 10, "sdfsdf", 10, 10));
+        GameVars.inventory.add(new Items.Weapon("Axe", 10, "sdfsd", 10, 10));
+        GameVars.inventory.add(new Items.Armour("Helmet", 10, 10));
 
         //init all necessary classes here:
         //new Shops.WeaponShop();
         //then also add all other shops here too
+
+        new MapGUI(); //again, init all necessary classes
 
 
         //-----------
@@ -58,7 +67,14 @@ public class HomeVillage {
             }
         });
 
-        JButton dungeonButton = new JButton("Dungeon"); //NOT IMPLEMENTED
+        JButton dungeonButton = new JButton("Dungeon");
+        dungeonButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MapGUI.showMapGUI();
+                hideHomeVillage();
+            }
+        });
 
         JButton exitButton = new JButton("Exit"); //IMPLEMENTED
         exitButton.addActionListener(new ActionListener() {
@@ -69,7 +85,15 @@ public class HomeVillage {
             }
         });
 
-        JButton[] buttons = {apothecaryButton, armourShopButton, foodMarket, weaponShopButton, dungeonButton, exitButton};
+        JButton saveGameButton = new JButton("Save Game");
+        saveGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //to be implemented
+            }
+        });
+
+        JButton[] buttons = {apothecaryButton, armourShopButton, foodMarket, weaponShopButton, dungeonButton, exitButton, saveGameButton};
         for(JButton button : buttons){
             button.setAlignmentX(Component.CENTER_ALIGNMENT); //Align the button to center
             homeVillagePanel.add(button); //ADD ALL THE BUTTONS TO THE PANNEL
@@ -78,7 +102,7 @@ public class HomeVillage {
 
         homeVillagePanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT)); //idk what this changes
 
-        homeVillageFrame.add(homeVillagePanel, BorderLayout.WEST);
+        homeVillageFrame.add(homeVillagePanel, BorderLayout.CENTER);
 
         homeVillageFrame.add(homeVillageSideBar.getPanel(), BorderLayout.EAST);
 
