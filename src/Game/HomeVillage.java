@@ -1,38 +1,37 @@
 package Game;
 
-import javax.swing.*;
-import java.awt.*;
-
-import Dungeon.MapGUI;
-import GameSlots.SlotInfo;
+//IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;       //-
+import java.util.*;     //-
+import javax.swing.*;   //-
+import Dungeon.*;       //-
+import java.awt.*;      //-
+import Items.*;         //-
+import Monsters.*;      //-
+import Shops.*;         //-
+import AnnaTools.*;     //-
+//-------------------------
 
 public class HomeVillage {
 
-    public static JFrame homeVillageFrame;
+    public static JFrame homeVillageFrame = new JFrame();
+    public static SideBar homeVillageSideBar;
+    public static JPanel homeVillagePanel;
 
-    public static SideBar homeVillageSideBar = new SideBar();
+    public HomeVillage(){
 
-    public HomeVillage() {
+        new Inventory(); //This is the display of the inventory. This has its JFrame
+        homeVillageSideBar = new SideBar(); //Create an instance for this Frame
 
-        new Inventory(); //this is a frame, taken care of by sidebar
-        // homeVillageSideBar = new SideBar(); //this is a panel. this is added to other frames as needed
-        homeVillageSideBar = new SideBar();
+        new Shops.WeaponShop(); //Also construct the weapon shop
+        //Add other shops here too
+        //. . .
 
-        /* TEMPOARRYAYRYRY */
-        GameVars.inventory.add(new Items.Weapon("Sword", 10, "sdfsdf", 10, 10));
-        GameVars.inventory.add(new Items.Weapon("Axe", 10, "sdfsd", 10, 10));
-        GameVars.inventory.add(new Items.Armour("Helmet", 10, 10));
+        new MapGUI(); //Create the map GUI for Map
 
-        //init all necessary classes here:
-        //new Shops.WeaponShop();
-        //then also add all other shops here too
-
-        new MapGUI(); //again, init all necessary classes
-
-
-        //-----------
+        //--------------------------------------------------------------------------------
 
         homeVillageFrame = new JFrame("Home Village");
         homeVillageFrame.setTitle("By Anna Denisova");
@@ -41,8 +40,10 @@ public class HomeVillage {
         homeVillageFrame.setLocationRelativeTo(null);
         homeVillageFrame.getContentPane().setLayout(new BorderLayout());
 
-        JPanel homeVillagePanel = new JPanel();
+        homeVillagePanel = new JPanel();
+        homeVillagePanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
         homeVillagePanel.setLayout(new BoxLayout(homeVillagePanel, BoxLayout.Y_AXIS));
+        homeVillagePanel.setBackground(Color.blue);
 
         JLabel titleLabel = new JLabel("Village");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -51,65 +52,80 @@ public class HomeVillage {
         homeVillagePanel.add(Box.createVerticalStrut(20)); //add space between
         homeVillagePanel.add(titleLabel);
         homeVillagePanel.add(Box.createVerticalStrut(20)); //add space between
-        homeVillagePanel.setBackground(Color.blue);
 
-
-        JButton apothecaryButton = new JButton("Apothecary"); //NOT IMPLEMENTED
-        JButton armourShopButton = new JButton("Armour Shop"); //NOT IMPLEMENTED
-        JButton foodMarket = new JButton("Food Market"); //NOT IMPLEMENTED
-        JButton weaponShopButton = new JButton("Weapon Shop"); //IMPLEMENTED
-        weaponShopButton.addActionListener(new ActionListener() {
+        JButton apothecaryButton = new JButton("Apothecary");
+        apothecaryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new Shops.WeaponShop();
+                //TO BE IMPLEMENTED
+                //Shops.Apothecary.showApothecary();
+                // hideHomeVillage();
+            }
+        });
+        JButton armourShopButton = new JButton("Armour Shop");
+        armourShopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TO BE IMPLEMENTED
+                //Shops.ArmourShop.showArmourShop();
+                // hideHomeVillage();
+            }
+        });
+        JButton foodMarket = new JButton("Food Market");
+        foodMarket.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TO BE IMPLEMENTED
+                //Shops.FoodMarket.showFoodMarket();
+                // hideHomeVillage();
+            }
+        });
+        JButton weaponShopButton = new JButton("Weapon Shop");
+        weaponShopButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {;
                 Shops.WeaponShop.showWeaponShop();
                 hideHomeVillage();
             }
         });
-
         JButton dungeonButton = new JButton("Dungeon");
         dungeonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MapGUI.showMapGUI();
-                hideHomeVillage();
+                //hideHomeVillage();
             }
         });
-
-        JButton exitButton = new JButton("Exit"); //IMPLEMENTED
+        JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameSlots.SlotInfo.showInfoFrame();
-                hideHomeVillage();
+                //TO BE IMPLEMENTED
+                //GameSlots.SlotInfo.showInfoFrame();
+                //hideHomeVillage();
             }
         });
-
         JButton saveGameButton = new JButton("Save Game");
         saveGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //to be implemented
+                //TO BE IMPLEMENTED
             }
         });
 
         JButton[] buttons = {apothecaryButton, armourShopButton, foodMarket, weaponShopButton, dungeonButton, exitButton, saveGameButton};
         for(JButton button : buttons){
             button.setAlignmentX(Component.CENTER_ALIGNMENT); //Align the button to center
-            homeVillagePanel.add(button); //ADD ALL THE BUTTONS TO THE PANNEL
+            homeVillagePanel.add(button); //ADD ALL THE BUTTONS TO THE PANEL
             homeVillagePanel.add(Box.createVerticalStrut(10)); //create space in between each button
         }
 
-        homeVillagePanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT)); //idk what this changes
-
         homeVillageFrame.add(homeVillagePanel, BorderLayout.CENTER);
-
         homeVillageFrame.add(homeVillageSideBar.getPanel(), BorderLayout.EAST);
 
-        homeVillageFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT));
-        homeVillageFrame.pack();
-       // homeVillageFrame.setVisible(true);
+        //homeVillageFrame.pack();
+
     }
+
     public static void showHomeVillage(){
         homeVillageFrame.setVisible(true);
     }
@@ -118,10 +134,5 @@ public class HomeVillage {
         homeVillageFrame.setVisible(false);
     }
 
-    public static void main(String[] args){
-        //new GameSlots.SlotInfo();
-       // new HomeVillage();
-        //new SideBar();
-       // showHomeVillage();
-    }
+
 }

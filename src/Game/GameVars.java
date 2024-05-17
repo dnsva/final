@@ -1,7 +1,16 @@
 package Game;
 
-import java.util.*;
-import Items.*;
+//IMPORT ALL PACKAGES -----
+import java.io.*;       //-
+import java.util.*;     //-
+import javax.swing.*;   //-
+import java.awt.*;      //-
+import Dungeon.*;       //-
+import Items.*;         //-
+import Monsters.*;      //-
+import Shops.*;         //-
+import AnnaTools.*;     //-
+//-------------------------
 
 public class GameVars {
 
@@ -21,17 +30,6 @@ public class GameVars {
     public static int hunger = 100;
     public static int balance = 100;
 
-    public static boolean isPoisoned = false;
-    public static boolean isParalyzed = false;
-    public static boolean isConfused = false;
-
-    public static Items.Weapon currWeapon = null;
-    public static Items.Armour currArmour = null;
-
-    //Temp code:
-    public GameVars(){
-        inventory.add(new Items.Weapon("Sword", 10, "sdfsdf", 10, 10));
-        inventory.add(new Items.Weapon("Axe", 10, "sdfsd", 10, 10));
-        inventory.add(new Items.Armour("Helmet", 10, 10));
-    }
+    public static Items.Weapon currWeapon = new Weapon("Sword", 10, "sdfsdf", 10, 10);
+    public static Items.Armour currArmour = new Armour("Helmet", 10, 10);
 }

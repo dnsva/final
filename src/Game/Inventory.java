@@ -1,26 +1,24 @@
 package Game;
 
-import java.awt.BorderLayout;
+//IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.*;
-import java.awt.*;
-
-import Items.*;
-import Shops.*;
-import Dungeon.*;
-import AnnaTools.*;
+import java.io.*;       //-
+import java.util.*;     //-
+import javax.swing.*;   //-
+import Dungeon.*;       //-
+import Items.*;         //-
+import Monsters.*;      //-
+import java.awt.*;      //-
+import Shops.*;         //-
+import AnnaTools.*;     //-
 
 import static Game.HomeVillage.homeVillageFrame;
 import static Game.HomeVillage.homeVillageSideBar;
 import static Shops.WeaponShop.weaponShopFrame;
 import static Shops.WeaponShop.weaponShopSideBar;
+//-------------------------
 
-//this class does not store the inventoy list. the list is stored in gameVars
-//this class is just a window that displays the inventory
-//however, this class is also used to add stuff to the gamevars list
 public class Inventory {
 
     private static Frame inventoryFrame = new JFrame();
@@ -29,7 +27,7 @@ public class Inventory {
 
     private static JTextArea allInventoryItemsTextArea = new JTextArea();
 
-   // String currentHealthItem = "DFSDFSDF";
+    // String currentHealthItem = "DFSDFSDF";
     static String currWeaponString = "none";
     static String currArmourString = "none";
 
@@ -137,7 +135,6 @@ public class Inventory {
                         }
                     }
                     updateCurrentSelectedItems();
-                    updateItemsList();
                 }
                 break;
             case "Armour":
@@ -149,7 +146,6 @@ public class Inventory {
                         }
                     }
                     updateCurrentSelectedItems();
-                    updateItemsList();
                 }
                 break;
         }
@@ -158,9 +154,6 @@ public class Inventory {
     private static void updateCurrentSelectedItems(){
         currentWeaponItemLabel.setText("Current Weapon Item: " + currWeaponString);
         currentArmourItemLabel.setText("Current Armour Item: " + currArmourString);
-
-        //update sidebars?
-
     }
 
     private static void updateItemsList() {
@@ -185,36 +178,22 @@ public class Inventory {
         updateItemsList();
         findWeaponsAndArmour();
         inventoryFrame.setVisible(true);
-        updateAllSidePanels();
     }
 
     public static void hideInventory(){
+        AnnaTools.Updater.updateAllSidePanels();
         inventoryFrame.setVisible(false);
-        updateAllSidePanels();
     }
-
-    public static void updateAllSidePanels(){
-        System.out.println("ABOUT TO UPDATE ALL SIDE PANELS...");
-        System.out.println("GAME VARS BEFORE: " + GameVars.currArmour + " " + GameVars.currWeapon);
-
-
-        homeVillageSideBar.updatePanel();
-        homeVillageFrame.getContentPane().add(homeVillageSideBar.getPanel(), BorderLayout.EAST);
-
-        weaponShopSideBar.updatePanel();
-        weaponShopFrame.add(weaponShopSideBar.getPanel(), BorderLayout.EAST);
-
-        System.out.println("GAME VARS AFTER: " + GameVars.currArmour + " " + GameVars.currWeapon);
-    }
-
-    //Methods used by other classes:
 
     public static void addItem(Item item){
         GameVars.inventory.add(item);
         AnnaTools.ItemInsertSort.insertSort(GameVars.inventory);
+        findWeaponsAndArmour();
+        updateItemsList();
     }
 
     public static void removeItem(Item item){
         GameVars.inventory.remove(item);
     }
+
 }

@@ -1,6 +1,6 @@
 package Shops;
 
-import Items.*;
+import Items.Food;
 public class FoodMarket {
 
     Food[] foodList;

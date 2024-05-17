@@ -1,27 +1,27 @@
 package GameSlots;
 
-import java.awt.*;
+import Dungeon.Map;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import javax.imageio.ImageIO; //FOR IMAGES (icons)
-import java.io.*; //FOR IMAGES (icons)
+import java.util.Date;
 
 public class SlotInfo {
 
-    public static String [] slotNames = new String[3];
-    public static String [] slotDifficulties = new String[3];
-    public static String [] slotCreationDates = new String[3];
-    public static String [] slotCharacters = new String[3];
-    private static String selectedCharacter = ""; //used in character selection
+    public static String[] slotNames = new String[3];
+    public static String[] slotDifficulties = new String[3];
+    public static String[] slotCreationDates = new String[3];
+    public static String[] slotCharacters = new String[3];
+    private static String selectedCharacter = ""; // used in character selection
 
     public static int takenSlots = 0;
 
     private static JFrame slotInfoFrame = new JFrame();
 
-   // private JTextField nameField;
+    // private JTextField nameField;
     private static DefaultListModel<String> slotListModel;
     private static JList<String> slotList;
 
@@ -30,32 +30,27 @@ public class SlotInfo {
 
     public SlotInfo() {
         slotInfoFrame.setTitle("By Anna Denisova");
-        //slotInfoFrame.getContentPane().setBackground( Color.red );
-       // slotInfoFrame.getContentPane().setBackground(new java.awt.Color(204, 166, 166));
         slotInfoFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT);
         slotInfoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         slotInfoFrame.setLocationRelativeTo(null);
-        slotInfoFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
+        slotInfoFrame.getContentPane().setLayout(new BorderLayout()); // Make the layout border
 
         /* 2 Panels.
         1st panel to show slots
         2nd panel to show buttons
          */
 
-        //PANEL 1 - SLOT LIST!!!!!
-        JPanel listPanel = new JPanel(new BorderLayout()); //Create the panel
-
-        listPanel.setBorder(BorderFactory.createTitledBorder("Slots")); //Add the title
-        slotListModel = new DefaultListModel<>(); //For the inside box
-        slotList = new JList<>(slotListModel); //The list of things in SlotListModel
+        // PANEL 1 - SLOT LIST!!!!!
+        JPanel listPanel = new JPanel(new BorderLayout()); // Create the panel
+        listPanel.setBorder(BorderFactory.createTitledBorder("Slots")); // Add the title
+        slotListModel = new DefaultListModel<>(); // For the inside box
+        slotList = new JList<>(slotListModel); // The list of things in SlotListModel
         listPanel.add(new JScrollPane(slotList));
-
         listPanel.setForeground(Color.red);
-
-        slotInfoFrame.getContentPane().add(listPanel, BorderLayout.CENTER); //Add this panel to the frame
+        slotInfoFrame.getContentPane().add(listPanel, BorderLayout.CENTER); // Add this panel to the frame
         listPanel.setBackground(Color.pink);
 
-        //PANEL 2 - BUTTONS!!!!!!!!!
+        // PANEL 2 - BUTTONS!!!!!!!!!
         /*
         There will be 4 buttons.
         - Select Slot
@@ -63,7 +58,7 @@ public class SlotInfo {
         - Delete Slot
         - Rename Slot
          */
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 4)); //Create the panel
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 4)); // Create the panel
 
         /* This code will create the buttons */
         JButton selectButton = new JButton("Select Slot");
@@ -83,38 +78,45 @@ public class SlotInfo {
         superclass.
          */
         selectButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { selectSlot(); } //Call selection
+            public void actionPerformed(ActionEvent e) {
+                selectSlot();
+            } // Call selection
         });
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //try{
-                    addSlot();
-               // }catch(Exception ignored){}
-            } //Call addition
+                // try{
+                addSlot();
+                // }catch(Exception ignored){}
+            } // Call addition
         });
         deleteButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { deleteSlot(); } //Call deletion
+            public void actionPerformed(ActionEvent e) {
+                deleteSlot();
+            } // Call deletion
         });
         renameButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { renameSlot(); } //Call renaming
+            public void actionPerformed(ActionEvent e) {
+                renameSlot();
+            } // Call renaming
         });
 
-        slotInfoFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH); //Add this panel to the frame
+        slotInfoFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH); // Add this panel to the frame
     }
 
-    public static void showInfoFrame(){
+    public static void showInfoFrame() {
         slotInfoFrame.setVisible(true);
     }
-    public static void hideInfoFrame(){
+
+    public static void hideInfoFrame() {
         slotInfoFrame.setVisible(false);
     }
 
-    public static void selectSlot(){
+    public static void selectSlot() {
         int selectedIndex = slotList.getSelectedIndex();
-        if(selectedIndex != -1) {
-            //-------
-            //the name is names[selectedIndex]
-            //slot selected.
+        if (selectedIndex != -1) {
+            // -------
+            // the name is names[selectedIndex]
+            // slot selected.
 
             /* code to load in slot memory if it exists, otherwise load in basic
             values that are defualt.
@@ -122,20 +124,20 @@ public class SlotInfo {
 
             hideInfoFrame();
             Game.HomeVillage.showHomeVillage();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(slotInfoFrame, "Please select a slot first", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public static void addSlot(){
+    public static void addSlot() {
 
-        //The folling code adds a new slot to the list without getting
-        //input from the user. It just uses "asd" for each field for test purpsoes
+        // The following code adds a new slot to the list without getting
+        // input from the user. It just uses "asd" for each field for test purposes
 
-        if(takenSlots < 3) {
+        if (takenSlots < 3) {
 
             // get icons
-            ImageIcon icon1 =  new ImageIcon("src/GameSlots/31_chocolatecake_dish.png");
+            ImageIcon icon1 = new ImageIcon("src/GameSlots/31_chocolatecake_dish.png");
             ImageIcon icon2 = new ImageIcon("src/GameSlots/23_cheesecake_dish.png");
 
             // Show icon1 for slot name input
@@ -159,7 +161,7 @@ public class SlotInfo {
 
             String difficulty = (String) JOptionPane.showInputDialog(slotInfoFrame, "Select difficulty:", "Difficulty", JOptionPane.QUESTION_MESSAGE, icon2, difficultyOptions, difficultyOptions[0]);
 
-            //String difficulty = (String) JOptionPane.showInputDialog(slotInfoFrame, "Select difficulty:", "Difficulty", JOptionPane.QUESTION_MESSAGE, null, difficultyOptions, difficultyOptions[0]);
+            // String difficulty = (String) JOptionPane.showInputDialog(slotInfoFrame, "Select difficulty:", "Difficulty", JOptionPane.QUESTION_MESSAGE, null, difficultyOptions, difficultyOptions[0]);
             if (difficulty == null) {
                 return; // Return if user cancels
             }
@@ -167,100 +169,63 @@ public class SlotInfo {
             // Get the current date and time
             String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
+            // ----------------------------------------
 
-
-            //----------------------------------------
-
-            JFrame characterSelectFrame = new JFrame(); //for slot creation
-            //Now, character selection
-            //characterSelectFrame
-
+            JFrame characterSelectFrame = new JFrame(); // for slot creation
+            // Now, character selection
+            // characterSelectFrame
             characterSelectFrame.setVisible(true);
             characterSelectFrame.setTitle("By Anna Denisova");
-            characterSelectFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT+150);
+            characterSelectFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT + 150);
             characterSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             characterSelectFrame.setLocationRelativeTo(null);
-            characterSelectFrame.getContentPane().setLayout(new BorderLayout()); //Make the layout border
+            characterSelectFrame.getContentPane().setLayout(new BorderLayout()); // Make the layout border
 
             hideInfoFrame();
 
-            //------------------------------------------
+            // ------------------------------------------
 
             String[] characterNames = {"Wizard", "Mime", "Warrior", "Doctor", "Farmer"};
             selectedCharacter = null;
 
-            JPanel panel = new JPanel();
+            JPanel characterSelectionPanel = new JPanel();
 
-            //panel.setSize(WINDOWWIDTH, WINDOWHEIGHT+200);
+            // panel.setSize(WINDOWWIDTH, WINDOWHEIGHT+200);
 
-            JTextArea namesAndDescriptions = new JTextArea();
-            namesAndDescriptions.setSize(WINDOWWIDTH, WINDOWHEIGHT + 130);
 
+            JEditorPane namesAndDescriptions = new JEditorPane();
+            namesAndDescriptions.setContentType("text/html");
             String nameAndDescriptionsString = "";
 
-            namesAndDescriptions.setEditable(false);
-            //namesAndDescriptions.setOpaque(false); // Make it transparent like a label
-            namesAndDescriptions.setLineWrap(true); // Enable line wrapping
-            namesAndDescriptions.setFocusable(false); //nocursor
-            namesAndDescriptions.setFont(new Font("Courier", Font.PLAIN, 14));
-            //namesAndDescriptions.setColumns(WINDOWWIDTH);
-
-            nameAndDescriptionsString += " -------------------------------------------------------------" +
-                                        "| WIZARD                                                     |" +
-                                        "| - Start game with [curse/potion name]                      |" +
-                                        "| - 25% off all monster curses                               |" +
-                                        "| - Default attack power: 10                                 |" +
-                                        "| MIME                                                       |" +
-                                        "| - Useless and weak                                         |" +
-                                        "| - Gets 1 free apple                                        |" +
-                                        "| - Default attack power: 1                                  |" +
-                                        "| WARRIOR                                                    |" +
-                                        "| - Start game with [weapon name]                            |" +
-                                        "| - 25% off all weapons                                      |" +
-                                        "| - Default attack power: 15                                 |" +
-                                        "| DOCTOR                                                     |" +
-                                        "| - Start game with [healing potion]                         |" +
-                                        "| - 25% off all healing potions                              |" +
-                                        "| - Default attack power: 10                                 |" +
-                                        "| FARMER                                                     |" +
-                                        "| - Can't fight                                              |" +
-                                        "| - Start game with all the food                             |" +
-                                        "| - Default attack power: 0                                  |" +
-                                        " -------------------------------------------------------------";
-
+            nameAndDescriptionsString = "<html><body style='font-family: PT Mono;'>" +
+                    "lkjjjjjijijiijjijijijjjjjjjjjjjjjjjjjjjjjjjjjjjjjiijijijjiij" +
+                    "<h3>WIZARD</h3>" +
+                    "<p>- Start game with [curse/potion]</p>" +
+                    "<p>- 25% off all monster curses</p>" +
+                    "<p>- Default attack power: 10</p>" +
+                    "<h3>MIME</h3>" +
+                    "<p>- Useless and weak</p>" +
+                    "<p>- Gets 1 free apple</p>" +
+                    "<p>- Default attack power: 1</p>" +
+                    "<h3>WARRIOR</h3>" +
+                    "<p>- Start game with [weapon]</p>" +
+                    "<p>- 25% off all weapons</p>" +
+                    "<p>- Default attack power: 15</p>" +
+                    "<h3>DOCTOR</h3>" +
+                    "<p>- Start game with [healing potion]</p>" +
+                    "<p>- 25% off all healing potions</p>" +
+                    "<p>- Default attack power: 10</p>" +
+                    "<h3>FARMER</h3>" +
+                    "<p>- Can't fight</p>" +
+                    "<p>- Start game with all the food</p>" +
+                    "<p>- Default attack power: 0</p>" +
+                    "</body></html>";
 
             namesAndDescriptions.setText(nameAndDescriptionsString);
-            namesAndDescriptions.setBackground(Color.pink);
-
-            panel.add(namesAndDescriptions);
-
-
-            //for (int i = 0; i < characterNames.length; i++) {
-                /*JLabel nameLabel = new JLabel(characterNames[i], JLabel.CENTER);
-                nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD));
-                panel.add(nameLabel);
-                */
-                //JTextArea nameArea = new JTextArea(characterNames[i]);
-               // nameArea.setAlignmentX(Component.CENTER_ALIGNMENT);
-                //nameArea.setFont(nameArea.getFont().deriveFont(Font.BOLD));
-                //panel.add(nameArea);
-
-               // JTextArea descriptionArea = new JTextArea(descriptions[i]);
-                //descriptionArea.setLineWrap(true);
-               // descriptionArea.setAlignmentX(Component.CENTER_ALIGNMENT);
-               // panel.add(descriptionArea);
-
-                /*
-                JLabel descriptionLabel = new JLabel(descriptions[i]);
-                descriptionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-                panel.add(descriptionLabel);
-                */
-
-
-                //JLabel descriptionLabel2 = new JLabel("sdfasdfasdfasdf");
-                //descriptionLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
-                //panel.add(descriptionLabel2);
-            //}
+            //namesAndDescriptions.setSize(WINDOWWIDTH, WINDOWHEIGHT + 130);
+            namesAndDescriptions.setEditable(false);
+            characterSelectionPanel.add(namesAndDescriptions);
+            characterSelectionPanel.setPreferredSize(new Dimension(WINDOWWIDTH, WINDOWHEIGHT + 130));
 
             JPanel buttonPanel = new JPanel();
             ButtonGroup group = new ButtonGroup();
@@ -269,7 +234,7 @@ public class SlotInfo {
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                       selectedCharacter = ((JRadioButton) e.getSource()).getText();
+                        selectedCharacter = ((JRadioButton) e.getSource()).getText();
                     }
                 });
                 group.add(button);
@@ -289,12 +254,12 @@ public class SlotInfo {
                         );
                         if (confirmation == JOptionPane.YES_OPTION) {
 
-                            //add to global arrays
+                            // add to global arrays
                             takenSlots++;
-                            slotNames[takenSlots-1] = name;
-                            slotDifficulties[takenSlots-1] = difficulty;
-                            slotCreationDates[takenSlots-1] = date;
-                            slotCharacters[takenSlots-1] = selectedCharacter; //add to the array
+                            slotNames[takenSlots - 1] = name;
+                            slotDifficulties[takenSlots - 1] = difficulty;
+                            slotCreationDates[takenSlots - 1] = date;
+                            slotCharacters[takenSlots - 1] = selectedCharacter; // add to the array
 
                             // Add the slot information to the list
                             String slotDetails = String.format("%s (%s) (%s) - Created on: %s", name, difficulty, selectedCharacter, date);
@@ -311,52 +276,35 @@ public class SlotInfo {
 
             buttonPanel.add(confirmButton);
 
-            characterSelectFrame.getContentPane().add(panel, BorderLayout.CENTER);
+            characterSelectFrame.getContentPane().add(characterSelectionPanel, BorderLayout.CENTER);
             characterSelectFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-            //characterSelectFrame.pack();
+            // characterSelectFrame.pack();
 
-
-
-
-
-
-            //showInfoFrame();
-            //characterSelectFrame.setVisible(false);
-
-            //System.out.println("Selected character: " + selectedCharacter);
-
-        }else{
+        } else {
             JOptionPane.showMessageDialog(slotInfoFrame, "You can only have 3 slots", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-   // private static String getRemainingWidthSpaces(int textWidth){
-        //String spaces = "";
-        //for(int i = 0; i < WINDOWWIDTH - textWidth; ++i){
-           //spaces += " ";
-        //}
-       // return spaces;
-    //}
-    public static void deleteSlot(){
+    public static void deleteSlot() {
         int selectedIndex = slotList.getSelectedIndex();
-        if(selectedIndex != -1) {
+        if (selectedIndex != -1) {
             slotListModel.remove(selectedIndex);
             takenSlots--;
-        }else{
+        } else {
             JOptionPane.showMessageDialog(slotInfoFrame, "Please select a slot first", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public static void renameSlot(){
+    public static void renameSlot() {
 
         int selectedIndex = slotList.getSelectedIndex();
 
-        if(selectedIndex != -1) {
+        if (selectedIndex != -1) {
 
-            String difficulty = slotDifficulties[selectedIndex]; //get from array
-            String date = slotCreationDates[selectedIndex]; //get from array
-            ImageIcon icon =  new ImageIcon("src/GameSlots/91_strawberrycake_dish.png");
-            String character = slotCharacters[selectedIndex]; //get from array
+            String difficulty = slotDifficulties[selectedIndex]; // get from array
+            String date = slotCreationDates[selectedIndex]; // get from array
+            ImageIcon icon = new ImageIcon("src/GameSlots/91_strawberrycake_dish.png");
+            String character = slotCharacters[selectedIndex]; // get from array
 
             Object newNameObj = JOptionPane.showInputDialog(slotInfoFrame,
                     "Enter new name for the slot",
@@ -368,25 +316,25 @@ public class SlotInfo {
             if (newNameObj == null) {
                 return; // User canceled, exit method
             }
-            String newName = (String) newNameObj; //Cast to strinig
+            String newName = (String) newNameObj; // Cast to strinig
             // Handle empty input
             if (newName.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(slotInfoFrame, "Slot name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            if(newName != null){
+            if (newName != null) {
                 slotListModel.set(selectedIndex, String.format("%s (%s) (%s) - Created on: %s", newName, character, difficulty, date));
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(slotInfoFrame, "Please select a slot first", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public static void main(String[] args){
-      //  new SlotInfo();
-     //   showInfoFrame();
-      // hideInfoFrame();
+    public static void main(String[] args) {
+        // new SlotInfo();
+        // showInfoFrame();
+        // hideInfoFrame();
     }
 
 }

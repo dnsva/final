@@ -1,6 +1,8 @@
 package Shops;
 
-import Items.*;
+import Items.Curse;
+import Items.HealingMedicine;
+import Items.SanityMedicine;
 public class Apothecary {
 
     HealingMedicine[] healingList;

@@ -1,13 +1,18 @@
 package Dungeon;
 
-import Game.GameVars;
-import Game.Inventory;
-import Game.SideBar;
-
-import javax.swing.*;
-import java.awt.*;
+//IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;       //-
+import java.util.*;     //-
+import java.awt.*;      //-
+import javax.swing.*;   //-
+import Game.*;          //-
+import Items.*;         //-
+import Monsters.*;      //-
+import Shops.*;         //-
+import AnnaTools.*;     //-
+//-------------------------
 
 public class MapGUI {
 

@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static AnnaTools.Updater.updateAllSidePanels;
+
 public class WeaponShop {
 
     public static SideBar weaponShopSideBar = new SideBar();
@@ -160,8 +162,10 @@ public class WeaponShop {
           // }
 
             //YOU NEED TO UPDATE THE SIDEBAR AS NOW THE INVENTORY HAS CHANGED AND THE BALANCE HAS CHANGED
-            weaponShopSideBar.updatePanel(); //Update the sidebar
-            weaponShopFrame.getContentPane().add(weaponShopSideBar.getPanel(), BorderLayout.EAST);
+            updateAllSidePanels();
+
+            //weaponShopSideBar.updatePanel(); //Update the sidebar
+            //weaponShopFrame.getContentPane().add(weaponShopSideBar.getPanel(), BorderLayout.EAST);
             //-----------------------------------
             JOptionPane.showMessageDialog(null, "Purchase successful!"); //:)
         } else { //If not enough money

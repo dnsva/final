@@ -1,108 +1,98 @@
 package Game;
 
-
-import java.awt.*;
-import javax.swing.*;
+//IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.io.File;
-import java.awt.BorderLayout;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.io.*;       //-
+import java.util.*;     //-
+import java.awt.*;      //-
+import javax.swing.*;   //-
 import javax.swing.border.EmptyBorder;
 
-import java.lang.*;
+import Dungeon.*;       //-
+import Items.*;         //-
+import Monsters.*;      //-
+import Shops.*;         //-
+import AnnaTools.*;     //-
+//-------------------------
 
 
-public class SideBar{
-    JPanel hey;
+/*
+
+Design
+
+SideBarPannel - local, field variable
+
+constructor initializes window with sanity, health, etc.
+
+updatePanel() - a field method that updates the labels described above
+
+ */
+public class SideBar {
 
     JPanel sideBarPanel;
-    JButton inventoryButton = new JButton("Inventory");
+    JButton inventoryButton;
+    JLabel healthLabel, sanityLabel, hungerLabel, balanceLabel, weaponLabel, armourLabel;
 
-    JLabel healthLabel = new JLabel(), sanityLabel = new JLabel(), hungerLabel = new JLabel(),
-            balanceLabel = new JLabel(), poisonedLabel = new JLabel(), paralyzedLabel = new JLabel(),
-            confusedLabel = new JLabel(), weaponLabel = new JLabel(), armourLabel = new JLabel();
+    public void updatePanel(){
+        healthLabel.setText("Health: " + GameVars.health);
+        sanityLabel.setText("Sanity: " + GameVars.sanity);
+        hungerLabel.setText("Hunger: " + GameVars.hunger);
+        balanceLabel.setText("Balance: " + GameVars.balance);
+        weaponLabel.setText("Weapon: " + GameVars.currWeapon.name);
+        armourLabel.setText("Armour: " + GameVars.currArmour.name);
 
+        //DEBUGGING: ========================================
+        System.out.println("Updated SideBar Panel!");
+    }
 
+    public JPanel getPanel(){
+        return sideBarPanel;
+    }
 
     public SideBar(){
-
-        sideBarPanel = new JPanel(new GridLayout(11, 1)); // Vertical layout
-        sideBarPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-
-        healthLabel.setText(" Health:" + GameVars.health);
-        healthLabel.setIcon(new ImageIcon("src/Game/Icons/Heart.png"));
-       // healthLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
-
-        sanityLabel.setIcon(new ImageIcon("src/Game/Icons/Bag.png"));
-        sanityLabel.setText("Sanity: " + GameVars.sanity);
-
-        hungerLabel.setText("Hunger: " + GameVars.hunger);
-        hungerLabel.setIcon(new ImageIcon("src/Game/Icons/Apple.png"));
-
-        balanceLabel.setText("Balance: " + GameVars.balance);
-        balanceLabel.setIcon(new ImageIcon("src/Game/Icons/Golden Coin.png"));
-
-        weaponLabel.setText("Weapon: " + GameVars.currWeapon);
-        weaponLabel.setIcon(new ImageIcon("src/Game/Icons/Rune Stone.png"));
-
-        armourLabel.setText("Armour: " + GameVars.currArmour);
-        armourLabel.setIcon(new ImageIcon("src/Game/Icons/Helm.png"));
-
-        poisonedLabel.setText("Poisoned: " + GameVars.isPoisoned);
-        paralyzedLabel.setText("Paralyzed: " + GameVars.isParalyzed);
-        confusedLabel.setText("Confused: " + GameVars.isConfused);
-
-
-        // Initialize inventory button
+        inventoryButton = new JButton("Inventory");
 
         inventoryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //NOT IMPLEMENTED YET
+                //SHOULD BE LIKE SHOW INVENTORY OR SOMETHING
                 Inventory.showInventory();
             }
         });
+
+        sideBarPanel = new JPanel(new GridLayout(11, 1)); // Vertical layout
+        sideBarPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        sideBarPanel.setSize(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
+        sideBarPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        healthLabel = new JLabel();
+        healthLabel.setText(" Health:" + GameVars.health);
+        healthLabel.setIcon(new ImageIcon("src/Game/Icons/Heart.png"));
+        sanityLabel = new JLabel();
+        sanityLabel.setText("Sanity: " + GameVars.sanity);
+        sanityLabel.setIcon(new ImageIcon("src/Game/Icons/Bag.png"));
+        hungerLabel = new JLabel();
+        hungerLabel.setText("Hunger: " + GameVars.hunger);
+        hungerLabel.setIcon(new ImageIcon("src/Game/Icons/Apple.png"));
+        balanceLabel = new JLabel();
+        balanceLabel.setText("Balance: " + GameVars.balance);
+        balanceLabel.setIcon(new ImageIcon("src/Game/Icons/Golden Coin.png"));
+        weaponLabel = new JLabel();
+        weaponLabel.setText("Weapon: " + GameVars.currWeapon.name);
+        weaponLabel.setIcon(new ImageIcon("src/Game/Icons/Rune Stone.png"));
+        armourLabel = new JLabel();
+        armourLabel.setText("Armour: " + GameVars.currArmour.name);
+        armourLabel.setIcon(new ImageIcon("src/Game/Icons/Helm.png"));
+
         sideBarPanel.add(healthLabel);
         sideBarPanel.add(sanityLabel);
         sideBarPanel.add(hungerLabel);
         sideBarPanel.add(balanceLabel);
         sideBarPanel.add(weaponLabel);
         sideBarPanel.add(armourLabel);
-        sideBarPanel.add(poisonedLabel);
-        sideBarPanel.add(paralyzedLabel);
-        sideBarPanel.add(confusedLabel);
-
         sideBarPanel.add(inventoryButton);
 
-        sideBarPanel.setPreferredSize(new Dimension(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT));
-        sideBarPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
     }
 
-    public void updatePanel(){
-
-        healthLabel.setText("Health: " + GameVars.health);
-        sanityLabel.setText("Sanity: " + GameVars.sanity);
-        hungerLabel.setText("Hunger: " + GameVars.hunger);
-        balanceLabel.setText("Balance: " + GameVars.balance);
-        poisonedLabel.setText("Poisoned: " + GameVars.isPoisoned);
-        paralyzedLabel.setText("Paralyzed: " + GameVars.isParalyzed);
-        confusedLabel.setText("Confused: " + GameVars.isConfused);
-
-        System.out.println("\tThe weapon label update: " + GameVars.currWeapon);
-        weaponLabel.setText("Weapon: " + GameVars.currWeapon);
-        System.out.println("\tThe armour label update: " + GameVars.currArmour);
-        armourLabel.setText("Armour: " + GameVars.currArmour);
-
-
-
-    }
-
-    public JPanel getPanel(){
-        return sideBarPanel;
-    }
 }

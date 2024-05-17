@@ -1,7 +1,5 @@
 package Items;
 
-import Items.Item;
-
 public class Weapon extends Item {
     //inherits price and name
     public String description;
