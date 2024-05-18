@@ -31,7 +31,7 @@ updatePanel() - a field method that updates the labels described above
 public class SideBar {
 
     JPanel sideBarPanel;
-    JButton inventoryButton;
+    JButton inventoryButton, useMedicineButton, eatFoodButton;
     public JLabel healthLabel, sanityLabel, hungerLabel, balanceLabel, weaponLabel, armourLabel;
 
     public void updatePanel(){
@@ -51,14 +51,8 @@ public class SideBar {
     }
 
     public SideBar(){
-        inventoryButton = new JButton("Inventory");
-        inventoryButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Inventory.showInventory();
-            }
-        });
 
-        sideBarPanel = new JPanel(new GridLayout(11, 1)); // Vertical layout
+        sideBarPanel = new JPanel(new GridLayout(12, 1)); // Vertical layout
         sideBarPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         sideBarPanel.setSize(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         sideBarPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -90,12 +84,33 @@ public class SideBar {
         sideBarPanel.add(weaponLabel);
         sideBarPanel.add(armourLabel);
 
-       // inventoryButton.setPreferredSize(inventoryButton.getPreferredSize());
+        inventoryButton = new JButton("Inventory");
+        inventoryButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Inventory.showInventory();
+            }
+        });
+
         sideBarPanel.add(inventoryButton);
 
-       // sideBarPanel.doLayout();
-       // sideBarPanel.revalidate();
-       // sideBarPanel.setSize(sideBarPanel.getPreferredSize());
+        useMedicineButton = new JButton("Use Medicine");
+        useMedicineButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                UseMedicine.showUseMedicine();
+            }
+        });
+
+        sideBarPanel.add(useMedicineButton);
+
+        eatFoodButton = new JButton("Eat Food");
+        eatFoodButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EatFood.showEatFood();
+            }
+        });
+
+        sideBarPanel.add(eatFoodButton);
+
 
     }
 

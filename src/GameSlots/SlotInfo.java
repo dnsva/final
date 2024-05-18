@@ -1,6 +1,7 @@
 package GameSlots;
 
 import Dungeon.Map;
+import Game.GameVars;
 
 import javax.swing.*;
 import java.awt.*;
@@ -259,8 +260,11 @@ public class SlotInfo {
                             takenSlots++;
                             slotNames[takenSlots - 1] = name;
                             slotDifficulties[takenSlots - 1] = difficulty;
+                            GameVars.difficulyLevel = difficulty;
                             slotCreationDates[takenSlots - 1] = date;
                             slotCharacters[takenSlots - 1] = selectedCharacter; // add to the array
+                            GameVars.characterType = selectedCharacter;
+                            loadPerks(selectedCharacter);
 
                             // Add the slot information to the list
                             String slotDetails = String.format("%s (%s) (%s) - Created on: %s", name, difficulty, selectedCharacter, date);
@@ -332,6 +336,29 @@ public class SlotInfo {
         }
     }
 
+    public static void loadPerks(String character) {
+        // Load perks based on character
+        /*
+        if(character.equals("Wizard")) {
+            GameVars.attackPower = 10;
+            GameVars.curses = 1;
+            GameVars.cursesDiscount = 0.25;
+        } else if(character.equals("Mime")) {
+            GameVars.attackPower = 1;
+            GameVars.apples = 1;
+        } else if(character.equals("Warrior")) {
+            GameVars.attackPower = 15;
+            GameVars.weaponsDiscount = 0.25;
+        } else if(character.equals("Doctor")) {
+            GameVars.attackPower = 10;
+            GameVars.healingPotionsDiscount = 0.25;
+        } else if(character.equals("Farmer")) {
+            GameVars.attackPower = 0;
+            GameVars.food = 1;
+        }
+        */
+
+    }
     public static void main(String[] args) {
         // new SlotInfo();
         // showInfoFrame();

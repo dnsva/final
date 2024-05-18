@@ -2,7 +2,9 @@ package AnnaTools;
 
 import static Dungeon.MapGUI.mapGUISideBar;
 import static Game.HomeVillage.homeVillageSideBar;
+import static Shops.Apothecary.apothecarySideBar;
 import static Shops.WeaponShop.weaponShopSideBar;
+import static Shops.FoodMarket.foodMarketSideBar;
 
 public class Updater {
 
@@ -10,5 +12,7 @@ public class Updater {
         homeVillageSideBar.updatePanel();
         weaponShopSideBar.updatePanel();
         mapGUISideBar.updatePanel();
+        apothecarySideBar.updatePanel();
+        foodMarketSideBar.updatePanel();
     }
 }

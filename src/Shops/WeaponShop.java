@@ -29,7 +29,7 @@ public class WeaponShop {
                     GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 25 : 30),
             new Weapon("Katana",
                     50,
-                    "Imported from Japanese masters",
+                    "Imported from Japan",
                     GameVars.difficulyLevel.equals("Easy") ? 30 : GameVars.difficulyLevel.equals("Medium") ? 20 : 15,
                     GameVars.difficulyLevel.equals("Easy") ? 20 : GameVars.difficulyLevel.equals("Medium") ? 30 : 40
                     ),
@@ -45,10 +45,8 @@ public class WeaponShop {
                     100,
                     90)
     };
-
-    //double balance = GameVars.balance; //character balance is retrieved from using Game.GameVars.balance !!!!!
     public static JFrame weaponShopFrame; //the most important thing in this entire file
-    /* -> */ private JComboBox<String> weaponComboBox; //a combo box that displays available weapons
+    private JComboBox<String> weaponComboBox; //a combo box that displays available weapons
 
     public WeaponShop() {
 
@@ -71,9 +69,7 @@ public class WeaponShop {
         String nameAndDescriptionsString = "";
 
         namesAndDescriptions.setEditable(false);
-        //namesAndDescriptions.setLineWrap(true); // Enable line wrapping
         namesAndDescriptions.setFocusable(false); //nocursor
-        //namesAndDescriptions.setFont(new Font("Courier", Font.PLAIN, 14));
         namesAndDescriptions.setContentType("text/html");
 
         nameAndDescriptionsString += "<html><body style='font-family: PT Mono; font-size: 10.5px;'>" +
@@ -91,7 +87,6 @@ public class WeaponShop {
         nameAndDescriptionsString += "&nbsp;&nbsp;------------------------------------------------------------ <br><br>";
         nameAndDescriptionsString += "</div></body></html>";
         namesAndDescriptions.setText(nameAndDescriptionsString);
-       // namesAndDescriptions.setBackground(Color.pink);
 
         // Display available weapons in a combo box
         weaponComboBox = new JComboBox<>();
@@ -128,10 +123,7 @@ public class WeaponShop {
         weaponShopPanel.add(newPanel, BorderLayout.CENTER);
         weaponShopPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-
         weaponShopFrame.add(weaponShopPanel, BorderLayout.WEST);
-
-
         weaponShopFrame.add(weaponShopSideBar.getPanel(), BorderLayout.EAST);
     }
 
@@ -146,7 +138,6 @@ public class WeaponShop {
     private void purchaseWeapon() {
         // Get the selected weapon
         int selectedWeaponIndex = weaponComboBox.getSelectedIndex(); //the weapons are indexed from 0 to whatever
-
         if (selectedWeaponIndex == -1) { //ERROR CHECK HERE FOR IF NOTHING SELECTED
             JOptionPane.showMessageDialog(null, "Please select a weapon to purchase."); //err message
             return; //get out of fn
@@ -158,17 +149,9 @@ public class WeaponShop {
             GameVars.balance -= selectedWeapon.price; //Deduct the price from the balance
             GameVars.inventory.add(selectedWeapon); //Add the purchased weapon to the inventory
 
-
-          //  System.out.println("INVENTORY: ");
-          //  for(int i = 0; i < GameVars.inventory.size(); ++i){
-          //      System.out.println(GameVars.inventory.get(i).name);
-          // }
-
             //YOU NEED TO UPDATE THE SIDEBAR AS NOW THE INVENTORY HAS CHANGED AND THE BALANCE HAS CHANGED
             updateAllSidePanels();
 
-            //weaponShopSideBar.updatePanel(); //Update the sidebar
-            //weaponShopFrame.getContentPane().add(weaponShopSideBar.getPanel(), BorderLayout.EAST);
             //-----------------------------------
             JOptionPane.showMessageDialog(null, "Purchase successful!"); //:)
         } else { //If not enough money

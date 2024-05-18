@@ -22,6 +22,10 @@ public class Item {
         this.price = 0;
     }
 
+    public void use(){
+        //to be overriden by medicine classes :)
+
+    }
     public String toString(){
         return name;
     }

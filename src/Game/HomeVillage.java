@@ -23,9 +23,13 @@ public class HomeVillage {
     public HomeVillage(){
 
         new Inventory(); //This is the display of the inventory. This has its JFrame
+        new UseMedicine(); //This is the use medicine frame
+        new EatFood(); //This is the eat food frame
         homeVillageSideBar = new SideBar(); //Create an instance for this Frame
 
         new Shops.WeaponShop(); //Also construct the weapon shop
+        new Shops.Apothecary(); //Also construct the apothecary shop
+        new Shops.FoodMarket(); //Also construct the food market
         //Add other shops here too
         //. . .
 
@@ -57,9 +61,8 @@ public class HomeVillage {
         apothecaryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TO BE IMPLEMENTED
-                //Shops.Apothecary.showApothecary();
-                // hideHomeVillage();
+                Shops.Apothecary.showApothecary();
+                 hideHomeVillage();
             }
         });
         JButton armourShopButton = new JButton("Armour Shop");
@@ -75,9 +78,8 @@ public class HomeVillage {
         foodMarket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TO BE IMPLEMENTED
-                //Shops.FoodMarket.showFoodMarket();
-                // hideHomeVillage();
+                Shops.FoodMarket.showFoodMarket();
+                hideHomeVillage();
             }
         });
         JButton weaponShopButton = new JButton("Weapon Shop");

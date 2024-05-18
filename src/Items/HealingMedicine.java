@@ -4,7 +4,7 @@ import Game.GameVars;
 
 public class HealingMedicine extends Item{
 
-    int healthAddition;
+    public int healthAddition;
 
     public HealingMedicine(String name, int price, int healthAddition){
         super(name, price);
@@ -13,7 +13,10 @@ public class HealingMedicine extends Item{
 
     public void use(){
         //add to health
-        GameVars.health += Math.min(100, healthAddition + GameVars.health);
+        GameVars.health += healthAddition;
+        if(GameVars.health > 100){
+            GameVars.health = 100;
+        }
     }
 
 }

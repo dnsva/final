@@ -5,7 +5,7 @@ public class Food extends Item {
 
     //name and price inhereted from item
 
-    int hungerRestore; //the amount of hunger it restores
+    public int hungerRestore; //the amount of hunger it restores
 
     //add to hunger
 
@@ -17,6 +17,9 @@ public class Food extends Item {
     public void eat(){
         //add to hunger
         GameVars.hunger += hungerRestore;
+        if(GameVars.hunger > 100){
+            GameVars.hunger = 100;
+        }
     }
 
 }

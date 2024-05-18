@@ -4,7 +4,7 @@ import Game.GameVars;
 
 public class SanityMedicine extends Item{
 
-    int sanityAddition;
+    public int sanityAddition;
 
     public SanityMedicine(String name, int price, int sanityAddition){
         super(name, price);
@@ -13,7 +13,10 @@ public class SanityMedicine extends Item{
 
     public void use(){
         //add to sanity
-        GameVars.sanity += Math.min(100, sanityAddition + GameVars.sanity);
+        GameVars.sanity += sanityAddition;
+        if(GameVars.sanity > 100){
+            GameVars.sanity = 100;
+        }
     }
 
 }
