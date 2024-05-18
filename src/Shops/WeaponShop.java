@@ -65,30 +65,33 @@ public class WeaponShop {
         weaponShopPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
 
         //text
-        JTextArea namesAndDescriptions = new JTextArea();
+        JEditorPane namesAndDescriptions = new JEditorPane();
         namesAndDescriptions.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
 
         String nameAndDescriptionsString = "";
 
         namesAndDescriptions.setEditable(false);
-        namesAndDescriptions.setLineWrap(true); // Enable line wrapping
+        //namesAndDescriptions.setLineWrap(true); // Enable line wrapping
         namesAndDescriptions.setFocusable(false); //nocursor
-        namesAndDescriptions.setFont(new Font("Courier", Font.PLAIN, 14));
+        //namesAndDescriptions.setFont(new Font("Courier", Font.PLAIN, 14));
+        namesAndDescriptions.setContentType("text/html");
 
-        nameAndDescriptionsString += " ------------------------------------------------------------ " +
-                "| AVAILABLE ITEMS                                            |";  //string length - "| space and space | (4) dont count. this is equal to 59 here.
+        nameAndDescriptionsString += "<html><body style='font-family: PT Mono; font-size: 10.5px;'>" +
+                "<div style='background-color: #9AD1D4;'>";
+        nameAndDescriptionsString += "<br>&nbsp;&nbsp;------------------------------------------------------------&nbsp;<br> " +
+                "&nbsp;|&nbsp;<b><u>AVAILABLE ITEMS</u></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>";  //string length - "| space and space | (4) dont count. this is equal to 59 here.
 
         for(int i = 0; i  < weaponList.length; ++i){
-            nameAndDescriptionsString += "| " + (weaponList[i].name).toUpperCase() + returnStringWithSpaces(weaponList[i].name, 59-(((Integer)weaponList[i].price)).toString().length()-1 ) + "$" + weaponList[i].price + " |" +
-                    "| - " + weaponList[i].description + returnStringWithSpaces(weaponList[i].description, 59-2) + " |" +
-                    "| - Damage: " + weaponList[i].damage + returnStringWithSpaces(((Integer)weaponList[i].damage).toString(), 59-10) + " |" +
-                    "| - Miss Rate: " + weaponList[i].missPercentage + "%" + returnStringWithSpaces(((Integer)weaponList[i].missPercentage).toString(), 59-14) + " |";
+            nameAndDescriptionsString += "&nbsp;|&nbsp;<b>" + (weaponList[i].name).toUpperCase() + returnStringWithSpaces(weaponList[i].name, 59-(((Integer)weaponList[i].price)).toString().length()-1 ) + "$" + weaponList[i].price + "&nbsp;</b>|&nbsp;<br>" +
+                    "&nbsp;|&nbsp;-&nbsp;" + weaponList[i].description + returnStringWithSpaces(weaponList[i].description, 59-2) + "&nbsp;|&nbsp;<br>" +
+                    "&nbsp;|&nbsp;-&nbsp;Damage:&nbsp;" + weaponList[i].damage + returnStringWithSpaces(((Integer)weaponList[i].damage).toString(), 59-10) + "&nbsp;|&nbsp;<br>" +
+                    "&nbsp;|&nbsp;-&nbsp;Miss Rate:&nbsp;" + weaponList[i].missPercentage + "%" + returnStringWithSpaces(((Integer)weaponList[i].missPercentage).toString(), 59-14) + "&nbsp;|&nbsp;<br>";
         }
 
-        nameAndDescriptionsString += " ------------------------------------------------------------ ";
-
+        nameAndDescriptionsString += "&nbsp;&nbsp;------------------------------------------------------------ <br><br>";
+        nameAndDescriptionsString += "</div></body></html>";
         namesAndDescriptions.setText(nameAndDescriptionsString);
-        namesAndDescriptions.setBackground(Color.pink);
+       // namesAndDescriptions.setBackground(Color.pink);
 
         // Display available weapons in a combo box
         weaponComboBox = new JComboBox<>();
@@ -136,7 +139,7 @@ public class WeaponShop {
         int spaces = length - string.length();
         String newString = "";
         for (int i = 0; i < spaces-1; i++) { //minus 1 just ebcause
-            newString += " ";
+            newString += "&nbsp;";
         }
         return newString;
     }

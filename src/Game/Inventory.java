@@ -21,10 +21,9 @@ import static Shops.WeaponShop.weaponShopSideBar;
 
 public class Inventory {
 
-    private static Frame inventoryFrame = new JFrame();
+    private static JFrame inventoryFrame = new JFrame();
     private static ArrayList<Items.Item> weaponItems = new ArrayList<>();
     private static ArrayList<Items.Item> armourItems = new ArrayList<>();
-
     private static JTextArea allInventoryItemsTextArea = new JTextArea();
 
     // String currentHealthItem = "DFSDFSDF";
@@ -37,9 +36,13 @@ public class Inventory {
 
     public Inventory() {
 
-        inventoryFrame.setTitle("Inventory");
-        inventoryFrame.setLocationRelativeTo(null);
+        inventoryFrame = new JFrame("By Anna Denisova");
         inventoryFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
+        inventoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        inventoryFrame.setLocationRelativeTo(null);
+        inventoryFrame.getContentPane().setLayout(new BorderLayout());
+
+
         //inventoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         findWeaponsAndArmour(); //this function will go through Gamevars.inventory and will
@@ -83,20 +86,54 @@ public class Inventory {
             }
         });
 
+
+        JLabel inventoryTitleLabel = new JLabel("Inventory");
+        inventoryTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        inventoryTitleLabel.setVerticalAlignment(SwingConstants.CENTER);
+        inventoryTitleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        inventoryTitleLabel.setOpaque(true);
+        inventoryTitleLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        inventoryTitleLabel.setBackground(Color.decode("#fb4d3d")); //TOMATO RED
+
+
+// Setup the current item panel
         currentItemPanel.add(currentWeaponItemLabel);
         currentItemPanel.add(currentArmourItemLabel);
-        inventoryFrame.add(currentItemPanel, BorderLayout.NORTH);
+        currentItemPanel.setOpaque(true);
+        currentItemPanel.setBackground(Color.decode("#03cea4")); //MINT TEAL
+        currentItemPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Consistent spacing
 
+// Create the panel that will hold the title, separator, and current item panel
+        JPanel titleAndCurrItemPanel = new JPanel(new GridLayout(2, 1));
+        titleAndCurrItemPanel.add(inventoryTitleLabel);
+        titleAndCurrItemPanel.add(currentItemPanel);
+        titleAndCurrItemPanel.setBackground(Color.decode("#0B2027")); //BLACK
+        titleAndCurrItemPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10)); // Consistent spacing
+
+// Add titleAndCurrItemPanel to the frame
+        inventoryFrame.add(titleAndCurrItemPanel, BorderLayout.NORTH);
+
+// Setup the list panel
         listPanel.add(allInventoryItemsTextArea);
+        allInventoryItemsTextArea.setEditable(false);
+        allInventoryItemsTextArea.setFocusable(false);
+        allInventoryItemsTextArea.setOpaque(true);
+        allInventoryItemsTextArea.setBackground(Color.decode("#03cea4")); //MINT TEAL
+        listPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10)); // Consistent spacing
+        listPanel.setBackground(Color.decode("#0B2027")); //BLACK
         inventoryFrame.add(listPanel, BorderLayout.CENTER);
 
+// Setup the button panel
         selectionButtonPanel.add(weaponButton);
         selectionButtonPanel.add(armourButton);
-
+        selectionButtonPanel.setBackground(Color.decode("#0B2027")); //BLACK
         buttonPanel.add(selectionButtonPanel, BorderLayout.NORTH);
         buttonPanel.add(closeInventoryButton, BorderLayout.SOUTH);
-
+        buttonPanel.setBackground(Color.decode("#0B2027")); //BLACK
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Consistent spacing
         inventoryFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+
 
     }
 
@@ -157,9 +194,9 @@ public class Inventory {
     }
 
     private static void updateItemsList() {
-        String allItemsTEXT = "Inventory Items:\n";
+        String allItemsTEXT = "\n    Inventory Items:\n";
         for (Items.Item item : GameVars.inventory) {
-            allItemsTEXT += item + "\n";
+            allItemsTEXT += "   - " + item + "\n";
         }
         allInventoryItemsTextArea.setText(allItemsTEXT);
     }

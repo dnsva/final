@@ -30,6 +30,6 @@ public class GameVars {
     public static int hunger = 100;
     public static int balance = 100;
 
-    public static Items.Weapon currWeapon = new Weapon("Sword", 10, "sdfsdf", 10, 10);
-    public static Items.Armour currArmour = new Armour("Helmet", 10, 10);
+    public static Items.Weapon currWeapon = new Weapon("none", 0, "", 0, 0);
+    public static Items.Armour currArmour = new Armour("none", 0, 0);
 }

@@ -20,7 +20,7 @@ public class MapGUI {
     private static JFrame mapFrame;
     public static SideBar mapGUISideBar = new SideBar();
     boolean exitFlag; //this is used to check if the exit button has been pressed
-    public static JEditorPane mapEditorPane;
+    public static JEditorPane mapEditorPane, mapLegendEditorPane, mapTitleEditorPane;
 
     public MapGUI() {
 
@@ -30,26 +30,45 @@ public class MapGUI {
         mapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mapFrame.setLocationRelativeTo(null);
         mapFrame.getContentPane().setLayout(new BorderLayout());
+        mapFrame.setBackground(Color.black);
+        mapFrame.getContentPane().setBackground(Color.black);
 
         JPanel mapAsciiPanel = new JPanel();
+        mapAsciiPanel.setBackground(Color.black);
         mapAsciiPanel.setLayout(new BoxLayout(mapAsciiPanel, BoxLayout.Y_AXIS));
         //mapAsciiPanel.setSize(600, GameVars.WINDOWHEIGHT);
 
-        JLabel titleLabel = new JLabel("Map");
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titleLabel.setForeground(Color.white);
+       // JLabel titleLabel = new JLabel("Map");
+       // titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+      //  titleLabel.setForeground(Color.white);
 
-        mapAsciiPanel.add(Box.createVerticalStrut(20)); //add space ebtween
-        mapAsciiPanel.add(titleLabel);
-        mapAsciiPanel.add(Box.createVerticalStrut(20)); //add space ebtween
-        mapAsciiPanel.setBackground(Color.blue);
+      //  mapAsciiPanel.add(Box.createVerticalStrut(20)); //add space ebtween
+      //  mapAsciiPanel.add(titleLabel);
+      //  mapAsciiPanel.add(Box.createVerticalStrut(20)); //add space ebtween
+      //  mapAsciiPanel.setBackground(Color.blue);
 
 
         mapEditorPane = new JEditorPane();
         mapEditorPane.setContentType("text/html");
         mapEditorPane.setText(Map.getMapAsciiString());
         mapEditorPane.setEditable(false);
+        mapEditorPane.setBackground(Color.black);
+
+        mapLegendEditorPane = new JEditorPane();
+        mapLegendEditorPane.setContentType("text/html");
+        mapLegendEditorPane.setText(Map.getMapLegend());
+        mapLegendEditorPane.setEditable(false);
+        mapLegendEditorPane.setBackground(Color.black);
+
+        mapTitleEditorPane = new JEditorPane();
+        mapTitleEditorPane.setContentType("text/html");
+        mapTitleEditorPane.setText(Map.getMapTitle());
+        mapTitleEditorPane.setEditable(false);
+        mapTitleEditorPane.setBackground(Color.black);
+
+        mapAsciiPanel.add(mapTitleEditorPane);
         mapAsciiPanel.add(mapEditorPane);
+        mapAsciiPanel.add(mapLegendEditorPane);
 
         JButton exitButton = new JButton("Exit");
 
@@ -106,10 +125,12 @@ public class MapGUI {
         });
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 3));
+        buttonPanel.setBackground(Color.black);
 
         buttonPanel.add(leftButton);
 
         JPanel buttonPanelUpDown = new JPanel(new GridLayout(2, 1));
+        buttonPanelUpDown.setBackground(Color.black);
         buttonPanelUpDown.add(upButton);
         buttonPanelUpDown.add(downButton);
 
@@ -123,6 +144,7 @@ public class MapGUI {
         //---------------------
 
         mapAsciiPanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT));
+
         mapAsciiPanel.add(buttonPanel);
 
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -131,7 +153,19 @@ public class MapGUI {
 
         mapFrame.add(mapAsciiPanel, BorderLayout.WEST);
 
-        //mapFrame.add(exitButton, BorderLayout.SOUTH);
+
+        //make the sidebar labels white for this one
+        mapGUISideBar.healthLabel.setForeground(Color.white);
+        mapGUISideBar.sanityLabel.setForeground(Color.white);
+        mapGUISideBar.hungerLabel.setForeground(Color.white);
+        mapGUISideBar.balanceLabel.setForeground(Color.white);
+        mapGUISideBar.weaponLabel.setForeground(Color.white);
+        mapGUISideBar.armourLabel.setForeground(Color.white);
+
+
+
+        mapGUISideBar.setColor("#000000");
+        mapGUISideBar.updatePanel();
 
         mapFrame.add(mapGUISideBar.getPanel(), BorderLayout.EAST);
 

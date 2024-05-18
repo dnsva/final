@@ -46,9 +46,9 @@ public class SlotInfo {
         slotListModel = new DefaultListModel<>(); // For the inside box
         slotList = new JList<>(slotListModel); // The list of things in SlotListModel
         listPanel.add(new JScrollPane(slotList));
-        listPanel.setForeground(Color.red);
+        //listPanel.setForeground(Color.red);
         slotInfoFrame.getContentPane().add(listPanel, BorderLayout.CENTER); // Add this panel to the frame
-        listPanel.setBackground(Color.pink);
+        listPanel.setBackground(Color.decode("#9AD1D4"));
 
         // PANEL 2 - BUTTONS!!!!!!!!!
         /*
@@ -176,7 +176,7 @@ public class SlotInfo {
             // characterSelectFrame
             characterSelectFrame.setVisible(true);
             characterSelectFrame.setTitle("By Anna Denisova");
-            characterSelectFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT + 150);
+            characterSelectFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT + 370);
             characterSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             characterSelectFrame.setLocationRelativeTo(null);
             characterSelectFrame.getContentPane().setLayout(new BorderLayout()); // Make the layout border
@@ -197,35 +197,36 @@ public class SlotInfo {
             namesAndDescriptions.setContentType("text/html");
             String nameAndDescriptionsString = "";
 
-            nameAndDescriptionsString = "<html><body style='font-family: PT Mono;'>" +
-                    "lkjjjjjijijiijjijijijjjjjjjjjjjjjjjjjjjjjjjjjjjjjiijijijjiij" +
-                    "<h3>WIZARD</h3>" +
-                    "<p>- Start game with [curse/potion]</p>" +
-                    "<p>- 25% off all monster curses</p>" +
-                    "<p>- Default attack power: 10</p>" +
-                    "<h3>MIME</h3>" +
-                    "<p>- Useless and weak</p>" +
-                    "<p>- Gets 1 free apple</p>" +
-                    "<p>- Default attack power: 1</p>" +
-                    "<h3>WARRIOR</h3>" +
-                    "<p>- Start game with [weapon]</p>" +
-                    "<p>- 25% off all weapons</p>" +
-                    "<p>- Default attack power: 15</p>" +
-                    "<h3>DOCTOR</h3>" +
-                    "<p>- Start game with [healing potion]</p>" +
-                    "<p>- 25% off all healing potions</p>" +
-                    "<p>- Default attack power: 10</p>" +
-                    "<h3>FARMER</h3>" +
-                    "<p>- Can't fight</p>" +
-                    "<p>- Start game with all the food</p>" +
-                    "<p>- Default attack power: 0</p>" +
-                    "</body></html>";
+            nameAndDescriptionsString = "<html><body style='font-family: PT Mono; font-size: 9px;'>" +
+                    "<div style='background-color: #9AD1D4;'>" +
+                    "<p><b>&nbsp;&nbsp;WIZARD</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>" +
+                    "<p>&nbsp;- Start game with [curse/potion]</p>" +
+                    "<p>&nbsp;- 25% off all monster curses</p>" +
+                    "<p>&nbsp;- Default attack power: 10</p>" +
+                    "<p><b>&nbsp;&nbsp;MIME</b></p>" +
+                    "<p>&nbsp;- Useless and weak</p>" +
+                    "<p>&nbsp;- Gets 1 free apple</p>" +
+                    "<p>&nbsp;- Default attack power: 1</p>" +
+                    "<p>&nbsp;&nbsp;<b>WARRIOR</b></p>" +
+                    "<p>&nbsp;- Start game with [weapon]</p>" +
+                    "<p>&nbsp;- 25% off all weapons</p>" +
+                    "<p>&nbsp;- Default attack power: 15</p>" +
+                    "<p>&nbsp;&nbsp;<b>DOCTOR</b></p>" +
+                    "<p>&nbsp;- Start game with [healing potion]</p>" +
+                    "<p>&nbsp;- 25% off all healing potions</p>" +
+                    "<p>&nbsp;- Default attack power: 10</p>" +
+                    "<p>&nbsp;&nbsp;<b>FARMER</b></p>" +
+                    "<p>&nbsp;- Can't fight</p>" +
+                    "<p>&nbsp;- Start game with all the food</p>" +
+                    "<p>&nbsp;- Default attack power: 0 <br>&nbsp;<br></p>" +
+                    "</div></body></html>";
 
             namesAndDescriptions.setText(nameAndDescriptionsString);
             //namesAndDescriptions.setSize(WINDOWWIDTH, WINDOWHEIGHT + 130);
             namesAndDescriptions.setEditable(false);
+
             characterSelectionPanel.add(namesAndDescriptions);
-            characterSelectionPanel.setPreferredSize(new Dimension(WINDOWWIDTH, WINDOWHEIGHT + 130));
+            characterSelectionPanel.setPreferredSize(new Dimension(WINDOWWIDTH, WINDOWHEIGHT + 370));
 
             JPanel buttonPanel = new JPanel();
             ButtonGroup group = new ButtonGroup();

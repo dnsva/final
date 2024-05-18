@@ -134,6 +134,34 @@ public class Map {
         }
         checkCell(playerRow, playerCol);
     }
+
+    static String getMapTitle() {
+        String title = "<html><p style=\"font-size:9; color:white; font-family: PT Mono; padding-left: 80px;\">";
+
+        title += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███╗&nbsp;&nbsp;&nbsp;███╗&nbsp;█████╗&nbsp;██████╗&nbsp;<br>";
+        title += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;████╗&nbsp;████║██╔══██╗██╔══██╗<br>";
+        title += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;██╔████╔██║███████║██████╔╝<br>";
+        title += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;██║╚██╔╝██║██╔══██║██╔═══╝&nbsp;<br>";
+        title += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;██║&nbsp;╚═╝&nbsp;██║██║&nbsp;&nbsp;██║██║&nbsp;&nbsp;&nbsp;&nbsp;<br>";
+        title += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╚═╝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╚═╝╚═╝&nbsp;&nbsp;╚═╝╚═╝&nbsp;&nbsp;&nbsp;&nbsp;<br>";
+
+        title += "</p></html>";
+        return title;
+    }
+
+    static String getMapLegend(){
+        String legend = "<html><p style=\"font-size:12; color:white; font-family: PT Mono; padding-left: 80px;\">";
+        legend += "&#x1FAA8; : Wall<br>";
+        legend += "&#x1F7E1; : Empty<br>";
+        legend += "&#x1F7E2; : Level Complete<br>";
+        legend += "&#x1F534; : Level Incomplete<br>";
+        legend += "&#x1F7E3; : Boss<br>";
+        legend += "&#x1f535; : Side Quest<br>";
+        legend += "&#x1F511; : Key";
+        legend += "<p style=\"font-size:9; color:white; font-family: PT Mono; padding-left: 80px;\">Collect all keys to unlock the final boss</p><br>";
+        legend += "</p></html>";
+        return legend;
+    }
     static String getMapAsciiString(){
         String mapString = "<html><p style=\"font-size:30; text-align: center;\" >";
 
@@ -161,6 +189,7 @@ public class Map {
                 }else if(map[i][j] == 4) { //side quest
                     mapString += "&#x1f535;";
                 }else if(map[i][j] == 5) { //key
+
                     mapString += "&#x1F511;";
                 }
 

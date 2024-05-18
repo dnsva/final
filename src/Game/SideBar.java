@@ -32,7 +32,7 @@ public class SideBar {
 
     JPanel sideBarPanel;
     JButton inventoryButton;
-    JLabel healthLabel, sanityLabel, hungerLabel, balanceLabel, weaponLabel, armourLabel;
+    public JLabel healthLabel, sanityLabel, hungerLabel, balanceLabel, weaponLabel, armourLabel;
 
     public void updatePanel(){
         healthLabel.setText("Health: " + GameVars.health);
@@ -52,11 +52,8 @@ public class SideBar {
 
     public SideBar(){
         inventoryButton = new JButton("Inventory");
-
         inventoryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //NOT IMPLEMENTED YET
-                //SHOULD BE LIKE SHOW INVENTORY OR SOMETHING
                 Inventory.showInventory();
             }
         });
@@ -65,6 +62,7 @@ public class SideBar {
         sideBarPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         sideBarPanel.setSize(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         sideBarPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //sideBarPanel.setBackground(Color.decode("#C2F9BB"));
 
         healthLabel = new JLabel();
         healthLabel.setText(" Health:" + GameVars.health);
@@ -91,8 +89,19 @@ public class SideBar {
         sideBarPanel.add(balanceLabel);
         sideBarPanel.add(weaponLabel);
         sideBarPanel.add(armourLabel);
+
+       // inventoryButton.setPreferredSize(inventoryButton.getPreferredSize());
         sideBarPanel.add(inventoryButton);
 
+       // sideBarPanel.doLayout();
+       // sideBarPanel.revalidate();
+       // sideBarPanel.setSize(sideBarPanel.getPreferredSize());
+
+    }
+
+    public void setColor(String hex){
+        sideBarPanel.setBackground(Color.decode(hex));
+        updatePanel();
     }
 
 }

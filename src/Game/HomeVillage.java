@@ -33,8 +33,8 @@ public class HomeVillage {
 
         //--------------------------------------------------------------------------------
 
-        homeVillageFrame = new JFrame("Home Village");
-        homeVillageFrame.setTitle("By Anna Denisova");
+        homeVillageFrame = new JFrame("By Anna Denisova");
+       // homeVillageFrame.setTitle("By Anna Denisova");
         homeVillageFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         homeVillageFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         homeVillageFrame.setLocationRelativeTo(null);
@@ -43,11 +43,11 @@ public class HomeVillage {
         homeVillagePanel = new JPanel();
         homeVillagePanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
         homeVillagePanel.setLayout(new BoxLayout(homeVillagePanel, BoxLayout.Y_AXIS));
-        homeVillagePanel.setBackground(Color.blue);
+        homeVillagePanel.setBackground(Color.decode("#C2F9BB"));
 
         JLabel titleLabel = new JLabel("Village");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        titleLabel.setForeground(Color.white);
+        //titleLabel.setForeground(Color.white);
 
         homeVillagePanel.add(Box.createVerticalStrut(20)); //add space between
         homeVillagePanel.add(titleLabel);
@@ -99,9 +99,8 @@ public class HomeVillage {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TO BE IMPLEMENTED
-                //GameSlots.SlotInfo.showInfoFrame();
-                //hideHomeVillage();
+                GameSlots.SlotInfo.showInfoFrame();
+                hideHomeVillage();
             }
         });
         JButton saveGameButton = new JButton("Save Game");
@@ -120,6 +119,8 @@ public class HomeVillage {
         }
 
         homeVillageFrame.add(homeVillagePanel, BorderLayout.CENTER);
+
+        JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
         homeVillageFrame.add(homeVillageSideBar.getPanel(), BorderLayout.EAST);
 
         //homeVillageFrame.pack();
