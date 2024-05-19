@@ -34,6 +34,7 @@ public class Inventory {
     static JLabel currentWeaponItemLabel = new JLabel();
     static JLabel currentArmourItemLabel = new JLabel();
 
+
     public Inventory() {
 
         inventoryFrame = new JFrame("By Anna Denisova");
@@ -148,6 +149,7 @@ public class Inventory {
 
         //make items strings too
         ArrayList<String> itemsString = new ArrayList<String>();
+        itemsString.clear(); ///just added this when debugging
         for(Item item : items){
             itemsString.add(item.toString());
         }
@@ -169,6 +171,7 @@ public class Inventory {
                     for(Item item : items){
                         if(item.toString().equals(selectedItem)){
                             GameVars.currWeapon = (Weapon)item;
+                            GameVars.fullAttackPower = ((Weapon) item).damage + GameVars.playerAttackPower;
                         }
                     }
                     updateCurrentSelectedItems();
@@ -180,6 +183,7 @@ public class Inventory {
                     for(Item item : items){
                         if(item.toString().equals(selectedItem)){
                             GameVars.currArmour = (Armour)item;
+                            GameVars.fullDefensePower = ((Armour) item).damageSubtractorPercentage;
                         }
                     }
                     updateCurrentSelectedItems();

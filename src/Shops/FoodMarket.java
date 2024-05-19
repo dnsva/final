@@ -19,7 +19,7 @@ public class FoodMarket {
 
     public static SideBar foodMarketSideBar = new SideBar();
 
-    Food[] foodList = { // An array of all available food in the shop
+    public Food[] foodList = { // An array of all available food in the shop
             new Food("Carrots", 1, 5),
             new Food("Cucumbers", 1, 5),
             new Food("Tomatoes", 1, 5),

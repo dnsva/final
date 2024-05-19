@@ -15,29 +15,28 @@ public class WeaponShop {
 
     public static SideBar weaponShopSideBar = new SideBar();
 
-    Weapon[] weaponList = { //An array of all available weapons in the shop
-            new Weapon("name", 10, "desc", 10, 25),
+    public static Weapon[] weaponList = { //An array of all available weapons in the shop
             new Weapon("Dagger",
                     10,
                     "Finely crafted by a local master",
-                    GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 10 : 5,
-                    GameVars.difficulyLevel.equals("Easy") ? 20 : GameVars.difficulyLevel.equals("Medium") ? 30 : 40),
+                    GameVars.difficultyLevel.equals("Easy") ? 15 : GameVars.difficultyLevel.equals("Medium") ? 10 : 5,
+                    GameVars.difficultyLevel.equals("Easy") ? 20 : GameVars.difficultyLevel.equals("Medium") ? 30 : 40),
             new Weapon("Axe",
                     15,
                     "For smashing enemies",
-                    GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 10 : 5,
-                    GameVars.difficulyLevel.equals("Easy") ? 15 : GameVars.difficulyLevel.equals("Medium") ? 25 : 30),
+                    GameVars.difficultyLevel.equals("Easy") ? 15 : GameVars.difficultyLevel.equals("Medium") ? 10 : 5,
+                    GameVars.difficultyLevel.equals("Easy") ? 15 : GameVars.difficultyLevel.equals("Medium") ? 25 : 30),
             new Weapon("Katana",
                     50,
                     "Imported from Japan",
-                    GameVars.difficulyLevel.equals("Easy") ? 30 : GameVars.difficulyLevel.equals("Medium") ? 20 : 15,
-                    GameVars.difficulyLevel.equals("Easy") ? 20 : GameVars.difficulyLevel.equals("Medium") ? 30 : 40
+                    GameVars.difficultyLevel.equals("Easy") ? 30 : GameVars.difficultyLevel.equals("Medium") ? 20 : 15,
+                    GameVars.difficultyLevel.equals("Easy") ? 20 : GameVars.difficultyLevel.equals("Medium") ? 30 : 40
                     ),
             new Weapon("Lightning Bow & Arrow",
                     100,
                     "Shoots lightning arrows and electrocutes enemies",
-                    GameVars.difficulyLevel.equals("Easy") ? 35 : GameVars.difficulyLevel.equals("Medium") ? 30 : 25,
-                    GameVars.difficulyLevel.equals("Easy") ? 5 : GameVars.difficulyLevel.equals("Medium") ? 10 : 25
+                    GameVars.difficultyLevel.equals("Easy") ? 35 : GameVars.difficultyLevel.equals("Medium") ? 30 : 25,
+                    GameVars.difficultyLevel.equals("Easy") ? 5 : GameVars.difficultyLevel.equals("Medium") ? 10 : 25
                     ),
             new Weapon("Scythe",
                     1000,
@@ -82,6 +81,9 @@ public class WeaponShop {
                     "&nbsp;|&nbsp;-&nbsp;" + weaponList[i].description + returnStringWithSpaces(weaponList[i].description, 59-2) + "&nbsp;|&nbsp;<br>" +
                     "&nbsp;|&nbsp;-&nbsp;Damage:&nbsp;" + weaponList[i].damage + returnStringWithSpaces(((Integer)weaponList[i].damage).toString(), 59-10) + "&nbsp;|&nbsp;<br>" +
                     "&nbsp;|&nbsp;-&nbsp;Miss Rate:&nbsp;" + weaponList[i].missPercentage + "%" + returnStringWithSpaces(((Integer)weaponList[i].missPercentage).toString(), 59-14) + "&nbsp;|&nbsp;<br>";
+            if(i != weaponList.length - 1)
+                    // Empty row after with the borders:
+                    nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 61) + "|&nbsp;<br>";
         }
 
         nameAndDescriptionsString += "&nbsp;&nbsp;------------------------------------------------------------ <br><br>";
@@ -137,27 +139,33 @@ public class WeaponShop {
     }
     private void purchaseWeapon() {
         // Get the selected weapon
-        int selectedWeaponIndex = weaponComboBox.getSelectedIndex(); //the weapons are indexed from 0 to whatever
-        if (selectedWeaponIndex == -1) { //ERROR CHECK HERE FOR IF NOTHING SELECTED
-            JOptionPane.showMessageDialog(null, "Please select a weapon to purchase."); //err message
-            return; //get out of fn
+        int selectedWeaponIndex = weaponComboBox.getSelectedIndex(); // The weapons are indexed from 0 to whatever
+        if (selectedWeaponIndex == -1) { // ERROR CHECK HERE FOR IF NOTHING SELECTED
+            JOptionPane.showMessageDialog(null, "Please select a weapon to purchase."); // Error message
+            return; // Get out of function
         }
 
-        Weapon selectedWeapon = weaponList[selectedWeaponIndex]; //stores the weapon in a weapon object
+        Weapon selectedWeapon = weaponList[selectedWeaponIndex]; // Stores the weapon in a weapon object
 
-        if (GameVars.balance >= selectedWeapon.price) { //Check if the player has enough balance to purchase the weapon
-            GameVars.balance -= selectedWeapon.price; //Deduct the price from the balance
-            GameVars.inventory.add(selectedWeapon); //Add the purchased weapon to the inventory
+        // Check if the selected weapon is already in the inventory
+        if (GameVars.inventory.contains(selectedWeapon)) {
+            JOptionPane.showMessageDialog(null, "You already own this weapon."); // Error message for duplicate purchase
+            return; // Get out of function
+        }
 
-            //YOU NEED TO UPDATE THE SIDEBAR AS NOW THE INVENTORY HAS CHANGED AND THE BALANCE HAS CHANGED
+        if (GameVars.balance >= selectedWeapon.price) { // Check if the player has enough balance to purchase the weapon
+            GameVars.balance -= selectedWeapon.price; // Deduct the price from the balance
+            GameVars.inventory.add(selectedWeapon); // Add the purchased weapon to the inventory
+
+            // Update the sidebar as now the inventory has changed and the balance has changed
             updateAllSidePanels();
 
-            //-----------------------------------
-            JOptionPane.showMessageDialog(null, "Purchase successful!"); //:)
-        } else { //If not enough money
-            JOptionPane.showMessageDialog(null, "Insufficient funds!"); //No purchase allowed
+            JOptionPane.showMessageDialog(null, "Purchase successful!"); // :)
+        } else { // If not enough money
+            JOptionPane.showMessageDialog(null, "Insufficient funds!"); // No purchase allowed
         }
     }
+
 
     public static void showWeaponShop() { //THIS SHOWS THE FRAME
         weaponShopFrame.setVisible(true); //ok

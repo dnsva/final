@@ -14,10 +14,11 @@ import static AnnaTools.Updater.updateAllSidePanels;
 public class ArmourShop {
     public static SideBar armourShopSideBar = new SideBar();
 
-    Armour[] armourList = { // An array of all available armour in the shop
-            new Armour("Bronze", 20, 10),
-            new Armour("Silver", 50, 25),
-            new Armour("Diamond", 100, 50)
+    //format: GameVars.difficultyLevel.equals("Easy") ? 30 : GameVars.difficultyLevel.equals("Medium") ? 20 : 15,
+    public Armour[] armourList = { // An array of all available armour in the shop
+            new Armour("Bronze", 20, GameVars.difficultyLevel.equals("Easy") ? 20 : GameVars.difficultyLevel.equals("Medium") ? 10 : 5),
+            new Armour("Silver", 50, GameVars.difficultyLevel.equals("Easy") ? 30 : GameVars.difficultyLevel.equals("Medium") ? 20 : 15),
+            new Armour("Diamond", 100, GameVars.difficultyLevel.equals("Easy") ? 40 : GameVars.difficultyLevel.equals("Medium") ? 30 : 25)
     };
 
     public static JFrame armourShopFrame; // The most important thing in this entire file
@@ -134,6 +135,12 @@ public class ArmourShop {
 
         Armour selectedArmour = armourList[selectedArmourIndex]; // Stores the armour in an armour object
 
+        // Check if the selected armour is already in the inventory
+        if (GameVars.inventory.contains(selectedArmour)) {
+            JOptionPane.showMessageDialog(null, "You already own this armour."); // Error message for duplicate purchase
+            return; // Get out of function
+        }
+
         if (GameVars.balance >= selectedArmour.price) { // Check if the player has enough balance to purchase the armour
             GameVars.balance -= selectedArmour.price; // Deduct the price from the balance
             GameVars.inventory.add(selectedArmour); // Add the purchased armour to the inventory
@@ -146,6 +153,7 @@ public class ArmourShop {
             JOptionPane.showMessageDialog(null, "Insufficient funds!"); // No purchase allowed
         }
     }
+
 
     public static void showArmourShop() { // THIS SHOWS THE FRAME
         armourShopFrame.setVisible(true); // OK

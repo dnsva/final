@@ -1,7 +1,7 @@
 package GameSlots;
 
-import Dungeon.Map;
 import Game.GameVars;
+import Game.HomeVillage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -124,6 +124,7 @@ public class SlotInfo {
              */
 
             hideInfoFrame();
+            new HomeVillage(); //remove if testing
             Game.HomeVillage.showHomeVillage();
         } else {
             JOptionPane.showMessageDialog(slotInfoFrame, "Please select a slot first", "Error", JOptionPane.ERROR_MESSAGE);
@@ -201,19 +202,19 @@ public class SlotInfo {
             nameAndDescriptionsString = "<html><body style='font-family: PT Mono; font-size: 9px;'>" +
                     "<div style='background-color: #9AD1D4;'>" +
                     "<p><b>&nbsp;&nbsp;WIZARD</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>" +
-                    "<p>&nbsp;- Start game with [curse/potion]</p>" +
-                    "<p>&nbsp;- 25% off all monster curses</p>" +
+                    "<p>&nbsp;- Start game with Basket of Berries</p>" +
+                    "<p>&nbsp;- 25% off all sanity medicine</p>" +
                     "<p>&nbsp;- Default attack power: 10</p>" +
                     "<p><b>&nbsp;&nbsp;MIME</b></p>" +
                     "<p>&nbsp;- Useless and weak</p>" +
                     "<p>&nbsp;- Gets 1 free apple</p>" +
                     "<p>&nbsp;- Default attack power: 1</p>" +
                     "<p>&nbsp;&nbsp;<b>WARRIOR</b></p>" +
-                    "<p>&nbsp;- Start game with [weapon]</p>" +
+                    "<p>&nbsp;- Start game with Axe</p>" +
                     "<p>&nbsp;- 25% off all weapons</p>" +
                     "<p>&nbsp;- Default attack power: 15</p>" +
                     "<p>&nbsp;&nbsp;<b>DOCTOR</b></p>" +
-                    "<p>&nbsp;- Start game with [healing potion]</p>" +
+                    "<p>&nbsp;- Start game with Regeneration Pill</p>" +
                     "<p>&nbsp;- 25% off all healing potions</p>" +
                     "<p>&nbsp;- Default attack power: 10</p>" +
                     "<p>&nbsp;&nbsp;<b>FARMER</b></p>" +
@@ -260,12 +261,10 @@ public class SlotInfo {
                             takenSlots++;
                             slotNames[takenSlots - 1] = name;
                             slotDifficulties[takenSlots - 1] = difficulty;
-                            GameVars.difficulyLevel = difficulty;
+                            GameVars.difficultyLevel = difficulty;
                             slotCreationDates[takenSlots - 1] = date;
                             slotCharacters[takenSlots - 1] = selectedCharacter; // add to the array
                             GameVars.characterType = selectedCharacter;
-                            loadPerks(selectedCharacter);
-
                             // Add the slot information to the list
                             String slotDetails = String.format("%s (%s) (%s) - Created on: %s", name, difficulty, selectedCharacter, date);
                             slotListModel.addElement(slotDetails);
@@ -336,29 +335,6 @@ public class SlotInfo {
         }
     }
 
-    public static void loadPerks(String character) {
-        // Load perks based on character
-        /*
-        if(character.equals("Wizard")) {
-            GameVars.attackPower = 10;
-            GameVars.curses = 1;
-            GameVars.cursesDiscount = 0.25;
-        } else if(character.equals("Mime")) {
-            GameVars.attackPower = 1;
-            GameVars.apples = 1;
-        } else if(character.equals("Warrior")) {
-            GameVars.attackPower = 15;
-            GameVars.weaponsDiscount = 0.25;
-        } else if(character.equals("Doctor")) {
-            GameVars.attackPower = 10;
-            GameVars.healingPotionsDiscount = 0.25;
-        } else if(character.equals("Farmer")) {
-            GameVars.attackPower = 0;
-            GameVars.food = 1;
-        }
-        */
-
-    }
     public static void main(String[] args) {
         // new SlotInfo();
         // showInfoFrame();

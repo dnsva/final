@@ -9,7 +9,7 @@ public class MAIN_RUNNER {
         new SlotInfo();
         SlotInfo.showInfoFrame();
 
-        new HomeVillage();
+       // new HomeVillage();
         //Game.HomeVillage.showHomeVillage();
     }
 }

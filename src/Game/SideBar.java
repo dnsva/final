@@ -32,7 +32,7 @@ public class SideBar {
 
     JPanel sideBarPanel;
     JButton inventoryButton, useMedicineButton, eatFoodButton;
-    public JLabel healthLabel, sanityLabel, hungerLabel, balanceLabel, weaponLabel, armourLabel;
+    public JLabel healthLabel, sanityLabel, hungerLabel, balanceLabel, weaponLabel, armourLabel, attackLabel, defenseLabel;
 
     public void updatePanel(){
         healthLabel.setText("Health: " + GameVars.health);
@@ -41,6 +41,8 @@ public class SideBar {
         balanceLabel.setText("Balance: " + GameVars.balance);
         weaponLabel.setText("Weapon: " + GameVars.currWeapon.name);
         armourLabel.setText("Armour: " + GameVars.currArmour.name);
+        attackLabel.setText("Attack: " + GameVars.fullAttackPower);
+        defenseLabel.setText("Defense: " + GameVars.fullDefensePower);
 
         //DEBUGGING: ========================================
         System.out.println("Updated SideBar Panel!");
@@ -52,7 +54,7 @@ public class SideBar {
 
     public SideBar(){
 
-        sideBarPanel = new JPanel(new GridLayout(12, 1)); // Vertical layout
+        sideBarPanel = new JPanel(new GridLayout(14, 1)); // Vertical layout
         sideBarPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         sideBarPanel.setSize(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         sideBarPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -72,10 +74,16 @@ public class SideBar {
         balanceLabel.setIcon(new ImageIcon("src/Game/Icons/Golden Coin.png"));
         weaponLabel = new JLabel();
         weaponLabel.setText("Weapon: " + GameVars.currWeapon.name);
-        weaponLabel.setIcon(new ImageIcon("src/Game/Icons/Rune Stone.png"));
+        weaponLabel.setIcon(new ImageIcon("src/Game/Icons/Iron Sword.png"));
         armourLabel = new JLabel();
         armourLabel.setText("Armour: " + GameVars.currArmour.name);
         armourLabel.setIcon(new ImageIcon("src/Game/Icons/Helm.png"));
+        attackLabel = new JLabel();
+        attackLabel.setText("Attack: " + GameVars.fullAttackPower);
+        attackLabel.setIcon(new ImageIcon("src/Game/Icons/Golden Sword.png")); //FIX
+        defenseLabel = new JLabel();
+        defenseLabel.setText("Defense: " + GameVars.fullDefensePower);
+        defenseLabel.setIcon(new ImageIcon("src/Game/Icons/Iron Shield.png")); //FIX
 
         sideBarPanel.add(healthLabel);
         sideBarPanel.add(sanityLabel);
@@ -83,6 +91,8 @@ public class SideBar {
         sideBarPanel.add(balanceLabel);
         sideBarPanel.add(weaponLabel);
         sideBarPanel.add(armourLabel);
+        sideBarPanel.add(attackLabel);
+        sideBarPanel.add(defenseLabel);
 
         inventoryButton = new JButton("Inventory");
         inventoryButton.addActionListener(new ActionListener() {

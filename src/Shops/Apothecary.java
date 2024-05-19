@@ -14,7 +14,7 @@ import static AnnaTools.Updater.updateAllSidePanels;
 public class Apothecary {
     public static SideBar apothecarySideBar = new SideBar();
 
-    Item[] medicineList = { //An array of all available medicines in the shop
+    public static Item[] medicineList = { //An array of all available medicines in the shop
             new HealingMedicine("Herb Bandage", 10, 10),
             new HealingMedicine("Regeneration Pill", 25, 25),
             new HealingMedicine("Limb Transplant", 50, 50),

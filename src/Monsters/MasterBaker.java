@@ -7,11 +7,11 @@ public class MasterBaker{
     int attackPower;
     public MasterBaker() {
         health = 100;
-        if(Game.GameVars.difficulyLevel.equals("Easy"))
+        if(Game.GameVars.difficultyLevel.equals("Easy"))
             attackPower = 10;
-        else if(Game.GameVars.difficulyLevel.equals("Medium"))
+        else if(Game.GameVars.difficultyLevel.equals("Medium"))
             attackPower = 20;
-        else if(Game.GameVars.difficulyLevel.equals("Hard"))
+        else if(Game.GameVars.difficultyLevel.equals("Hard"))
             attackPower = 30;
 
         name = "Master Baker";

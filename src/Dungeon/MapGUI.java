@@ -161,6 +161,8 @@ public class MapGUI {
         mapGUISideBar.balanceLabel.setForeground(Color.white);
         mapGUISideBar.weaponLabel.setForeground(Color.white);
         mapGUISideBar.armourLabel.setForeground(Color.white);
+        mapGUISideBar.attackLabel.setForeground(Color.white);
+        mapGUISideBar.defenseLabel.setForeground(Color.white);
 
 
 

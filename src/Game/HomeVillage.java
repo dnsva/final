@@ -3,15 +3,12 @@ package Game;
 //IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;       //-
-import java.util.*;     //-
 import javax.swing.*;   //-
 import Dungeon.*;       //-
 import java.awt.*;      //-
 import Items.*;         //-
-import Monsters.*;      //-
 import Shops.*;         //-
-import AnnaTools.*;     //-
+
 //-------------------------
 
 public class HomeVillage {
@@ -27,6 +24,9 @@ public class HomeVillage {
         new EatFood(); //This is the eat food frame
         homeVillageSideBar = new SideBar(); //Create an instance for this Frame
 
+        //LOAD IN USER BENEFITS BASED ON CHARACTER SELECTION
+        loadUserBenefits(GameVars.characterType);
+
         new Shops.WeaponShop(); //Also construct the weapon shop
         new Shops.Apothecary(); //Also construct the apothecary shop
         new Shops.FoodMarket(); //Also construct the food market
@@ -35,6 +35,9 @@ public class HomeVillage {
         //. . .
 
         new MapGUI(); //Create the map GUI for Map
+
+        //LOAD IN USER BENEFITS BASED ON CHARACTER SELECTION
+        //loadUserBenefits(GameVars.characterType);
 
         //--------------------------------------------------------------------------------
 
@@ -101,8 +104,10 @@ public class HomeVillage {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameSlots.SlotInfo.showInfoFrame();
+                //GameSlots.SlotInfo.showInfoFrame();
                 hideHomeVillage();
+                //dispose of program/end program:
+                System.exit(0);
             }
         });
         JButton saveGameButton = new JButton("Save Game");
@@ -137,5 +142,94 @@ public class HomeVillage {
         homeVillageFrame.setVisible(false);
     }
 
+    public static void loadUserBenefits(String name){
+
+        if(name.equals("Wizard")){
+
+            //Start game with sanity medicine
+
+            GameVars.inventory.add(new SanityMedicine("Basket of Berries", 25, 25));
+
+            //25% off all sanity potions
+            for(int i = 0; i < Apothecary.medicineList.length; ++i){
+                if(Apothecary.medicineList[i] instanceof SanityMedicine){
+                    Apothecary.medicineList[i].price = (int)(Apothecary.medicineList[i].price * 0.75);
+                }
+            }
+
+            //Default Attack Power: 10
+            GameVars.playerAttackPower = 10;
+            GameVars.fullAttackPower = 10;
+            AnnaTools.Updater.updateAllSidePanels();
+
+        }else if(name.equals("Mime")){
+            /*
+            "<p>&nbsp;- Useless and weak</p>" +
+            "<p>&nbsp;- Gets 1 free apple</p>" +
+            "<p>&nbsp;- Default attack power: 1</p>" +
+             */
+
+            GameVars.inventory.add(new Food("Apple", 0, 1));
+            GameVars.playerAttackPower = 1;
+            GameVars.fullAttackPower = 1;
+            AnnaTools.Updater.updateAllSidePanels();
+
+        }else if(name.equals("Warrior")){
+
+            //Start game with axe
+            GameVars.inventory.add(new Weapon("Axe",
+                    15,
+                    "For smashing enemies",
+                    GameVars.difficultyLevel.equals("Easy") ? 15 : GameVars.difficultyLevel.equals("Medium") ? 10 : 5,
+                    GameVars.difficultyLevel.equals("Easy") ? 15 : GameVars.difficultyLevel.equals("Medium") ? 25 : 30));
+
+            //25% off all weapons
+            for(int i = 0; i < WeaponShop.weaponList.length; ++i){
+                WeaponShop.weaponList[i].price = (int)(WeaponShop.weaponList[i].price * 0.75);
+            }
+
+            //Default attack power: 15
+            GameVars.playerAttackPower = 15;
+            GameVars.fullAttackPower = 15;
+            AnnaTools.Updater.updateAllSidePanels();
+
+        }else if(name.equals("Doctor")){
+            /*
+            "<p>&nbsp;- Start game with basket of berries</p>" +
+            "<p>&nbsp;- 25% off all healing potions</p>" +
+            "<p>&nbsp;- Default attack power: 10</p>" +
+             */
+
+            GameVars.inventory.add(new HealingMedicine("Regeneration Pill", 25, 25));
+
+            for(int i = 0; i < Apothecary.medicineList.length; ++i){
+                if(Apothecary.medicineList[i] instanceof HealingMedicine){
+                    Apothecary.medicineList[i].price = (int)(Apothecary.medicineList[i].price * 0.75);
+                }
+            }
+
+            GameVars.playerAttackPower = 10;
+            GameVars.fullAttackPower = 10;
+            AnnaTools.Updater.updateAllSidePanels();
+
+        }else if(name.equals("Farmer")) {
+            //Start game with all the food
+            GameVars.inventory.add(new Food("Carrots", 1, 5));
+            GameVars.inventory.add(new Food("Cucumbers", 1, 5));
+            GameVars.inventory.add(new Food("Tomatoes", 1, 5));
+            GameVars.inventory.add(new Food("Strawberries", 2, 10));
+            GameVars.inventory.add(new Food("Apples", 2, 10));
+            GameVars.inventory.add(new Food("Peaches", 2, 10));
+            GameVars.inventory.add(new Food("Chicken", 5, 20));
+            GameVars.inventory.add(new Food("Pig", 10, 30));
+            GameVars.inventory.add(new Food("Cow", 15, 40));
+            GameVars.inventory.add(new Food("Dragon", 99, 99));
+
+            //Default attack power
+            GameVars.playerAttackPower = 5;
+            GameVars.fullAttackPower = 5;
+            AnnaTools.Updater.updateAllSidePanels();
+        }
+    }
 
 }
