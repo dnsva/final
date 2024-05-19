@@ -25,8 +25,8 @@ public class GameVars {
     public static int WINDOWHEIGHT = 610;
 
     //int day = 0;
-    public static int health = 50;
-    public static int sanity = 50;
+    public static int health = 100;
+    public static int sanity = 100;
     public static int hunger = 100;
     public static int balance = 100;
 
