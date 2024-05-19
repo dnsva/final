@@ -2,7 +2,7 @@ package Items;
 
 public class Armour extends Item{
 
-    int damageSubtractorPercentage;
+    public int damageSubtractorPercentage;
     String type;
 
     public Armour(String name, int price, int damageSubtractorPercentage){
@@ -12,6 +12,5 @@ public class Armour extends Item{
     public int adjustDamage(int damage){
         return (int)(damage * (1 - (damageSubtractorPercentage / 100.0))); //double check this later
     }
-
 
 }

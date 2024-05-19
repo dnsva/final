@@ -30,6 +30,7 @@ public class HomeVillage {
         new Shops.WeaponShop(); //Also construct the weapon shop
         new Shops.Apothecary(); //Also construct the apothecary shop
         new Shops.FoodMarket(); //Also construct the food market
+        new Shops.ArmourShop(); //Also construct the armour shop
         //Add other shops here too
         //. . .
 
@@ -69,9 +70,8 @@ public class HomeVillage {
         armourShopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TO BE IMPLEMENTED
-                //Shops.ArmourShop.showArmourShop();
-                // hideHomeVillage();
+                Shops.ArmourShop.showArmourShop();
+                hideHomeVillage();
             }
         });
         JButton foodMarket = new JButton("Food Market");
