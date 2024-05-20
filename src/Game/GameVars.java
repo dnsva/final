@@ -22,9 +22,9 @@ public class GameVars {
     //int day = 0;
     public static int health = 100;
     public static int sanity = 100;
-    public static int hunger = 100;
+    public static int hunger = 0;
     public static int balance = 100;
-
+    public static int day = 0;
     public static int playerAttackPower = 0; //based on character choice
     public static int fullAttackPower = 0; //based on weapon, a percentage
     public static int fullDefensePower = 0;

@@ -6,8 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.*;   //-
 import Dungeon.*;       //-
 import java.awt.*;      //-
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import Items.*;         //-
 import Shops.*;         //-
+
 
 //-------------------------
 
@@ -18,6 +23,8 @@ public class HomeVillage {
     public static JPanel homeVillagePanel;
 
     public HomeVillage(){
+
+        runTimerThread();
 
         new Inventory(); //This is the display of the inventory. This has its JFrame
         new UseMedicine(); //This is the use medicine frame
@@ -231,5 +238,60 @@ public class HomeVillage {
             AnnaTools.Updater.updateAllSidePanels();
         }
     }
+
+    public static void runTimerThread() {
+        // Ensure GUI updates happen on the Event Dispatch Thread
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // Initial actions when the GUI is first shown
+                GameVars.day++; // times goes by literally
+                GameVars.hunger += 5; // you get hungrier
+                System.out.println("SOMETHING HAPPENENENDNNDN");
+                AnnaTools.Updater.updateAllSidePanels(); // OK!
+            }
+        });
+
+        // Create and start the periodic task in a separate thread
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                // Update GameVars and print message every second
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        GameVars.day++; // times goes by literally
+                        GameVars.hunger += 5; // you get hungrier
+                        System.out.println("SOMETHING HAPPENENENDNNDN");
+                        AnnaTools.Updater.updateAllSidePanels(); // OK!
+                    }
+                });
+            }
+        };
+
+        scheduler.scheduleAtFixedRate(task, 1, 1, TimeUnit.MINUTES);
+
+        // Add a shutdown hook to gracefully stop the scheduler on JVM exit
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Shutting down scheduler...");
+                scheduler.shutdown();
+                try {
+                    if (!scheduler.awaitTermination(5, TimeUnit.SECONDS)) {
+                        System.out.println("Forcing shutdown...");
+                        scheduler.shutdownNow();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    scheduler.shutdownNow();
+                }
+                System.out.println("Scheduler shut down.");
+            }
+        }));
+    }
+
 
 }

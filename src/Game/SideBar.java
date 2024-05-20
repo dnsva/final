@@ -32,7 +32,7 @@ public class SideBar {
 
     JPanel sideBarPanel;
     JButton inventoryButton, useMedicineButton, eatFoodButton;
-    public JLabel healthLabel, sanityLabel, hungerLabel, balanceLabel, weaponLabel, armourLabel, attackLabel, defenseLabel;
+    public JLabel healthLabel, sanityLabel, hungerLabel, dayLabel, balanceLabel, weaponLabel, armourLabel, attackLabel, defenseLabel;
 
     public void updatePanel(){
         healthLabel.setText("Health: " + GameVars.health);
@@ -43,6 +43,7 @@ public class SideBar {
         armourLabel.setText("Armour: " + GameVars.currArmour.name);
         attackLabel.setText("Attack: " + GameVars.fullAttackPower);
         defenseLabel.setText("Defense: " + GameVars.fullDefensePower);
+        dayLabel.setText("Day: " + GameVars.day);
 
         //DEBUGGING: ========================================
         System.out.println("Updated SideBar Panel!");
@@ -54,7 +55,7 @@ public class SideBar {
 
     public SideBar(){
 
-        sideBarPanel = new JPanel(new GridLayout(14, 1)); // Vertical layout
+        sideBarPanel = new JPanel(new GridLayout(15, 1)); // Vertical layout
         sideBarPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         sideBarPanel.setSize(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         sideBarPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -84,7 +85,11 @@ public class SideBar {
         defenseLabel = new JLabel();
         defenseLabel.setText("Defense: " + GameVars.fullDefensePower);
         defenseLabel.setIcon(new ImageIcon("src/Game/Icons/Iron Shield.png")); //FIX
+        dayLabel = new JLabel();
+        dayLabel.setText("Day: " + GameVars.day);
+        dayLabel.setIcon(new ImageIcon("src/Game/Icons/Scroll.png"));
 
+        sideBarPanel.add(dayLabel);
         sideBarPanel.add(healthLabel);
         sideBarPanel.add(sanityLabel);
         sideBarPanel.add(hungerLabel);
@@ -120,7 +125,6 @@ public class SideBar {
         });
 
         sideBarPanel.add(eatFoodButton);
-
 
     }
 
