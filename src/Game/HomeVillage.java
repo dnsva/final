@@ -25,6 +25,7 @@ public class HomeVillage {
     public HomeVillage(){
 
         runTimerThread();
+        new AnnaTools.Fonts();
 
         new Inventory(); //This is the display of the inventory. This has its JFrame
         new UseMedicine(); //This is the use medicine frame

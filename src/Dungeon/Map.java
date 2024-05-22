@@ -53,7 +53,16 @@ public class Map {
     static int playerRow = map.length-1;
     static int playerCol = 0;
 
+    static int prevPlayerRow = map.length - 1;
+    static int prevPlayerCol = 0;
+
+    static int currGlobalRow = 0;
+    static int currGlobalCol = map.length-1;
+
     static void checkCell(int row, int col){
+
+        currGlobalRow = row;
+        currGlobalCol = col;
 
         if(map[row][col] == 1){
             System.out.println("Level Complete");
@@ -81,9 +90,9 @@ public class Map {
                 finalBossObject.showFinalBoss();
                 MapGUI.hideMapGUI();
             }
-            //process
-            map[row][col] = 1;
-            System.out.println("Level Complete");
+
+           // map[row][col] = 1;
+           // System.out.println("Level Complete");
         }
         //if(map[row][col] == 3){
           //  System.out.println("Boss Fight");
@@ -112,24 +121,28 @@ public class Map {
     }
     static void moveUp(){
         if (playerRow > 0 && map[playerRow - 1][playerCol] != -1) {
+            prevPlayerRow = playerRow;
             playerRow--;
         }
         checkCell(playerRow, playerCol);
     }
     static void moveDown(){
         if (playerRow < map.length - 1 && map[playerRow + 1][playerCol] != -1) {
+            prevPlayerRow = playerRow;
             playerRow++;
         }
         checkCell(playerRow, playerCol);
     }
     static void moveLeft(){
         if (playerCol > 0 && map[playerRow][playerCol - 1] != -1) {
+            prevPlayerCol = playerCol;
             playerCol--;
         }
         checkCell(playerRow, playerCol);
     }
     static void moveRight(){
         if (playerCol < map[0].length - 1 && map[playerRow][playerCol + 1] != -1) {
+            prevPlayerCol = playerCol;
             playerCol++;
         }
         checkCell(playerRow, playerCol);
@@ -232,6 +245,54 @@ public class Map {
 
 
 
+
+    }
+
+    public static void dealWithMapLevelCompletion(int ID){
+
+        if(ID == 10){
+            if(quest10Object.complete){
+                map[currGlobalRow][currGlobalCol] = 1;
+            }else{
+                playerRow = prevPlayerRow;
+                playerCol = prevPlayerCol;
+            }
+        }else if(ID == 20) {
+            if(quest20Object.complete){
+                map[currGlobalRow][currGlobalCol] = 1;
+            }else{
+                playerRow = prevPlayerRow;
+                playerCol = prevPlayerCol;
+            }
+        }else if(ID == 30){
+            if(quest30Object.complete){
+                map[currGlobalRow][currGlobalCol] = 1;
+            }else{
+                playerRow = prevPlayerRow;
+                playerCol = prevPlayerCol;
+            }
+        }else if(ID == 40){
+            if(quest40Object.complete){
+                map[currGlobalRow][currGlobalCol] = 1;
+            }else{
+                playerRow = prevPlayerRow;
+                playerCol = prevPlayerCol;
+            }
+        }else if(ID == 50){
+            if(quest50Object.complete){
+                map[currGlobalRow][currGlobalCol] = 1;
+            }else{
+                playerRow = prevPlayerRow;
+                playerCol = prevPlayerCol;
+            }
+        }else if(ID == 100) {
+            if (finalBossObject.complete) {
+                map[currGlobalRow][currGlobalCol] = 1;
+            } else {
+                playerRow = prevPlayerRow;
+                playerCol = prevPlayerCol;
+            }
+        }
 
     }
 

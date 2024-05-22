@@ -16,9 +16,9 @@ public class ArmourShop {
 
     //format: GameVars.difficultyLevel.equals("Easy") ? 30 : GameVars.difficultyLevel.equals("Medium") ? 20 : 15,
     public Armour[] armourList = { // An array of all available armour in the shop
-            new Armour("Bronze", 20, GameVars.difficultyLevel.equals("Easy") ? 20 : GameVars.difficultyLevel.equals("Medium") ? 10 : 5),
-            new Armour("Silver", 50, GameVars.difficultyLevel.equals("Easy") ? 30 : GameVars.difficultyLevel.equals("Medium") ? 20 : 15),
-            new Armour("Diamond", 100, GameVars.difficultyLevel.equals("Easy") ? 40 : GameVars.difficultyLevel.equals("Medium") ? 30 : 25)
+            new Armour("Bronze", 20, GameVars.difficultyLevel.equals("Easy") ? 10 : GameVars.difficultyLevel.equals("Medium") ? 5 : 3),
+            new Armour("Silver", 50, GameVars.difficultyLevel.equals("Easy") ? 20 : GameVars.difficultyLevel.equals("Medium") ? 10 : 5),
+            new Armour("Diamond", 100, GameVars.difficultyLevel.equals("Easy") ? 30 : GameVars.difficultyLevel.equals("Medium") ? 15 : 8)
     };
 
     public static JFrame armourShopFrame; // The most important thing in this entire file

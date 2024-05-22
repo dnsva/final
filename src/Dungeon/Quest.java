@@ -13,8 +13,10 @@ import AnnaTools.*;     //-
 //-------------------------
 
 public class Quest {
-    JFrame questFrame;
+    static JFrame questFrame;
     JPanel questPanel;
+
+    static boolean complete = false;
 
     public Quest() {
         questFrame = new JFrame();

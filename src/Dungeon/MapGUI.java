@@ -81,7 +81,7 @@ public class MapGUI {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Game.HomeVillage.showHomeVillage(); //UNCOMMENT THSI ALTER
+                Game.HomeVillage.showHomeVillage();
                 hideMapGUI();
 
             }
