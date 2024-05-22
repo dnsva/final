@@ -55,18 +55,20 @@ public class Quest50{
 
     public static void encounter(){
 
+       // new Fonts(); //FOR TESTING REMOVE THIS AFTER
+
         currentPanel.removeAll();
         currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
-        currentPanel.setBackground(Color.decode("#C2F9BB"));
+        currentPanel.setBackground(Color.decode("#FF0000"));
 
         JLabel encounterTitle = new JLabel("THE MASTER");
-        encounterTitle.setFont(Fonts.Royalacid_o);
+        encounterTitle.setFont(Fonts.BAD_GRUNGE);
         encounterTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         encounterTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel encounterTitle2 = new JLabel("BAKER");
-        encounterTitle2.setFont(Fonts.Royalacid_o);
+        encounterTitle2.setFont(Fonts.BAD_GRUNGE);
         encounterTitle2.setAlignmentX(Component.CENTER_ALIGNMENT);
         encounterTitle2.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -86,7 +88,7 @@ public class Quest50{
         fullTitle.setLayout(new GridLayout(2, 1));
         fullTitle.add(encounterTitle);
         fullTitle.add(encounterTitle2);
-        fullTitle.setBackground(Color.decode("#C2F9BB"));
+        fullTitle.setBackground(Color.decode("#FF0000"));
 
         currentPanel.add(fullTitle);
         currentPanel.add(encounterText);
@@ -100,7 +102,7 @@ public class Quest50{
         currentPanel.removeAll();
         currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
-        currentPanel.setBackground(Color.decode("#C2F9BB"));
+        currentPanel.setBackground(Color.decode("#FF0000"));
 
         JLabel questionOneTitle = new JLabel("     QUESTION 1");
         questionOneTitle.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30));
@@ -108,7 +110,7 @@ public class Quest50{
         JTextArea questionOneText = new JTextArea("     What is the main ingredient in bread?");
         questionOneText.setLineWrap(true);
         questionOneText.setWrapStyleWord(true);
-        questionOneText.setBackground(Color.decode("#C2F9BB"));
+        questionOneText.setBackground(Color.decode("#FF0000"));
         questionOneText.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
         JButton optionOne = new JButton("Sugar");
         optionOne.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
@@ -148,7 +150,7 @@ public class Quest50{
         currentPanel.add(questionOneText);
 
         JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
-        buttonPanel.setBackground(Color.decode("#C2F9BB"));
+        buttonPanel.setBackground(Color.decode("#FF0000"));
         buttonPanel.add(optionOne);
         buttonPanel.add(optionTwo);
         buttonPanel.add(optionThree);
@@ -163,7 +165,7 @@ public class Quest50{
         currentPanel.removeAll();
         currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
-        currentPanel.setBackground(Color.decode("#C2F9BB"));
+        currentPanel.setBackground(Color.decode("#FF0000"));
 
         JLabel questionTwoTitle = new JLabel("     QUESTION 2");
         questionTwoTitle.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30));
@@ -171,7 +173,7 @@ public class Quest50{
         JTextArea questionTwoText = new JTextArea("     Which is NOT a type of pastry?");
         questionTwoText.setLineWrap(true);
         questionTwoText.setWrapStyleWord(true);
-        questionTwoText.setBackground(Color.decode("#C2F9BB"));
+        questionTwoText.setBackground(Color.decode("#FF0000"));
         questionTwoText.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
         JButton optionOne = new JButton("Croissant");
         optionOne.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
@@ -211,7 +213,7 @@ public class Quest50{
         currentPanel.add(questionTwoText);
 
         JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
-        buttonPanel.setBackground(Color.decode("#C2F9BB"));
+        buttonPanel.setBackground(Color.decode("#FF0000"));
         buttonPanel.add(optionOne);
         buttonPanel.add(optionTwo);
         buttonPanel.add(optionThree);
@@ -226,7 +228,7 @@ public class Quest50{
         currentPanel.removeAll();
         currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
-        currentPanel.setBackground(Color.decode("#C2F9BB"));
+        currentPanel.setBackground(Color.decode("#FF0000"));
 
         JLabel questionThreeTitle = new JLabel("     QUESTION 3");
         questionThreeTitle.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30));
@@ -234,7 +236,7 @@ public class Quest50{
         JTextArea questionThreeText = new JTextArea("     What gives cake its fluffy texture?");
         questionThreeText.setLineWrap(true);
         questionThreeText.setWrapStyleWord(true);
-        questionThreeText.setBackground(Color.decode("#C2F9BB"));
+        questionThreeText.setBackground(Color.decode("#FF0000"));
         questionThreeText.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
         JButton optionOne = new JButton("Baking Soda");
         optionOne.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
@@ -274,7 +276,7 @@ public class Quest50{
         currentPanel.add(questionThreeText);
 
         JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
-        buttonPanel.setBackground(Color.decode("#C2F9BB"));
+        buttonPanel.setBackground(Color.decode("#FF0000"));
         buttonPanel.add(optionOne);
         buttonPanel.add(optionTwo);
         buttonPanel.add(optionThree);
@@ -289,7 +291,7 @@ public class Quest50{
         currentPanel.removeAll();
         currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
-        currentPanel.setBackground(Color.decode("#C2F9BB"));
+        currentPanel.setBackground(Color.decode("#FF0000"));
 
         JLabel rewardTitle = new JLabel("REWARD");
         rewardTitle.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30));
@@ -297,7 +299,7 @@ public class Quest50{
         JTextArea rewardText = new JTextArea("CAKE (-10 Hunger)\n50 coins");
         rewardText.setLineWrap(true);
         rewardText.setWrapStyleWord(true);
-        rewardText.setBackground(Color.decode("#C2F9BB"));
+        rewardText.setBackground(Color.decode("#FF0000"));
         rewardText.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
 
         JButton exitButton = new JButton("Exit");
