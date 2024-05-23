@@ -16,9 +16,9 @@ public class Food extends Item {
 
     public void eat(){
         //add to hunger
-        GameVars.hunger += hungerRestore;
-        if(GameVars.hunger > 100){
-            GameVars.hunger = 100;
+        GameVars.hunger -= hungerRestore;
+        if(GameVars.hunger < 0){
+            GameVars.hunger = 0;
         }
     }
 

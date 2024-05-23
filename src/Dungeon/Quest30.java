@@ -1,17 +1,17 @@
 package Dungeon;
 
 //IMPORT ALL PACKAGES -----
-import java.io.*;       //-
-import java.util.*;     //-
-import java.awt.*;      //-
+import java.io.*;
+import java.util.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;   //-
-import Game.*;          //-
-import Items.*;         //-
-import Monsters.*;      //-
-import Shops.*;         //-
-import AnnaTools.*;     //-
+import javax.swing.*;
+import Game.*;
+import Items.*;
+import Monsters.*;
+import Shops.*;
+import AnnaTools.*;
 
 import static Dungeon.Map.dealWithMapLevelCompletion;
 //-------------------------
@@ -51,25 +51,43 @@ public class Quest30 {
 
     public static void exposition() {
         currentPanel.removeAll();
-        currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
         currentPanel.setBackground(Color.decode("#C2F9BB"));
 
+        JPanel expositionTitlePanel = new JPanel(new GridLayout(2, 1));
         JLabel expositionTitle = new JLabel("A DUDE THAT SPEAKS WITH ANIMALS");
+        expositionTitle.setFont(Fonts.pepperoni_pizza);
+        expositionTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        expositionTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        expositionTitlePanel.add(expositionTitle);
+        expositionTitlePanel.setBackground(Color.decode("#C2F9BB"));
+        expositionTitlePanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT / 3);
+        expositionTitlePanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT / 3));
 
-        JTextArea expositionText = new JTextArea("A harmless looking guy walks up to you looking for directions. As this is your first time in this dungeon, you explain that you don’t know. For some reason, he gets really mad. He starts speaking a weird language. Turns out, he decided to call for his goblin friend to kill you. You have no choice but to fight back.");
-        expositionText.setLineWrap(true);
-        expositionText.setWrapStyleWord(true);
-        expositionText.setBackground(Color.decode("#C2F9BB"));
+        JEditorPane expositionText = new JEditorPane();
+        expositionText.setOpaque(true);
+        expositionText.setBorder(BorderFactory.createLineBorder(Color.decode("#C2F9BB"), 5));
+        expositionText.setBackground(Color.white);
+        expositionText.setEditable(false);
+        expositionText.setFocusable(false);
+        expositionText.setContentType("text/html");
+        expositionText.setMargin(new Insets(5, 5, 5, 5));
+        expositionText.setText(
+                "<html><body style='font-size: 15px; padding: 10px; font-family: Arial'>" +
+                        "A harmless looking guy walks up to you looking for directions. As this is your first time in this dungeon, you explain that you don’t know. For some reason, he gets really mad. He starts speaking a weird language. Turns out, he decided to call for his goblin friend to kill you. You have no choice but to fight back." +
+                        "</body></html>"
+        );
 
         JButton okButton = new JButton("OK");
+        okButton.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 50));
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 goblinFight();
             }
         });
 
-        currentPanel.add(expositionTitle);
+        currentPanel.setLayout(new GridLayout(3, 1));
+        currentPanel.add(expositionTitlePanel);
         currentPanel.add(expositionText);
         currentPanel.add(okButton);
 
@@ -95,17 +113,28 @@ public class Quest30 {
 
     public static void fight(String enemy, int attackPower, int health, ActionListener onVictory) {
         currentPanel.removeAll();
-        currentPanel.setLayout(new GridLayout(4, 1));
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
         currentPanel.setBackground(Color.decode("#C2F9BB"));
 
         JLabel fightTitle = new JLabel("Defeat the " + enemy + ". " + enemy + " has an attack power of " + attackPower + ".");
-        fightTitle.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+        fightTitle.setFont(Fonts.pepperoni_pizza);
+        fightTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        fightTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel healthLabel = new JLabel("Current " + enemy + " Health: " + health);
-        healthLabel.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
+        JEditorPane healthLabel = new JEditorPane();
+        healthLabel.setOpaque(true);
+        healthLabel.setBorder(BorderFactory.createLineBorder(Color.decode("#C2F9BB"), 5));
+        healthLabel.setBackground(Color.white);
+        healthLabel.setEditable(false);
+        healthLabel.setFocusable(false);
+        healthLabel.setContentType("text/html");
+        healthLabel.setMargin(new Insets(5, 5, 5, 5));
+        healthLabel.setText("<html><body style='font-size: 20px; padding: 10px; font-family: Arial'>" +
+                "Current " + enemy + " Health: " + health +
+                "</body></html>");
 
         JButton attackButton = new JButton("ATTACK");
+        attackButton.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 50));
         attackButton.addActionListener(new ActionListener() {
             int enemyHealth = health;
 
@@ -123,16 +152,19 @@ public class Quest30 {
                 if (enemyHealth <= 0) {
                     onVictory.actionPerformed(e);
                 } else {
-                    healthLabel.setText("Current " + enemy + " Health: " + enemyHealth);
+                    healthLabel.setText("<html><body style='font-size: 20px; padding: 10px; font-family: Arial'>" +
+                            "Current " + enemy + " Health: " + enemyHealth +
+                            "</body></html>");
                     JOptionPane.showMessageDialog(quest30Frame, "In response to your attack, the " + enemy + " attacks! You lose " + Math.max(0, (attackPower - GameVars.fullDefensePower)) + " health.", "Fight", JOptionPane.INFORMATION_MESSAGE);
                 }
                 AnnaTools.Updater.updateAllSidePanels();
             }
         });
 
+        currentPanel.setLayout(new GridLayout(4, 1));
         currentPanel.add(fightTitle);
         currentPanel.add(healthLabel);
-        currentPanel.add(new JLabel(""));
+        currentPanel.add(new JLabel("")); // Placeholder for spacing
         currentPanel.add(attackButton);
 
         currentPanel.revalidate();
@@ -141,28 +173,41 @@ public class Quest30 {
 
     public static void rewardScreen(int reward) {
         currentPanel.removeAll();
-        currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
         currentPanel.setBackground(Color.decode("#C2F9BB"));
 
         JLabel rewardTitle = new JLabel("REWARD");
-        rewardTitle.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30));
+        rewardTitle.setFont(Fonts.pepperoni_pizza);
+        rewardTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        rewardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextArea rewardText;
+        JEditorPane rewardText = new JEditorPane();
+        rewardText.setOpaque(true);
+        rewardText.setBorder(BorderFactory.createLineBorder(Color.decode("#C2F9BB"), 5));
+        rewardText.setBackground(Color.white);
+        rewardText.setEditable(false);
+        rewardText.setFocusable(false);
+        rewardText.setContentType("text/html");
+        rewardText.setMargin(new Insets(5, 5, 5, 5));
         if (reward > 0) {
-            rewardText = new JTextArea("REWARD, GAME SAVED. You get a balance of " + reward + " added to your balance!");
+            rewardText.setText(
+                    "<html><body style='font-size: 20px; padding: 10px; font-family: Arial'>" +
+                            "REWARD, GAME SAVED. You get a balance of " + reward + " added to your balance!" +
+                            "</body></html>"
+            );
             GameVars.balance += reward;
             AnnaTools.Updater.updateAllSidePanels();
         } else {
-            rewardText = new JTextArea("NO REWARD, GAME SAVED.");
+            rewardText.setText(
+                    "<html><body style='font-size: 20px; padding: 10px; font-family: Arial'>" +
+                            "NO REWARD, GAME SAVED." +
+                            "</body></html>"
+            );
             AnnaTools.Updater.updateAllSidePanels();
         }
-        rewardText.setLineWrap(true);
-        rewardText.setWrapStyleWord(true);
-        rewardText.setBackground(Color.decode("#C2F9BB"));
-        rewardText.setFont(new Font("Arial Unicode MS", Font.PLAIN, 20));
 
         JButton exitButton = new JButton("Exit");
+        exitButton.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 50));
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 hideQuest30();
@@ -170,6 +215,7 @@ public class Quest30 {
         });
 
         complete = true;
+        currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.add(rewardTitle);
         currentPanel.add(rewardText);
         currentPanel.add(exitButton);

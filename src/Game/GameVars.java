@@ -26,7 +26,7 @@ public class GameVars {
     public static int balance = 100;
     public static int day = 0;
     public static int playerAttackPower = 0; //based on character choice
-    public static int fullAttackPower = 0; //based on weapon, a percentage
+    public static int fullAttackPower = 0; //based on weapon
     public static int fullDefensePower = 0;
     public static Items.Weapon currWeapon = new Weapon("none", 0, "", 0, 0);
     public static Items.Armour currArmour = new Armour("none", 0, 0);
