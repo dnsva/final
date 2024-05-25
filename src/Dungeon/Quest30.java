@@ -25,6 +25,9 @@ public class Quest30 {
     public static JPanel currentPanel;
 
     public Quest30() {
+
+//        new Fonts(); //FOR TESTING
+
         quest30Frame = new JFrame("By Anna Denisova");
         quest30Frame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         quest30Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,11 +58,18 @@ public class Quest30 {
         currentPanel.setBackground(Color.decode("#C2F9BB"));
 
         JPanel expositionTitlePanel = new JPanel(new GridLayout(2, 1));
-        JLabel expositionTitle = new JLabel("A DUDE THAT SPEAKS WITH ANIMALS");
-        expositionTitle.setFont(Fonts.pepperoni_pizza);
+        JLabel expositionTitle = new JLabel("A Guy That Speaks");
+        expositionTitle.setFont(Fonts.dTheHero);
         expositionTitle.setHorizontalAlignment(SwingConstants.CENTER);
         expositionTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel expositionTitle2 = new JLabel("With Animals");
+        expositionTitle2.setFont(Fonts.dTheHero);
+        expositionTitle2.setHorizontalAlignment(SwingConstants.CENTER);
+        expositionTitle2.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         expositionTitlePanel.add(expositionTitle);
+        expositionTitlePanel.add(expositionTitle2);
         expositionTitlePanel.setBackground(Color.decode("#C2F9BB"));
         expositionTitlePanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT / 3);
         expositionTitlePanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT / 3));
@@ -116,10 +126,16 @@ public class Quest30 {
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
         currentPanel.setBackground(Color.decode("#C2F9BB"));
 
-        JLabel fightTitle = new JLabel("Defeat the " + enemy + ". " + enemy + " has an attack power of " + attackPower + ".");
-        fightTitle.setFont(Fonts.pepperoni_pizza);
+        JLabel fightTitle = new JLabel("FIGHT!");
+        fightTitle.setFont(Fonts.dTheHero);
         fightTitle.setHorizontalAlignment(SwingConstants.CENTER);
         fightTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel fightDescription = new JLabel("   Defeat the " + enemy + ". He has as an attack power of " + attackPower + ".");
+        fightDescription.setBackground(Color.white);
+        fightDescription.setOpaque(true);
+        fightDescription.setBorder(BorderFactory.createLineBorder(Color.decode("#C2F9BB"), 5));
+        fightDescription.setFont(new Font("Arial", Font.PLAIN, 20));
 
         JEditorPane healthLabel = new JEditorPane();
         healthLabel.setOpaque(true);
@@ -130,7 +146,7 @@ public class Quest30 {
         healthLabel.setContentType("text/html");
         healthLabel.setMargin(new Insets(5, 5, 5, 5));
         healthLabel.setText("<html><body style='font-size: 20px; padding: 10px; font-family: Arial'>" +
-                "Current " + enemy + " Health: " + health +
+                "<br> Current " + enemy + " Health: " + health +
                 "</body></html>");
 
         JButton attackButton = new JButton("ATTACK");
@@ -163,8 +179,9 @@ public class Quest30 {
 
         currentPanel.setLayout(new GridLayout(4, 1));
         currentPanel.add(fightTitle);
+        currentPanel.add(fightDescription);
         currentPanel.add(healthLabel);
-        currentPanel.add(new JLabel("")); // Placeholder for spacing
+        //currentPanel.add(new JLabel("")); // Placeholder for spacing
         currentPanel.add(attackButton);
 
         currentPanel.revalidate();
@@ -177,7 +194,7 @@ public class Quest30 {
         currentPanel.setBackground(Color.decode("#C2F9BB"));
 
         JLabel rewardTitle = new JLabel("REWARD");
-        rewardTitle.setFont(Fonts.pepperoni_pizza);
+        rewardTitle.setFont(Fonts.dTheHero);
         rewardTitle.setHorizontalAlignment(SwingConstants.CENTER);
         rewardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 

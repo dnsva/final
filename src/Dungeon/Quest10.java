@@ -8,6 +8,7 @@ import javax.swing.*;   //-
 import Game.*;          //-
 import AnnaTools.*;     //-
 
+import static Dungeon.Map.currGlobalRow;
 import static Dungeon.Map.dealWithMapLevelCompletion;
 //-------------------------
 
@@ -46,7 +47,7 @@ public class Quest10 {
 
     public static void introduction() {
 
-        new Fonts(); //FOR TESTING ONLy
+       // new Fonts(); //FOR TESTING ONLy
 
         currentPanel.removeAll();
         currentPanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
@@ -133,15 +134,19 @@ public class Quest10 {
         pickSideTitle.setFont(Fonts.panicFont);
         pickSideTitle.setHorizontalAlignment(SwingConstants.CENTER);
         pickSideTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //pickSideTitle.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 200));
+       // pickSideTitle.setSize(GameVars.WINDOWWIDTH, 200);
 
         JRadioButton headsButton = new JRadioButton("Heads");
-        headsButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        headsButton.setFont(new Font("Arial Black", Font.PLAIN, 30));
         headsButton.setHorizontalAlignment(SwingConstants.CENTER);
         headsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //headsButton.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 100));
         JRadioButton tailsButton = new JRadioButton("Tails");
-        tailsButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        tailsButton.setFont(new Font("Arial Black", Font.PLAIN, 30));
         tailsButton.setHorizontalAlignment(SwingConstants.CENTER);
         tailsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //tailsButton.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 100));
 
         headsButton.setSelected(true);
 
@@ -149,16 +154,21 @@ public class Quest10 {
         group.add(headsButton);
         group.add(tailsButton);
 
-        JPanel buttonOptionPanel = new JPanel(new GridLayout(1, 2));
+        JPanel buttonOptionPanel = new JPanel();
+        buttonOptionPanel.setLayout(new GridLayout(1, 2));
         buttonOptionPanel.setBackground(Color.decode("#6967d6"));
         buttonOptionPanel.setBorder(BorderFactory.createLineBorder(Color.decode("#5448C8"), 5));
 
+        //buttonOptionPanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 50));
         buttonOptionPanel.add(headsButton);
         buttonOptionPanel.add(tailsButton);
 
         JButton confirmButton = new JButton("Confirm");
-        confirmButton.setBackground(Color.decode("#5448C8"));
-        confirmButton.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 50));
+        //confirmButton.setBorderPainted(false);
+        confirmButton.setOpaque(true);
+        confirmButton.setBorder(BorderFactory.createLineBorder(Color.decode("#5448C8"), 5));
+        confirmButton.setBackground(Color.decode("#6967d6"));
+        //confirmButton.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 50));
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (headsButton.isSelected()) {
@@ -170,6 +180,7 @@ public class Quest10 {
             }
         });
 
+        //currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.setLayout(new GridLayout(3, 1));
         currentPanel.add(pickSideTitle);
         currentPanel.add(buttonOptionPanel);

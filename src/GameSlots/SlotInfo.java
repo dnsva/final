@@ -218,7 +218,7 @@ public class SlotInfo {
                     "<p>&nbsp;- 25% off all healing potions</p>" +
                     "<p>&nbsp;- Default attack power: 10</p>" +
                     "<p>&nbsp;&nbsp;<b>FARMER</b></p>" +
-                    "<p>&nbsp;- Can't fight</p>" +
+                    "<p>&nbsp;- Bad at fighting</p>" +
                     "<p>&nbsp;- Start game with all the food</p>" +
                     "<p>&nbsp;- Default attack power: 0 <br>&nbsp;<br></p>" +
                     "</div></body></html>";

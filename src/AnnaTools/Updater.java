@@ -1,5 +1,6 @@
 package AnnaTools;
 
+import static Dungeon.FinalBoss.finalBossSideBar;
 import static Dungeon.MapGUI.mapGUISideBar;
 import static Dungeon.Quest50.quest50SideBar;
 import static Dungeon.Quest40.quest40SideBar;
@@ -26,5 +27,6 @@ public class Updater {
         quest30SideBar.updatePanel();
         quest20SideBar.updatePanel();
         quest10SideBar.updatePanel();
+        finalBossSideBar.updatePanel();
     }
 }

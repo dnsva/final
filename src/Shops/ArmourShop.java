@@ -59,7 +59,7 @@ public class ArmourShop {
 
         for(int i = 0; i < armourList.length; ++i){
             nameAndDescriptionsString += "&nbsp;|&nbsp;<b>" + (armourList[i].name).toUpperCase() + returnStringWithSpaces(armourList[i].name, 47-(((Integer) armourList[i].price)).toString().length()-1 ) + "$" + armourList[i].price + "&nbsp;</b>|&nbsp;<br>";
-            nameAndDescriptionsString += "&nbsp;|&nbsp;-&nbsp;Damage Reduction:&nbsp;" + armourList[i].damageSubtractorPercentage + "%" + returnStringWithSpaces("ok", 47-21) + "&nbsp;|&nbsp;<br>";
+            nameAndDescriptionsString += "&nbsp;|&nbsp;-&nbsp;Damage Reduction:&nbsp;" + armourList[i].damageSubtractorPercentage + returnStringWithSpaces("ok", 47-20) + "&nbsp;|&nbsp;<br>";
             // Empty row after with the borders:
             nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 49) + "|&nbsp;<br>";
             nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 49) + "|&nbsp;<br>";
