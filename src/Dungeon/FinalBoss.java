@@ -144,14 +144,16 @@ public class FinalBoss {
         currentPanel.setBackground(Color.decode("#000000"));
 
         JPanel surprisePanel = new JPanel();
-        surprisePanel.setLayout(new BoxLayout(surprisePanel, BoxLayout.Y_AXIS));
+        surprisePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         surprisePanel.setBackground(Color.decode("#000000"));
 
         JLabel surpriseTitle = new JLabel("SURPRISE ATTACK");
         surpriseTitle.setFont(Fonts.curse_of_the_zombie);
         surpriseTitle.setForeground(Color.white);
         surpriseTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-        surpriseTitle.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 150));
+        surpriseTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        surpriseTitle.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 180)); // Adjusted size for spacing
+        surpriseTitle.setBorder(new EmptyBorder(40, 0, 20, 0));
 
         JEditorPane desc1 = new JEditorPane();
         desc1.setEditable(false);
@@ -161,38 +163,58 @@ public class FinalBoss {
         desc1.setBorder(BorderFactory.createLineBorder(Color.decode("#000000"), 20));
         desc1.setBackground(Color.black);
         desc1.setContentType("text/html");
+        desc1.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 200)); // Adjusted size to accommodate all buttons
         desc1.setAlignmentX(Component.CENTER_ALIGNMENT);
         desc1.setText(
-                        "<html><body style='font-size: 20px; padding: 10px; color: white; font-family: Arial'>" +
+                "<html><body style='font-size: 15px; padding: 10px; color: white; font-family: Arial'>" +
                         "Five skeletons come running at you. Four of them regenerate immediately after any attack." +
                         "The fifth special skeleton is not invincible and is the one you need to find and defeat. <br><br>" +
                         "Each skeleton has an attack power of 40." +
                         "</body></html>"
-                );
+        );
+        desc1.setBorder(new EmptyBorder(0, 0, 40, 0)); // Add bottom empty border for spacing
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1, 10)); // Use FlowLayout with spacing
+        buttonPanel.setLayout(new GridLayout(2, 1)); // Use FlowLayout with spacing
         buttonPanel.setBackground(Color.decode("#000000"));
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel buttonPanel1 = new JPanel();
+        buttonPanel1.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Use FlowLayout with spacing
+        buttonPanel1.setBackground(Color.decode("#000000"));
+        buttonPanel1.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel buttonPanel2 = new JPanel();
+        buttonPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Use FlowLayout with spacing
+        buttonPanel2.setBackground(Color.decode("#000000"));
+        buttonPanel2.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         for (int i = 1; i <= 5; i++) {
             int buttonNumber = i;
-            JButton button = new JButton(String.valueOf(buttonNumber));
-            button.setPreferredSize(new Dimension(95, 50));  // Set smaller preferred size
+            String buttonName = "";
+            if(i == 1) buttonName = "Wizard Bones";
+            else if(i == 2) buttonName = "Warrior Bones";
+            else if(i == 3) buttonName = "Doctor Bones";
+            else if(i == 4) buttonName = "Mime Bones";
+            else if(i == 5) buttonName = "Farmer Bones";
+            JButton button = new JButton(buttonName);
+            button.setPreferredSize(new Dimension(150, 50));  // Set smaller preferred size
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     handleButtonPress(buttonNumber);
                 }
             });
-            buttonPanel.add(button);
+
+            if(i >= 1 && i <= 3) buttonPanel1.add(button); //first row
+            else buttonPanel2.add(button); //second row
         }
 
-        surprisePanel.add(Box.createVerticalStrut(10));
+        buttonPanel.add(buttonPanel1);
+        buttonPanel.add(buttonPanel2);
+
         surprisePanel.add(surpriseTitle);
-        surprisePanel.add(Box.createVerticalStrut(10));
         surprisePanel.add(desc1);
-        surprisePanel.add(Box.createVerticalStrut(10));
         surprisePanel.add(buttonPanel);
-        surprisePanel.add(Box.createVerticalGlue());
 
         currentPanel.setLayout(new BorderLayout());
         currentPanel.add(surprisePanel, BorderLayout.CENTER);
@@ -200,6 +222,11 @@ public class FinalBoss {
         currentPanel.revalidate();
         currentPanel.repaint();
     }
+
+
+
+
+
 
 
 
@@ -230,7 +257,7 @@ public class FinalBoss {
         fightTitle.setHorizontalAlignment(SwingConstants.CENTER);
         fightTitle.setBorder(new EmptyBorder(20, 0, 0, 0)); // Add bottom empty border for spacing
 
-        JLabel fightTitle1 = new JLabel("SPECIAL");
+        JLabel fightTitle1 = new JLabel("MIME");
         fightTitle1.setFont(Fonts.curse_of_the_zombie);
         fightTitle1.setForeground(Color.white);
         fightTitle1.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 90));
@@ -246,7 +273,7 @@ public class FinalBoss {
         fightTitle2.setHorizontalAlignment(SwingConstants.CENTER);
         fightTitle2.setBorder(new EmptyBorder(0, 0, 40, 0)); // Add bottom empty border for spacing
 
-        JLabel healthLabel = new JLabel("Special Skeleton Health: 100");
+        JLabel healthLabel = new JLabel("Mime Skeleton Health: 100");
         healthLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         healthLabel.setForeground(Color.white);
         healthLabel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 130));
@@ -273,7 +300,7 @@ public class FinalBoss {
                 if (skeletonHealth <= 0) {
                     rewardScreen();
                 } else {
-                    healthLabel.setText("Special Skeleton Health: " + skeletonHealth);
+                    healthLabel.setText("Mime Skeleton Health: " + skeletonHealth);
                     JOptionPane.showMessageDialog(finalBossFrame, "In response to your attack, the skeleton attacks! You lose " + Math.max(0, (40 - GameVars.fullDefensePower)) + " health.", "Fight", JOptionPane.INFORMATION_MESSAGE);
                 }
                 AnnaTools.Updater.updateAllSidePanels();
