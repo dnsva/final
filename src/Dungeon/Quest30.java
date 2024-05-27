@@ -14,6 +14,7 @@ import Shops.*;
 import AnnaTools.*;
 
 import static Dungeon.Map.dealWithMapLevelCompletion;
+import static Game.GameOver.checkGameOver;
 //-------------------------
 
 public class Quest30 {
@@ -173,6 +174,7 @@ public class Quest30 {
                             "</body></html>");
                     JOptionPane.showMessageDialog(quest30Frame, "In response to your attack, the " + enemy + " attacks! You lose " + Math.max(0, (attackPower - GameVars.fullDefensePower)) + " health.", "Fight", JOptionPane.INFORMATION_MESSAGE);
                 }
+                checkGameOver();
                 AnnaTools.Updater.updateAllSidePanels();
             }
         });

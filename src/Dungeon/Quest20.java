@@ -14,6 +14,7 @@ import Shops.*;
 import AnnaTools.*;
 
 import static Dungeon.Map.dealWithMapLevelCompletion;
+import static Game.GameOver.checkGameOver;
 //-------------------------
 
 public class Quest20 {
@@ -197,6 +198,7 @@ public class Quest20 {
         //nextButton.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 50));
        // enterButton.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 50));
         nextButton.setEnabled(false);
+        enterButton.setEnabled(true);
         enterButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -204,15 +206,20 @@ public class Quest20 {
                     if (userAnswer == correctAnswer) {
                         GameVars.balance += rewardPerCorrect;
                         feedbackLabel.setText("Correct! You get $" + rewardPerCorrect);
+                        enterButton.setEnabled(false);
+                        nextButton.setEnabled(true);
                     } else {
                         GameVars.sanity -= sanityLossPerIncorrect;
                         feedbackLabel.setText("Incorrect. The answer was " + correctAnswer + " [-" + sanityLossPerIncorrect + " sanity]");
+                        enterButton.setEnabled(false);
+                        nextButton.setEnabled(true);
+                        checkGameOver();
                     }
                 } catch (NumberFormatException ex) {
                     feedbackLabel.setText("Please enter a valid number.");
                 }
                 AnnaTools.Updater.updateAllSidePanels();
-                nextButton.setEnabled(true);
+
                 nextButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         nextQuestion();
@@ -241,7 +248,7 @@ public class Quest20 {
         currentPanel.setBackground(Color.decode("#A3BCF9"));
 
         JLabel rewardTitle = new JLabel("REWARD");
-        rewardTitle.setFont(Fonts.pepperoni_pizza);
+        rewardTitle.setFont(Fonts.Corrupted_File);
         rewardTitle.setHorizontalAlignment(SwingConstants.CENTER);
         rewardTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 

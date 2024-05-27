@@ -14,6 +14,8 @@ import Items.*;         //-
 import Monsters.*;      //-
 import Shops.*;         //-
 import AnnaTools.*;     //-
+
+import static Game.GameVars.isGhost;
 //-------------------------
 
 
@@ -35,18 +37,32 @@ public class SideBar {
     public JLabel healthLabel, sanityLabel, hungerLabel, dayLabel, balanceLabel, weaponLabel, armourLabel, attackLabel, defenseLabel;
 
     public void updatePanel(){
-        healthLabel.setText("Health: " + GameVars.health);
-        sanityLabel.setText("Sanity: " + GameVars.sanity);
-        hungerLabel.setText("Hunger: " + GameVars.hunger);
-        balanceLabel.setText("Balance: " + GameVars.balance);
-        weaponLabel.setText("Weapon: " + GameVars.currWeapon.name);
-        armourLabel.setText("Armour: " + GameVars.currArmour.name);
-        attackLabel.setText("Attack: " + GameVars.fullAttackPower);
-        defenseLabel.setText("Defense: " + GameVars.fullDefensePower);
-        dayLabel.setText("Day: " + GameVars.day);
 
-        //DEBUGGING: ========================================
-        System.out.println("Updated SideBar Panel!");
+        if(!isGhost){
+            healthLabel.setText("Health: " + GameVars.health);
+            sanityLabel.setText("Sanity: " + GameVars.sanity);
+            hungerLabel.setText("Hunger: " + GameVars.hunger);
+            balanceLabel.setText("Balance: " + GameVars.balance);
+            weaponLabel.setText("Weapon: " + GameVars.currWeapon.name);
+            armourLabel.setText("Armour: " + GameVars.currArmour.name);
+            attackLabel.setText("Attack: " + GameVars.fullAttackPower);
+            defenseLabel.setText("Defense: " + GameVars.fullDefensePower);
+            dayLabel.setText("Day: " + GameVars.day);
+
+            //DEBUGGING: ========================================
+            System.out.println("Updated SideBar Panel!");
+        }else{
+            healthLabel.setText("Health: 0");
+            sanityLabel.setText("Sanity: 0");
+            hungerLabel.setText("Hunger: 0");
+            balanceLabel.setText("Balance: 0");
+            weaponLabel.setText("Weapon: none");
+            armourLabel.setText("Armour: none");
+            attackLabel.setText("Attack: 0");
+            defenseLabel.setText("Defense: 0");
+            dayLabel.setText("Day: " + GameVars.day);
+        }
+
     }
 
     public JPanel getPanel(){

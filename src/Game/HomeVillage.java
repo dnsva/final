@@ -15,6 +15,9 @@ import java.util.concurrent.TimeUnit;
 import Items.*;         //-
 import Shops.*;         //-
 
+import static Game.GameOver.checkGameOver;
+import static Game.GameVars.isGhost;
+
 
 //-------------------------
 
@@ -85,8 +88,13 @@ public class HomeVillage {
         apothecaryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Shops.Apothecary.showApothecary();
-                 hideHomeVillage();
+                if(!isGhost){
+                    Shops.Apothecary.showApothecary();
+                    hideHomeVillage();
+                }else{
+                    JOptionPane.showMessageDialog(null, "You are a ghost and cannot use the apothecary.");
+                }
+
             }
         });
         JButton armourShopButton = new JButton("Armour Shop");
@@ -94,8 +102,13 @@ public class HomeVillage {
         armourShopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Shops.ArmourShop.showArmourShop();
-                hideHomeVillage();
+                if(!isGhost) {
+                    Shops.ArmourShop.showArmourShop();
+                    hideHomeVillage();
+                }else{
+                    JOptionPane.showMessageDialog(null, "You are a ghost and cannot use the armour shop.");
+
+                }
             }
         });
         JButton foodMarket = new JButton("Food Market");
@@ -103,16 +116,24 @@ public class HomeVillage {
         foodMarket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Shops.FoodMarket.showFoodMarket();
-                hideHomeVillage();
+                if(!isGhost){
+                    Shops.FoodMarket.showFoodMarket();
+                    hideHomeVillage();
+                }else{
+                    JOptionPane.showMessageDialog(null, "You are a ghost and cannot use the food market.");
+                }
             }
         });
         JButton weaponShopButton = new JButton("Weapon Shop");
         buttonPanel.add(weaponShopButton);
         weaponShopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {;
-                Shops.WeaponShop.showWeaponShop();
-                hideHomeVillage();
+            public void actionPerformed(ActionEvent e) {
+                if(!isGhost){
+                    Shops.WeaponShop.showWeaponShop();
+                    hideHomeVillage();
+                }else{
+                    JOptionPane.showMessageDialog(null, "You are a ghost and cannot use the weapon shop.");
+                }
             }
         });
         JButton dungeonButton = new JButton("Dungeon");
@@ -120,8 +141,13 @@ public class HomeVillage {
         dungeonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MapGUI.showMapGUI();
-                //hideHomeVillage();
+                if(!isGhost){
+                    MapGUI.showMapGUI();
+                    //hideHomeVillage();
+                }else{
+                    JOptionPane.showMessageDialog(null, "You are a ghost and cannot enter the dungeon.");
+                }
+
             }
         });
         JButton exitButton = new JButton("Exit");
@@ -268,9 +294,12 @@ public class HomeVillage {
             public void run() {
                 // Initial actions when the GUI is first shown
                 GameVars.day++; // times goes by literally
-                GameVars.hunger += 5; // you get hungrier
+                if(!isGhost){
+                    GameVars.hunger += 5; // you get hungrier
+                    checkGameOver();
+                }
                 System.out.println("SOMETHING HAPPENENENDNNDN");
-                AnnaTools.Updater.updateAllSidePanels(); // OK!
+                AnnaTools.Updater.updateAllSidePanels(); // OK
             }
         });
 
@@ -285,9 +314,12 @@ public class HomeVillage {
                     @Override
                     public void run() {
                         GameVars.day++; // times goes by literally
-                        GameVars.hunger += 5; // you get hungrier
+                        if(!isGhost){
+                            GameVars.hunger += 5; // you get hungrier
+                            checkGameOver();
+                        }
                         System.out.println("SOMETHING HAPPENENENDNNDN");
-                        AnnaTools.Updater.updateAllSidePanels(); // OK!
+                        AnnaTools.Updater.updateAllSidePanels(); // OK
                     }
                 });
             }

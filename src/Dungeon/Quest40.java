@@ -14,6 +14,7 @@ import Shops.*;         //-
 import AnnaTools.*;     //-
 
 import static Dungeon.Map.dealWithMapLevelCompletion;
+import static Game.GameOver.checkGameOver;
 //-------------------------
 
 public class Quest40 {
@@ -234,6 +235,7 @@ public class Quest40 {
                             bobHealthLabel.setText("Bob's Health: " + bobHealth);
                             JOptionPane.showMessageDialog(quest40Frame, "In response to your attack, Bob attacks! You lose " + Math.max(0,(20 - GameVars.fullDefensePower)) + " health.", "Fight", JOptionPane.INFORMATION_MESSAGE);
                         }
+                        checkGameOver();
                         AnnaTools.Updater.updateAllSidePanels();
                     }
                 });

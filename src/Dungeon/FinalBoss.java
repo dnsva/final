@@ -12,6 +12,7 @@ import Items.HealingMedicine;
 import Items.SanityMedicine;
 
 import static Dungeon.Map.dealWithMapLevelCompletion;
+import static Game.GameOver.checkGameOver;
 
 public class FinalBoss {
 
@@ -235,6 +236,7 @@ public class FinalBoss {
             fightSpecialSkeleton();
         } else {
             GameVars.health -= Math.max(0, (40 - GameVars.fullDefensePower));
+            checkGameOver();
             AnnaTools.Updater.updateAllSidePanels();
             JOptionPane.showMessageDialog(finalBossFrame, "Wrong one! You lose " + Math.max(0, (40 - GameVars.fullDefensePower)) + " health.", "Fight", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -294,15 +296,14 @@ public class FinalBoss {
                     JOptionPane.showMessageDialog(finalBossFrame, "You tried to attack but you missed.", "Fight", JOptionPane.INFORMATION_MESSAGE);
                 }
 
-                GameVars.health -= Math.max(0, (40 - GameVars.fullDefensePower));
-                AnnaTools.Updater.updateAllSidePanels();
-
                 if (skeletonHealth <= 0) {
                     rewardScreen();
                 } else {
                     healthLabel.setText("Mime Skeleton Health: " + skeletonHealth);
                     JOptionPane.showMessageDialog(finalBossFrame, "In response to your attack, the skeleton attacks! You lose " + Math.max(0, (40 - GameVars.fullDefensePower)) + " health.", "Fight", JOptionPane.INFORMATION_MESSAGE);
                 }
+                GameVars.health -= Math.max(0, (40 - GameVars.fullDefensePower));
+                checkGameOver();
                 AnnaTools.Updater.updateAllSidePanels();
             }
         });

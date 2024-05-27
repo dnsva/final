@@ -19,10 +19,13 @@ public class GameVars {
     public static int SIDEBARWIDTH = 180; //180 normal
     public static int WINDOWHEIGHT = 610;
 
+    public static boolean isGhost = false;
+
     //int day = 0;
     public static int health = 100;
     public static int sanity = 100;
     public static int hunger = 0;
+
     public static int balance = 100;
     public static int day = 0;
     public static int playerAttackPower = 0; //based on character choice
