@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Fonts {
-    public static Font Royalacid_o = null, curse_of_the_zombie = null, BAD_GRUNGE = null, pepperoni_pizza = null, Corrupted_File = null, panicFont = null, dTheHero = null;
+    public static Font Royalacid_o = null, curse_of_the_zombie = null, Pamela = null, BAD_GRUNGE = null, pepperoni_pizza = null, Corrupted_File = null, panicFont = null, dTheHero = null;
     public Fonts(){
         try {
             // Load the font file
@@ -23,6 +23,8 @@ public class Fonts {
             dTheHero = Font.createFont(Font.TRUETYPE_FONT, fontFile);
             fontFile = new File("src/AnnaTools/Curse of the Zombie.ttf");
             curse_of_the_zombie = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+            fontFile = new File("src/AnnaTools/Pamela.ttf");
+            Pamela = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 
             // Optionally, derive the font to a specific size
             Royalacid_o = Royalacid_o.deriveFont(50f);
@@ -32,6 +34,7 @@ public class Fonts {
             panicFont = panicFont.deriveFont(60f);
             dTheHero = dTheHero.deriveFont(50f);
             curse_of_the_zombie = curse_of_the_zombie.deriveFont(53f);
+            Pamela = Pamela.deriveFont(70f);
 
             // Register the font with the graphics environment
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -42,6 +45,7 @@ public class Fonts {
             ge.registerFont(panicFont);
             ge.registerFont(dTheHero);
             ge.registerFont(curse_of_the_zombie);
+            ge.registerFont(Pamela);
 
             // Now you can use this font in your application, e.g., set it to a JLabel
             // JLabel label = new JLabel("Custom Font");

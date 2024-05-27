@@ -16,7 +16,7 @@ public class GameVars {
     public static ArrayList<Item> inventory = new ArrayList<Item>();
 
     public static int WINDOWWIDTH = 500;
-    public static int SIDEBARWIDTH = 180;
+    public static int SIDEBARWIDTH = 180; //180 normal
     public static int WINDOWHEIGHT = 610;
 
     //int day = 0;

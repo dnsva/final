@@ -58,6 +58,7 @@ public class SideBar {
         sideBarPanel = new JPanel(new GridLayout(15, 1)); // Vertical layout
         sideBarPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         sideBarPanel.setSize(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
+        sideBarPanel.setPreferredSize(new Dimension(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT));
         sideBarPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         //sideBarPanel.setBackground(Color.decode("#C2F9BB"));
 
@@ -76,6 +77,8 @@ public class SideBar {
         weaponLabel = new JLabel();
         weaponLabel.setText("Weapon: " + GameVars.currWeapon.name);
         weaponLabel.setIcon(new ImageIcon("src/Game/Icons/Iron Sword.png"));
+
+
         armourLabel = new JLabel();
         armourLabel.setText("Armour: " + GameVars.currArmour.name);
         armourLabel.setIcon(new ImageIcon("src/Game/Icons/Helm.png"));

@@ -4,6 +4,8 @@ package Game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;   //-
+
+import AnnaTools.Fonts;
 import Dungeon.*;       //-
 import java.awt.*;      //-
 import java.util.concurrent.Executors;
@@ -19,7 +21,7 @@ import Shops.*;         //-
 public class HomeVillage {
 
     public static JFrame homeVillageFrame = new JFrame();
-    public static SideBar homeVillageSideBar;
+    public static SideBar homeVillageSideBar = new SideBar();
     public static JPanel homeVillagePanel;
 
     public HomeVillage(){
@@ -58,18 +60,28 @@ public class HomeVillage {
 
         homeVillagePanel = new JPanel();
         homeVillagePanel.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
-        homeVillagePanel.setLayout(new BoxLayout(homeVillagePanel, BoxLayout.Y_AXIS));
+        //homeVillagePanel.setLayout(new BoxLayout(homeVillagePanel, BoxLayout.Y_AXIS));
+        homeVillagePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         homeVillagePanel.setBackground(Color.decode("#C2F9BB"));
 
         JLabel titleLabel = new JLabel("Village");
+        titleLabel.setFont(Fonts.Pamela);
+        titleLabel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, 100));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         //titleLabel.setForeground(Color.white);
 
         homeVillagePanel.add(Box.createVerticalStrut(20)); //add space between
         homeVillagePanel.add(titleLabel);
         homeVillagePanel.add(Box.createVerticalStrut(20)); //add space between
 
+        JPanel buttonPanel = new JPanel(new GridLayout(7, 1));
+        buttonPanel.setSize(GameVars.WINDOWWIDTH-50, GameVars.WINDOWHEIGHT-150);
+        buttonPanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH-50, GameVars.WINDOWHEIGHT-150));
+        buttonPanel.setBackground(Color.decode("#C2F9BB"));
+
         JButton apothecaryButton = new JButton("Apothecary");
+        buttonPanel.add(apothecaryButton);
         apothecaryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,6 +90,7 @@ public class HomeVillage {
             }
         });
         JButton armourShopButton = new JButton("Armour Shop");
+        buttonPanel.add(armourShopButton);
         armourShopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,6 +99,7 @@ public class HomeVillage {
             }
         });
         JButton foodMarket = new JButton("Food Market");
+        buttonPanel.add(foodMarket);
         foodMarket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,6 +108,7 @@ public class HomeVillage {
             }
         });
         JButton weaponShopButton = new JButton("Weapon Shop");
+        buttonPanel.add(weaponShopButton);
         weaponShopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {;
                 Shops.WeaponShop.showWeaponShop();
@@ -101,6 +116,7 @@ public class HomeVillage {
             }
         });
         JButton dungeonButton = new JButton("Dungeon");
+        buttonPanel.add(dungeonButton);
         dungeonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,6 +125,7 @@ public class HomeVillage {
             }
         });
         JButton exitButton = new JButton("Exit");
+        buttonPanel.add(exitButton);
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,6 +136,7 @@ public class HomeVillage {
             }
         });
         JButton saveGameButton = new JButton("Save Game");
+        buttonPanel.add(saveGameButton);
         saveGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -129,9 +147,12 @@ public class HomeVillage {
         JButton[] buttons = {apothecaryButton, armourShopButton, foodMarket, weaponShopButton, dungeonButton, exitButton, saveGameButton};
         for(JButton button : buttons){
             button.setAlignmentX(Component.CENTER_ALIGNMENT); //Align the button to center
-            homeVillagePanel.add(button); //ADD ALL THE BUTTONS TO THE PANEL
-            homeVillagePanel.add(Box.createVerticalStrut(10)); //create space in between each button
+            //homeVillagePanel.add(button); //ADD ALL THE BUTTONS TO THE PANEL
+            //homeVillagePanel.add(Box.createVerticalStrut(10)); //create space in between each button
         }
+
+
+        homeVillagePanel.add(buttonPanel);
 
         homeVillageFrame.add(homeVillagePanel, BorderLayout.CENTER);
 
