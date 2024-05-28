@@ -44,13 +44,9 @@ public class HomeVillage {
         new Shops.Apothecary(); //Also construct the apothecary shop
         new Shops.FoodMarket(); //Also construct the food market
         new Shops.ArmourShop(); //Also construct the armour shop
-        //Add other shops here too
-        //. . .
 
         new MapGUI(); //Create the map GUI for Map
 
-        //LOAD IN USER BENEFITS BASED ON CHARACTER SELECTION
-        //loadUserBenefits(GameVars.characterType);
 
         //--------------------------------------------------------------------------------
 
