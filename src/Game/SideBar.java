@@ -71,7 +71,7 @@ public class SideBar {
 
     public SideBar(){
 
-        sideBarPanel = new JPanel(new GridLayout(15, 1)); // Vertical layout
+        sideBarPanel = new JPanel(new GridLayout(12, 1)); // Vertical layout
         sideBarPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         sideBarPanel.setSize(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         sideBarPanel.setPreferredSize(new Dimension(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT));
