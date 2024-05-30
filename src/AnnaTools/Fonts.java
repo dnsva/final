@@ -32,7 +32,7 @@ public class Fonts {
             pepperoni_pizza = pepperoni_pizza.deriveFont(60f);
             Corrupted_File = Corrupted_File.deriveFont(60f);
             panicFont = panicFont.deriveFont(60f);
-            dTheHero = dTheHero.deriveFont(50f);
+            dTheHero = dTheHero.deriveFont(45f);
             curse_of_the_zombie = curse_of_the_zombie.deriveFont(53f);
             Pamela = Pamela.deriveFont(70f);
 

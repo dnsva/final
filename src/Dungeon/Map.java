@@ -50,8 +50,8 @@ public class Map {
             {0, 0, 0, 50, 0, 0, 0, 0}
     };
 
-    static int playerRow = 0; //MAKE THIS map.length-1
-    static int playerCol = 5; //MAKE THIS 0
+    static int playerRow = map.length-1; //MAKE THIS map.length-1
+    static int playerCol = 0; //MAKE THIS 0
 
     static int prevPlayerRow = map.length - 1;
     static int prevPlayerCol = 0;

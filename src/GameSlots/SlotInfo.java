@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -30,6 +32,17 @@ public class SlotInfo {
     private static int WINDOWHEIGHT = 300;
 
     public SlotInfo() {
+
+        //If a save file does not exist, create one
+        File file = new File("src/GameSlots/GameSave.txt");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("ERROR FILES");
+            }
+        }
+
         slotInfoFrame.setTitle("By Anna Denisova");
         slotInfoFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT);
         slotInfoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -33,7 +33,7 @@ updatePanel() - a field method that updates the labels described above
 public class SideBar {
 
     JPanel sideBarPanel;
-    JButton inventoryButton, useMedicineButton, eatFoodButton;
+    JButton inventoryButton, useMedicineButton, eatFoodButton, helpButton;
     public JLabel healthLabel, sanityLabel, hungerLabel, dayLabel, balanceLabel, weaponLabel, armourLabel, attackLabel, defenseLabel;
 
     public void updatePanel(){
@@ -71,7 +71,7 @@ public class SideBar {
 
     public SideBar(){
 
-        sideBarPanel = new JPanel(new GridLayout(12, 1)); // Vertical layout
+        sideBarPanel = new JPanel(new GridLayout(13, 1)); // Vertical layout
         sideBarPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         sideBarPanel.setSize(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
         sideBarPanel.setPreferredSize(new Dimension(GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT));
@@ -93,8 +93,6 @@ public class SideBar {
         weaponLabel = new JLabel();
         weaponLabel.setText("Weapon: " + GameVars.currWeapon.name);
         weaponLabel.setIcon(new ImageIcon("src/Game/Icons/Iron Sword.png"));
-
-
         armourLabel = new JLabel();
         armourLabel.setText("Armour: " + GameVars.currArmour.name);
         armourLabel.setIcon(new ImageIcon("src/Game/Icons/Helm.png"));
@@ -107,6 +105,7 @@ public class SideBar {
         dayLabel = new JLabel();
         dayLabel.setText("Day: " + GameVars.day);
         dayLabel.setIcon(new ImageIcon("src/Game/Icons/Scroll.png"));
+
 
         sideBarPanel.add(dayLabel);
         sideBarPanel.add(healthLabel);
@@ -144,6 +143,23 @@ public class SideBar {
         });
 
         sideBarPanel.add(eatFoodButton);
+
+        helpButton = new JButton("Help");
+        helpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //create a pop up that says:
+                /*
+                Beat the final boss to win the game. Use the shops to buy items and equip armour and weapons from the inventory.
+                If your health or sanity reaches 0, or your hunger reaches 100, you will die and become a ghost.
+                 */
+                JOptionPane.showMessageDialog(null, "Beat the final boss to win the game. Use \n" +
+                                                                           "the shops to buy items and equip armour and \n" +
+                                                                           "weapons from the inventory. If your health or \n" +
+                                                                           "sanity reaches 0, or your hunger reaches 100, \n" +
+                                                                           "you will die and become a ghost.");
+            }
+        });
+        sideBarPanel.add(helpButton);
 
     }
 

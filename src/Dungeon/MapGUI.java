@@ -148,7 +148,38 @@ public class MapGUI {
         mapAsciiPanel.add(buttonPanel);
 
         exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mapAsciiPanel.add(exitButton);
+
+      //  JPanel exitAndHelpPanel = new JPanel();
+
+      //  mapAsciiPanel.add(exitButton);
+
+        JPanel exitAndHelpPanel = new JPanel(new GridLayout(2, 1));
+
+        JButton helpButton = new JButton("Help");
+        helpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //create a pop up that says:
+                /*
+                Beat the final boss to win the game. Use the shops to buy items and equip armour and weapons from the inventory.
+                If your health or sanity reaches 0, or your hunger reaches 100, you will die and become a ghost.
+                 */
+                JOptionPane.showMessageDialog(null, "Beat the final boss to win the game. Use \n" +
+                        "the shops to buy items and equip armour and \n" +
+                        "weapons from the inventory. If your health or \n" +
+                        "sanity reaches 0, or your hunger reaches 100, \n" +
+                        "you will die and become a ghost.");
+            }
+        });
+        //mapAsciiPanel.add(helpButton);
+        helpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        helpButton.setHorizontalAlignment(SwingConstants.CENTER);
+
+        exitAndHelpPanel.add(exitButton);
+        exitAndHelpPanel.add(helpButton);
+
+        exitAndHelpPanel.setBackground(Color.black);
+
+        mapAsciiPanel.add(exitAndHelpPanel);
 
 
         mapFrame.add(mapAsciiPanel, BorderLayout.WEST);
