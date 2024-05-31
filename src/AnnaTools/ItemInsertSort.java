@@ -1,22 +1,15 @@
 package AnnaTools;
 
 //IMPORT ALL PACKAGES -----
-import java.io.*;       //-
 import java.util.*;     //-
-import Dungeon.*;       //-
-import Game.*;          //-
 import Items.*;         //-
-import Monsters.*;      //-
-import Shops.*;         //-
 //-------------------------
 public class ItemInsertSort {
-
-
-    public static void insertSort(ArrayList<Item> list){
-        for (int top = 1; top < list.size(); top++){
+    public static void insertSort(ArrayList<Item> list){ //all items are of type Item
+        for (int top = 1; top < list.size(); top++){ //for loop
             Item item = list.get(top); // temporary storage of item
-            int i = top;
-            while (i > 0 && item.toString().compareTo(list.get(i-1).toString()) < 0){
+            int i = top; //ok
+            while (i > 0 && item.toString().compareTo(list.get(i-1).toString()) < 0){ //while loop
                 list.set(i, list.get(i-1)); //shift larger items to the RIGHT by one
                 i--; //prepare to check the next item to the left
             }

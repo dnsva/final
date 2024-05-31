@@ -3,39 +3,32 @@ package Dungeon;
 //IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;       //-
-import java.util.*;     //-
 import java.awt.*;      //-
 import javax.swing.*;   //-
 import Game.*;          //-
-import Items.*;         //-
-import Monsters.*;      //-
-import Shops.*;         //-
-import AnnaTools.*;     //-
 //-------------------------
 
 public class MapGUI {
 
-
-    private static JFrame mapFrame;
-    public static SideBar mapGUISideBar = new SideBar();
+    private static JFrame mapFrame; //the frame with the ascii display AND sidebar
+    public static SideBar mapGUISideBar = new SideBar(); //local sidebar
     boolean exitFlag; //this is used to check if the exit button has been pressed
-    public static JEditorPane mapEditorPane, mapLegendEditorPane, mapTitleEditorPane;
+    public static JEditorPane mapEditorPane, mapLegendEditorPane, mapTitleEditorPane; //the different displays
 
     public MapGUI() {
 
-        mapFrame = new JFrame("Dungeon Map");
-        mapFrame.setTitle("By Anna Denisova");
-        mapFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
-        mapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mapFrame.setLocationRelativeTo(null);
-        mapFrame.getContentPane().setLayout(new BorderLayout());
-        mapFrame.setBackground(Color.black);
-        mapFrame.getContentPane().setBackground(Color.black);
+        mapFrame = new JFrame(); //initialize
+        mapFrame.setTitle("By Anna Denisova"); //set title
+        mapFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT); //set size
+        mapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //close setting
+        mapFrame.setLocationRelativeTo(null); //center
+        mapFrame.getContentPane().setLayout(new BorderLayout()); //make layout border
+        mapFrame.setBackground(Color.black); //set background all black
+        mapFrame.getContentPane().setBackground(Color.black); //set background all black
 
-        JPanel mapAsciiPanel = new JPanel();
-        mapAsciiPanel.setBackground(Color.black);
-        mapAsciiPanel.setLayout(new BoxLayout(mapAsciiPanel, BoxLayout.Y_AXIS));
+        JPanel mapAsciiPanel = new JPanel(); //new panel for all the ascii stuff
+        mapAsciiPanel.setBackground(Color.black); //again, black background
+        mapAsciiPanel.setLayout(new BoxLayout(mapAsciiPanel, BoxLayout.Y_AXIS)); //make everything go after the previous thing. vertical layout
         //mapAsciiPanel.setSize(600, GameVars.WINDOWHEIGHT);
 
        // JLabel titleLabel = new JLabel("Map");
@@ -47,24 +40,23 @@ public class MapGUI {
       //  mapAsciiPanel.add(Box.createVerticalStrut(20)); //add space ebtween
       //  mapAsciiPanel.setBackground(Color.blue);
 
+        mapEditorPane = new JEditorPane(); //initiallize
+        mapEditorPane.setContentType("text/html"); //make format be html
+        mapEditorPane.setText(Map.getMapAsciiString()); //get the ascii map string from the map class
+        mapEditorPane.setEditable(false); //cannot be editable
+        mapEditorPane.setBackground(Color.black); //set background black as always
 
-        mapEditorPane = new JEditorPane();
-        mapEditorPane.setContentType("text/html");
-        mapEditorPane.setText(Map.getMapAsciiString());
-        mapEditorPane.setEditable(false);
-        mapEditorPane.setBackground(Color.black);
+        mapLegendEditorPane = new JEditorPane(); //initialize
+        mapLegendEditorPane.setContentType("text/html"); //make the format be html here too
+        mapLegendEditorPane.setText(Map.getMapLegend()); //use map function again
+        mapLegendEditorPane.setEditable(false); //cannot be editable
+        mapLegendEditorPane.setBackground(Color.black); //set background black as always again
 
-        mapLegendEditorPane = new JEditorPane();
-        mapLegendEditorPane.setContentType("text/html");
-        mapLegendEditorPane.setText(Map.getMapLegend());
-        mapLegendEditorPane.setEditable(false);
-        mapLegendEditorPane.setBackground(Color.black);
-
-        mapTitleEditorPane = new JEditorPane();
-        mapTitleEditorPane.setContentType("text/html");
-        mapTitleEditorPane.setText(Map.getMapTitle());
-        mapTitleEditorPane.setEditable(false);
-        mapTitleEditorPane.setBackground(Color.black);
+        mapTitleEditorPane = new JEditorPane(); //intialize
+        mapTitleEditorPane.setContentType("text/html"); //make format be html...
+        mapTitleEditorPane.setText(Map.getMapTitle()); //use map class functin to get the ascii art
+        mapTitleEditorPane.setEditable(false); //cannot be editable
+        mapTitleEditorPane.setBackground(Color.black); //set panel background to be black
 
         mapAsciiPanel.add(mapTitleEditorPane);
         mapAsciiPanel.add(mapEditorPane);
