@@ -8,15 +8,19 @@ import javax.swing.*;   //-
 import AnnaTools.Fonts;
 import Dungeon.*;       //-
 import java.awt.*;      //-
+import java.io.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import GameSlots.SlotInfo;
 import Items.*;         //-
 import Shops.*;         //-
 
 import static Game.GameOver.checkGameOver;
 import static Game.GameVars.isGhost;
+import static Game.GameVars.slotNameLocal;
+import static GameSlots.SlotInfo.*;
 
 
 //-------------------------
@@ -46,6 +50,32 @@ public class HomeVillage {
         new Shops.ArmourShop(); //Also construct the armour shop
 
         new MapGUI(); //Create the map GUI for Map
+
+
+        /* LOAD IN ALL DATA */
+        //In the GameVars.slotName + txt file, if there is a fifth line that means that there
+        //has been already saved data. If not, nothing is changed and we proceed as normal.
+        //If there is data, we load in the data and update the GameVars variables accordingly.
+        File file = new File(SAVE_FILE_PATH);
+        if (!file.exists()) {
+            System.out.println("File does not exist.");
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            int lineCount = 0;
+            while ((line = reader.readLine()) != null) {
+                lineCount++;
+                if (lineCount == 5) {
+                    // Load data
+                    loadGameData(file);
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         //--------------------------------------------------------------------------------
@@ -162,7 +192,8 @@ public class HomeVillage {
         saveGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TO BE IMPLEMENTED
+                saveGameData(new File(SAVE_FILE_PATH));
+                JOptionPane.showMessageDialog(null, "Game saved successfully.");
             }
         });
 
@@ -184,6 +215,205 @@ public class HomeVillage {
         //homeVillageFrame.pack();
 
     }
+
+    private void saveGameData(File file) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write(slotNameLocal + "\n" + GameVars.difficultyLevel + "\n" + GameVars.characterType + "\n" + SlotInfo.slotCreationDate + "\n");
+            // Save Dungeon.Map data
+            for(int i = 0; i < 5; ++i){
+                writer.write(arrayToString(Dungeon.Map.map[i]));
+                writer.newLine();
+            }
+            writer.write(Integer.toString(Dungeon.Map.playerRow));
+            writer.newLine();
+            writer.write(Integer.toString(Dungeon.Map.playerCol));
+            writer.newLine();
+            writer.write(Integer.toString(Dungeon.Map.prevPlayerRow));
+            writer.newLine();
+            writer.write(Integer.toString(Dungeon.Map.prevPlayerCol));
+            writer.newLine();
+
+            // Save quest completion data
+            writer.write(Boolean.toString(Dungeon.FinalBoss.complete));
+            writer.newLine();
+            writer.write(Boolean.toString(Dungeon.Quest10.complete));
+            writer.newLine();
+            writer.write(Boolean.toString(Dungeon.Quest20.complete));
+            writer.newLine();
+            writer.write(Boolean.toString(Dungeon.Quest30.complete));
+            writer.newLine();
+            writer.write(Boolean.toString(Dungeon.Quest40.complete));
+            writer.newLine();
+            writer.write(Boolean.toString(Dungeon.Quest50.complete));
+            writer.newLine();
+
+            // Save GameVars data
+            StringBuilder inventoryBuilder = new StringBuilder();
+            for (Item item : GameVars.inventory) {
+                if (item instanceof Food) {
+                    inventoryBuilder.append("Food;")
+                            .append(item.name).append(";")
+                            .append(((Food) item).price).append(";")
+                            .append(((Food) item).hungerRestore).append(",");
+                } else if (item instanceof HealingMedicine) {
+                    inventoryBuilder.append("HealingMedicine;")
+                            .append(item.name).append(";")
+                            .append(((HealingMedicine) item).price).append(";")
+                            .append(((HealingMedicine) item).healthAddition).append(",");
+                } else if (item instanceof SanityMedicine) {
+                    inventoryBuilder.append("SanityMedicine;")
+                            .append(item.name).append(";")
+                            .append(((SanityMedicine) item).price).append(";")
+                            .append(((SanityMedicine) item).sanityAddition).append(",");
+                } else if (item instanceof Weapon) {
+                    inventoryBuilder.append("Weapon;")
+                            .append(item.name).append(";")
+                            .append(((Weapon) item).price).append(";")
+                            .append(((Weapon) item).description).append(";")
+                            .append(((Weapon) item).damage).append(";")
+                            .append(((Weapon) item).missPercentage).append(",");
+                } else if (item instanceof Armour) {
+                    inventoryBuilder.append("Armour;")
+                            .append(item.name).append(";")
+                            .append(((Armour) item).price).append(";")
+                            .append(((Armour) item).damageSubtractorPercentage).append(",");
+                }else if(item instanceof DungeonKey){
+                    inventoryBuilder.append("Key;")
+                            .append(item.name).append(",");
+                }
+            }
+            writer.write(inventoryBuilder.toString());
+            writer.newLine();
+
+            writer.write(Boolean.toString(GameVars.isGhost));
+            writer.newLine();
+            writer.write(Integer.toString(GameVars.health));
+            writer.newLine();
+            writer.write(Integer.toString(GameVars.sanity));
+            writer.newLine();
+            writer.write(Integer.toString(GameVars.hunger));
+            writer.newLine();
+            writer.write(Integer.toString(GameVars.balance));
+            writer.newLine();
+            writer.write(Integer.toString(GameVars.day));
+            writer.newLine();
+            writer.write(Integer.toString(GameVars.playerAttackPower));
+            writer.newLine();
+            writer.write(Integer.toString(GameVars.fullAttackPower));
+            writer.newLine();
+            writer.write(Integer.toString(GameVars.fullDefensePower));
+            writer.newLine();
+
+            writer.write("Weapon;" + GameVars.currWeapon.name + ";" + ((Weapon) GameVars.currWeapon).price + ";" + ((Weapon) GameVars.currWeapon).description + ";" + ((Weapon) GameVars.currWeapon).damage + ";" + ((Weapon) GameVars.currWeapon).missPercentage );
+            writer.newLine();
+            writer.write("Armour;" + GameVars.currArmour.name + ";" + ((Armour) GameVars.currArmour).price + ";" + ((Armour) GameVars.currArmour).damageSubtractorPercentage );
+            writer.newLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadGameData(File file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            //skip first 4 lines as they were already taken care of in GameSlots
+            reader.readLine();
+            reader.readLine();
+            reader.readLine();
+            reader.readLine();
+            // Load Dungeon.Map data
+            Dungeon.Map.map[0] = stringToArray(reader.readLine());
+            Dungeon.Map.map[1] = stringToArray(reader.readLine());
+            Dungeon.Map.map[2] = stringToArray(reader.readLine());
+            Dungeon.Map.map[3] = stringToArray(reader.readLine());
+            Dungeon.Map.map[4] = stringToArray(reader.readLine());
+
+            Dungeon.Map.playerRow = Integer.parseInt(reader.readLine());
+            Dungeon.Map.playerCol = Integer.parseInt(reader.readLine());
+            Dungeon.Map.prevPlayerRow = Integer.parseInt(reader.readLine());
+            Dungeon.Map.prevPlayerCol = Integer.parseInt(reader.readLine());
+
+            MapGUI.updateMapGUIAscii();
+
+            // Load quest completion data
+            Dungeon.FinalBoss.complete = Boolean.parseBoolean(reader.readLine());
+            Dungeon.Quest10.complete = Boolean.parseBoolean(reader.readLine());
+            Dungeon.Quest20.complete = Boolean.parseBoolean(reader.readLine());
+            Dungeon.Quest30.complete = Boolean.parseBoolean(reader.readLine());
+            Dungeon.Quest40.complete = Boolean.parseBoolean(reader.readLine());
+            Dungeon.Quest50.complete = Boolean.parseBoolean(reader.readLine());
+
+            // Load GameVars data
+            GameVars.inventory.clear();
+            String[] items = reader.readLine().split(",");
+            for (String itemString : items) {
+                String[] itemData = itemString.split(";");
+                String itemType = itemData[0];
+                switch (itemType) {
+                    case "Food":
+                        GameVars.inventory.add(new Food(itemData[1], Integer.parseInt(itemData[2]), Integer.parseInt(itemData[3])));
+                        break;
+                    case "HealingMedicine":
+                        GameVars.inventory.add(new HealingMedicine(itemData[1], Integer.parseInt(itemData[2]), Integer.parseInt(itemData[3])));
+                        break;
+                    case "SanityMedicine":
+                        GameVars.inventory.add(new SanityMedicine(itemData[1], Integer.parseInt(itemData[2]), Integer.parseInt(itemData[3])));
+                        break;
+                    case "Weapon":
+                        GameVars.inventory.add(new Weapon(itemData[1], Integer.parseInt(itemData[2]), itemData[3], Integer.parseInt(itemData[4]), Integer.parseInt(itemData[5])));
+                        break;
+                    case "Armour":
+                        GameVars.inventory.add(new Armour(itemData[1], Integer.parseInt(itemData[2]), Integer.parseInt(itemData[3])));
+                        break;
+                    case "Key":
+                        GameVars.inventory.add(new DungeonKey(itemData[1]));
+                        break;
+                }
+            }
+
+            GameVars.isGhost = Boolean.parseBoolean(reader.readLine());
+            GameVars.health = Integer.parseInt(reader.readLine());
+            GameVars.sanity = Integer.parseInt(reader.readLine());
+            GameVars.hunger = Integer.parseInt(reader.readLine());
+            GameVars.balance = Integer.parseInt(reader.readLine());
+            GameVars.day = Integer.parseInt(reader.readLine());
+            GameVars.playerAttackPower = Integer.parseInt(reader.readLine());
+            GameVars.fullAttackPower = Integer.parseInt(reader.readLine());
+            GameVars.fullDefensePower = Integer.parseInt(reader.readLine());
+
+            // Load current weapon and armour
+            String[] currWeaponData = reader.readLine().split(";");
+            GameVars.currWeapon = new Weapon(currWeaponData[1], Integer.parseInt(currWeaponData[2]), currWeaponData[3], Integer.parseInt(currWeaponData[4]), Integer.parseInt(currWeaponData[5]));
+
+            String[] currArmourData = reader.readLine().split(";");
+            GameVars.currArmour = new Armour(currArmourData[1], Integer.parseInt(currArmourData[2]), Integer.parseInt(currArmourData[3]));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Helper method to parse a string into a 2D int array
+    public static int[] stringToArray(String str) {
+         String[] line = str.split(" ");
+         int[] array = new int[line.length];
+          for (int j = 0; j < line.length; j++) {
+              array[j] = Integer.parseInt(line[j]);
+          }
+        return array;
+    }
+
+
+    // Method to convert a 1D int array into a string
+    public static String arrayToString(int[] array) {
+        String str = "";
+        for (int i = 0; i < array.length; i++) {
+             str += array[i] + " ";
+        }
+        return str;
+    }
+
+
 
     public static void showHomeVillage(){
         homeVillageFrame.setVisible(true);

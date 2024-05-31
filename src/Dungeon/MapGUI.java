@@ -163,11 +163,7 @@ public class MapGUI {
                 Beat the final boss to win the game. Use the shops to buy items and equip armour and weapons from the inventory.
                 If your health or sanity reaches 0, or your hunger reaches 100, you will die and become a ghost.
                  */
-                JOptionPane.showMessageDialog(null, "Beat the final boss to win the game. Use \n" +
-                        "the shops to buy items and equip armour and \n" +
-                        "weapons from the inventory. If your health or \n" +
-                        "sanity reaches 0, or your hunger reaches 100, \n" +
-                        "you will die and become a ghost.");
+                JOptionPane.showMessageDialog(null, "Use the buttons to move.");
             }
         });
         //mapAsciiPanel.add(helpButton);
