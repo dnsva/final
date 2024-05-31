@@ -22,6 +22,7 @@ public class Map {
      3 : BOSS
      4 : SIDE QUEST
      5 : KEY
+     6 : Treasure
      */
 
     //rows - 5
@@ -35,7 +36,7 @@ public class Map {
     static FinalBoss finalBossObject = new FinalBoss();
 
     public static int[][] map = {
-            {0, 0, 0, 2, 0, 5, 0, 3},
+            {0, 0, 0, 2, 0, 5, 3, 6},
             {0, -1, 0, -1, -1, -1, -1, -1},
             {4, -1, 5, 0, 0, 2, 0, 5},
             {-1, -1, -1, -1, -1, -1, -1, 2},
@@ -43,7 +44,7 @@ public class Map {
     };
 
     public static int[][] questIDs = {
-            {0, 0, 0, 20, 0, 3, 0, 100}, //multiples of 10 are quests
+            {0, 0, 0, 20, 0, 3, 100, 0}, //multiples of 10 are quests
             {0, 0, 0, 0, 0, 0, 0, 0, 0}, //1,2,3 - key 1,2,3,
             {10, 0, 2, 0, 0, 30, 0, 1},
             {0, 0, 0, 0, 0, 0, 0, 40},
@@ -115,6 +116,13 @@ public class Map {
 
 
             System.out.println("Key Used");
+        }else if(map[row][col] == 6){
+            System.out.println("Treasure Found");
+            //process
+
+            GameVars.inventory.add(new DungeonKey("Treasure: The friends you made the along the way"));
+            map[row][col] = 0;
+            System.out.println("Treasure Used");
         }
 
 
@@ -163,7 +171,7 @@ public class Map {
     }
 
     static String getMapLegend(){
-        String legend = "<html><p style=\"font-size:12; color:white; font-family: PT Mono; padding-left: 80px;\">";
+        String legend = "<html><p style=\"font-size:10; color:white; font-family: PT Mono; padding-left: 80px;\">";
         legend += "&#x1FAA8; : Wall<br>";
         legend += "&#x1F7E1; : Empty<br>";
         legend += "&#x1F7E2; : Level Complete<br>";
@@ -176,7 +184,7 @@ public class Map {
         return legend;
     }
     static String getMapAsciiString(){
-        String mapString = "<html><p style=\"font-size:30; text-align: center;\" >";
+        String mapString = "<html><p style=\"font-size:28; text-align: center;\" >";
 
         for(int i = 0; i < map[0].length + 2; i++){
             //wall
@@ -202,8 +210,9 @@ public class Map {
                 }else if(map[i][j] == 4) { //side quest
                     mapString += "&#x1f535;";
                 }else if(map[i][j] == 5) { //key
-
                     mapString += "&#x1F511;";
+                }else if(map[i][j] == 6) { //treasure
+                    mapString += "&#x1F3C6;";
                 }
 
             }

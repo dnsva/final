@@ -1,31 +1,4 @@
-bvn
+jkjkkjlklj
 Easy
-Farmer
-2024-05-30
-0 0 0 2 0 5 0 3 
-0 -1 0 -1 -1 -1 -1 -1 
-4 -1 5 0 0 2 0 0 
--1 -1 -1 -1 -1 -1 -1 1 
-0 0 0 1 0 0 0 0 
-2
-6
-3
-7
-false
-false
-false
-false
-true
-true
-Food;Carrots;1;5,Food;Cucumbers;1;5,Food;Tomatoes;1;5,Food;Strawberries;2;10,Food;Apples;2;10,Food;Peaches;2;10,Food;Chicken;5;20,Food;Pig;10;30,Food;Cow;15;40,Food;Dragon;99;99,Food;Cake;10;10,Key;Key 1,
-false
-88
-80
-5
-150
-1
-5
-5
-0
-Weapon;none;0; ;0;0
-Armour;none;0;0
+Doctor
+2024-05-31

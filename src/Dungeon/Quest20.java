@@ -210,7 +210,8 @@ public class Quest20 {
                         nextButton.setEnabled(true);
                     } else {
                         GameVars.sanity -= sanityLossPerIncorrect;
-                        feedbackLabel.setText("Incorrect. The answer was " + correctAnswer + " [-" + sanityLossPerIncorrect + " sanity]");
+                        //feedbackLabel.setText("Incorrect. The answer was " + correctAnswer + " [-" + sanityLossPerIncorrect + " sanity]");
+                        feedbackLabel.setText(incorrectMessage + " [-" + sanityLossPerIncorrect + " sanity]");
                         enterButton.setEnabled(false);
                         nextButton.setEnabled(true);
                         checkGameOver();

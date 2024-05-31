@@ -39,9 +39,9 @@ public class SideBar {
     public void updatePanel(){
 
         if(!isGhost){
-            healthLabel.setText("Health: " + GameVars.health);
-            sanityLabel.setText("Sanity: " + GameVars.sanity);
-            hungerLabel.setText("Hunger: " + GameVars.hunger);
+            healthLabel.setText("Health: " + GameVars.health + "/100");
+            sanityLabel.setText("Sanity: " + GameVars.sanity + "/100");
+            hungerLabel.setText("Hunger: " + GameVars.hunger + "/100");
             balanceLabel.setText("Balance: " + GameVars.balance);
             weaponLabel.setText("Weapon: " + GameVars.currWeapon.name);
             armourLabel.setText("Armour: " + GameVars.currArmour.name);
@@ -79,13 +79,13 @@ public class SideBar {
         //sideBarPanel.setBackground(Color.decode("#C2F9BB"));
 
         healthLabel = new JLabel();
-        healthLabel.setText(" Health:" + GameVars.health);
+        healthLabel.setText(" Health:" + GameVars.health + "/100");
         healthLabel.setIcon(new ImageIcon("src/Game/Icons/Heart.png"));
         sanityLabel = new JLabel();
-        sanityLabel.setText("Sanity: " + GameVars.sanity);
+        sanityLabel.setText("Sanity: " + GameVars.sanity + "/100");
         sanityLabel.setIcon(new ImageIcon("src/Game/Icons/Bag.png"));
         hungerLabel = new JLabel();
-        hungerLabel.setText("Hunger: " + GameVars.hunger);
+        hungerLabel.setText("Hunger: " + GameVars.hunger + "/100");
         hungerLabel.setIcon(new ImageIcon("src/Game/Icons/Apple.png"));
         balanceLabel = new JLabel();
         balanceLabel.setText("Balance: " + GameVars.balance);

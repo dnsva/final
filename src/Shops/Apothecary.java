@@ -54,32 +54,32 @@ public class Apothecary {
 
         nameAndDescriptionsString += "<html><body style='font-family: PT Mono; font-size: 12px;'>" +
                 "<div style='background-color: #9AD1D4;'>";
-        nameAndDescriptionsString += "<br>&nbsp;&nbsp;------------------------------------------------&nbsp;<br> " +
-                "&nbsp;|&nbsp;<b><u>AVAILABLE ITEMS</u></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>";  //string length - "| space and space | (4) dont count. this is equal to 59 here.
+        nameAndDescriptionsString += "<br>&nbsp;&nbsp;----------------------------------------------&nbsp;<br> " +
+                "&nbsp;|&nbsp;<b><u>AVAILABLE ITEMS</u></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>";  //string length - "| space and space | (4) dont count. this is equal to 59 here.
         //empty row after with the borders:
-        nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 49) + "|&nbsp;<br>";
+        nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 47) + "|&nbsp;<br>";
 
         for(int i = 0; i < medicineList.length; ++i){
-            nameAndDescriptionsString += "&nbsp;|&nbsp;<b>" + (medicineList[i].name).toUpperCase() + returnStringWithSpaces(medicineList[i].name, 47-(((Integer) medicineList[i].price)).toString().length()-1 ) + "$" + medicineList[i].price + "&nbsp;</b>|&nbsp;<br>";
+            nameAndDescriptionsString += "&nbsp;|&nbsp;<b>" + (medicineList[i].name).toUpperCase() + returnStringWithSpaces(medicineList[i].name, 45-(((Integer) medicineList[i].price)).toString().length()-1 ) + "$" + medicineList[i].price + "&nbsp;</b>|<br>";
 
             if(medicineList[i] instanceof HealingMedicine){
-                nameAndDescriptionsString += "&nbsp;|&nbsp;-&nbsp;Health Addition:&nbsp;" + ((HealingMedicine) medicineList[i]).healthAddition + returnStringWithSpaces("ok", 47-19) + "&nbsp;|&nbsp;<br>";
+                nameAndDescriptionsString += "&nbsp;|&nbsp;-&nbsp;Health Addition:&nbsp;" + ((HealingMedicine) medicineList[i]).healthAddition + returnStringWithSpaces("ok", 45-19) + "&nbsp;|<br>";
                 //empty row after with the borders:
-                nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 49) + "|&nbsp;<br>";
+                nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 47) + "|<br>";
             } else {
-                nameAndDescriptionsString += "&nbsp;|&nbsp;-&nbsp;Sanity Addition:&nbsp;" + ((SanityMedicine) medicineList[i]).sanityAddition + returnStringWithSpaces("ok", 47-19) + "&nbsp;|&nbsp;<br>";
+                nameAndDescriptionsString += "&nbsp;|&nbsp;-&nbsp;Sanity Addition:&nbsp;" + ((SanityMedicine) medicineList[i]).sanityAddition + returnStringWithSpaces("ok", 45-19) + "&nbsp;|<br>";
                 //empty row after with the borders:
-                nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 49) + "|&nbsp;<br>";
+                nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 47) + "|<br>";
             }
 
             if(i == 2){
-                nameAndDescriptionsString += "&nbsp;|" + "°。°。°。°。°。°。°。°。°。°。°。°。°。°。°。°。°。°。°" + "|&nbsp;<br>";
+                nameAndDescriptionsString += "&nbsp;|" + "°。°。°。°。°。°。°。°。°。°。°。°。°。°。°。°。°。° " + "|<br>";
                 //empty row after with the borders:
-                nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 49) + "|&nbsp;<br>";
+                nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 47) + "|<br>";
             }
         }
 
-        nameAndDescriptionsString += "&nbsp;&nbsp;------------------------------------------------ <br><br>";
+        nameAndDescriptionsString += "&nbsp;&nbsp;---------------------------------------------- <br><br>";
         nameAndDescriptionsString += "</div></body></html>";
         namesAndDescriptions.setText(nameAndDescriptionsString);
 
@@ -118,7 +118,7 @@ public class Apothecary {
         apothecaryPanel.add(newPanel, BorderLayout.CENTER);
         apothecaryPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        apothecaryFrame.add(apothecaryPanel, BorderLayout.WEST);
+        apothecaryFrame.add(apothecaryPanel, BorderLayout.CENTER);
         apothecaryFrame.add(apothecarySideBar.getPanel(), BorderLayout.EAST);
     }
 
