@@ -2,10 +2,10 @@ package Items;
 
 public class DungeonKey extends Item{
 
-    public String name;
+    public String name; //the name of the key
 
-    public DungeonKey(String keyType){
-        super(keyType);
+    public DungeonKey(String keyType){ //just a name
+        super(keyType); //super
     }
 
 }
