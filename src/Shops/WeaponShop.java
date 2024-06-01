@@ -1,5 +1,12 @@
 package Shops;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Weapon Shop
+description: Weapon Shop class
+*/
+
 import Game.GameVars;
 import Game.SideBar;
 import Items.Weapon;

@@ -1,5 +1,12 @@
 package Game;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Game Over
+description: The game over gui frame pop up when the user loses
+*/
+
 //IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

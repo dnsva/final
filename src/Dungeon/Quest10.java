@@ -1,5 +1,12 @@
 package Dungeon;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Quest 10
+description: This class is a quest in the game. It is a gambling game where the user can win or lose money.
+*/
+
 // IMPORT ALL PACKAGES -----
 import java.awt.*;      //-
 import java.awt.event.ActionEvent;

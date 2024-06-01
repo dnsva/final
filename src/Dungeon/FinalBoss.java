@@ -1,5 +1,12 @@
 package Dungeon;
 
+/*
+name: Anna
+date: May 31, 2024
+title: FinalBoss
+description: This class is the final boss level.
+*/
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

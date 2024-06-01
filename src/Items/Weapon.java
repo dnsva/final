@@ -1,5 +1,12 @@
 package Items;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Weapon
+description: Weapon Item subclass
+*/
+
 public class Weapon extends Item {
     //inherits price and name
     public String description; //description of the weapon

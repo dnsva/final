@@ -1,5 +1,12 @@
 package AnnaTools;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Fonts
+description: This class initializes fonts for use in the GUI.
+*/
+
 import java.awt.*; //For gui
 import java.io.File; //For files
 

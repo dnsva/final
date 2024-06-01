@@ -1,5 +1,12 @@
 package Dungeon;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Quest 40
+description: This class creates the another quest with a potential fight. This is the work boss level
+*/
+
 //IMPORT ALL PACKAGES -----
 import java.io.*;       //-
 import java.util.*;     //-

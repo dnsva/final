@@ -1,5 +1,12 @@
 package Items;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Healing Medicine
+description: Healing Medicine Item subclass
+*/
+
 import Game.GameVars;
 
 public class HealingMedicine extends Item{

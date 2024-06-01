@@ -5,8 +5,15 @@
 
     Once confirmed, Food.eat() is called and all sidebars are updated
 
-     */
+*/
 package Game;
+
+/*
+name: Anna
+date: May 31, 2024
+title: EatFood
+description: This class creates the eat food GUI.
+*/
 
 import Items.Food;
 import Items.Item;

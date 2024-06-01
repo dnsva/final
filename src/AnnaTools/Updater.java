@@ -1,4 +1,10 @@
 package AnnaTools;
+/*
+name: Anna
+date: May 31, 2024
+title: updater
+description: This class updates all sidebars.
+*/
 
 import static Dungeon.FinalBoss.finalBossSideBar;
 import static Dungeon.MapGUI.mapGUISideBar;

@@ -1,5 +1,12 @@
 package Dungeon;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Map
+description: This class is the map of the game. It is a 2D array that stores the different types of things on the map.
+*/
+
 //IMPORT ALL PACKAGES -----
 import Game.*;          //-
 import Items.*;         //-

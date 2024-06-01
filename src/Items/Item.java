@@ -1,5 +1,12 @@
 package Items;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Item
+description: The SUPERCLASS
+*/
+
 public class Item {
 
     //SUPERCLASS OF ANY PURCHASABLE ITEM

@@ -1,5 +1,12 @@
 package Dungeon;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Quest 30
+description: This class is a qquest in the game. It is a fight quest.
+*/
+
 //IMPORT ALL PACKAGES -----
 import java.io.*;
 import java.util.*;

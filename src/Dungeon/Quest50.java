@@ -1,7 +1,11 @@
-
-
 package Dungeon;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Quest 50
+description: The quest with multiple choice questions. The master baker encounter.
+*/
 
 //IMPORT ALL PACKAGES -----
 import java.awt.*;      //-

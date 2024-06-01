@@ -1,5 +1,12 @@
 package Game;
 
+/*
+name: Anna
+date: May 31, 2024
+title: GameVars
+description: This file stores all basic user info variables
+*/
+
 //IMPORT ALL PACKAGES -----
 import java.util.*;     //-
 

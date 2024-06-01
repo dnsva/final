@@ -1,5 +1,12 @@
 package Items;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Armour
+description: Armour Item subclass
+*/
+
 public class Armour extends Item{
 
     public int damageSubtractorPercentage; //damage subtractor percentage

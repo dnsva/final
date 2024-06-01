@@ -1,5 +1,12 @@
 package Game;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Side Bar
+description: Deals with the sidebar panel and updating it
+*/
+
 //IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

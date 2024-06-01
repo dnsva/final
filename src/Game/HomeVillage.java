@@ -1,5 +1,12 @@
 package Game;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Home Village
+description: Basically the main menu
+*/
+
 //IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

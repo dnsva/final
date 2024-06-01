@@ -1,4 +1,10 @@
 package Shops;
+/*
+name: Anna
+date: May 31, 2024
+title: Apothecary
+description: Apothecary Shop class
+*/
 
 import Game.GameVars;
 import Game.SideBar;

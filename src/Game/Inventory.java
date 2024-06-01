@@ -1,5 +1,12 @@
 package Game;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Inventory
+description: The frame with all the ALPHABETICALLY SORTED items and the current weapon and armour
+*/
+
 //IMPORT ALL PACKAGES -----
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,6 +70,7 @@ public class Inventory {
         //these fns can also be used to just set the text straight away
         updateCurrentSelectedItems(); //this updates the little messages with what is currently selected
         updateItemsList(); //this updates the list of things in your inventory
+        AnnaTools.ItemInsertSort.insertSort(GameVars.inventory); //sort the inventory
 
         JButton weaponButton = new JButton("Select Weapon Item"); //button to select weapon
         weaponButton.addActionListener(new ActionListener() { //on click
@@ -196,6 +204,7 @@ public class Inventory {
     }
 
     private static void updateItemsList() { //this function will update the list of things in your inventory
+
         String allItemsTEXT = "\n    Inventory Items:\n"; //initialize
         for (Items.Item item : GameVars.inventory) { //for all items in the inventory
             allItemsTEXT += "   - " + item + "\n"; //add the item to the text
@@ -216,18 +225,21 @@ public class Inventory {
     public static void showInventory(){ //show the inventory
         updateItemsList(); //update the items list
         findWeaponsAndArmour(); //find the weapons and armour
+        AnnaTools.ItemInsertSort.insertSort(GameVars.inventory); //sort the inventory
         inventoryFrame.setVisible(true); //set the frame visible
     }
 
     public static void hideInventory(){ //hide the inventory
         AnnaTools.Updater.updateAllSidePanels(); //update all side panels
         inventoryFrame.setVisible(false); //set the frame invisible
+        AnnaTools.ItemInsertSort.insertSort(GameVars.inventory); //sort the inventory
     }
 
     public static void addItem(Item item){ //add an item
         GameVars.inventory.add(item); //add the item
         AnnaTools.ItemInsertSort.insertSort(GameVars.inventory); //sort the inventory
         findWeaponsAndArmour(); //find the weapons and armour
+        AnnaTools.ItemInsertSort.insertSort(GameVars.inventory); //sort the inventory
         updateItemsList(); //update the items list
     }
 

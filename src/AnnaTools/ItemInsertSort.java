@@ -1,5 +1,12 @@
 package AnnaTools;
 
+/*
+name: Anna
+date: Jan 31, 2024
+title: ItemInsertSort
+description: This class sorts items
+ */
+
 //IMPORT ALL PACKAGES -----
 import java.util.*;     //-
 import Items.*;         //-

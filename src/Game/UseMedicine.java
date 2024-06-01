@@ -12,6 +12,13 @@
      */
 package Game;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Use Medicine
+description:  This class creates the use medicine GUI.
+*/
+
 import Items.HealingMedicine;
 import Items.Item;
 import Items.SanityMedicine;

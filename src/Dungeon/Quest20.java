@@ -1,5 +1,12 @@
 package Dungeon;
 
+/*
+name: Anna
+date: May 31, 2024
+title: Quest 20
+description: This class a quest in the game. It is a quiz with 5 questions.
+*/
+
 //IMPORT ALL PACKAGES -----
 import java.awt.*;
 import java.awt.event.ActionEvent;
