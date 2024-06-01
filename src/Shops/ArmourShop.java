@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import static AnnaTools.Updater.updateAllSidePanels;
 
 public class ArmourShop {
-    public static SideBar armourShopSideBar = new SideBar();
+    public static SideBar armourShopSideBar = new SideBar(); // The sidebar for the armour shop
 
     //format: GameVars.difficultyLevel.equals("Easy") ? 30 : GameVars.difficultyLevel.equals("Medium") ? 20 : 15,
     public Armour[] armourList = { // An array of all available armour in the shop
@@ -42,12 +42,15 @@ public class ArmourShop {
         JEditorPane namesAndDescriptions = new JEditorPane();
         namesAndDescriptions.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
 
-        String nameAndDescriptionsString = "";
+        String nameAndDescriptionsString = ""; // Create string to store all the names and descriptions
 
         namesAndDescriptions.setEditable(false);
         namesAndDescriptions.setFocusable(false); // No cursor
         namesAndDescriptions.setContentType("text/html");
 
+        /* The following code writes HTML formatted descriptions
+         * for the namesAndDescriptionsString this is code to display
+         * all possible items to buy*/
         nameAndDescriptionsString += "<html><body style='font-family: PT Mono; font-size: 12px;'>" +
                 "<div style='background-color: #9AD1D4;'>";
         nameAndDescriptionsString += "<br>&nbsp;&nbsp;------------------------------------------------&nbsp;<br> " +
@@ -55,7 +58,6 @@ public class ArmourShop {
         // Empty row after with the borders:
         nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 49) + "|&nbsp;<br>";
         nameAndDescriptionsString += "&nbsp;|" + returnStringWithSpaces("", 49) + "|&nbsp;<br>";
-
 
         for(int i = 0; i < armourList.length; ++i){
             nameAndDescriptionsString += "&nbsp;|&nbsp;<b>" + (armourList[i].name).toUpperCase() + returnStringWithSpaces(armourList[i].name, 47-(((Integer) armourList[i].price)).toString().length()-1 ) + "$" + armourList[i].price + "&nbsp;</b>|&nbsp;<br>";
@@ -76,36 +78,37 @@ public class ArmourShop {
         nameAndDescriptionsString += "&nbsp;&nbsp;------------------------------------------------ <br><br>";
         nameAndDescriptionsString += "</div></body></html>";
         namesAndDescriptions.setText(nameAndDescriptionsString);
+        // End of HTML formatted descriptions ---------------------------------------------
 
         // Display available armours in a combo box
-        armourComboBox = new JComboBox<>();
-        for (Armour armour : armourList) {
-            armourComboBox.addItem(armour.name + " - $" + armour.price);
+        armourComboBox = new JComboBox<>(); // Initialize
+        for (Armour armour : armourList) { // For all armours in the armour list
+            armourComboBox.addItem(armour.name + " - $" + armour.price); // Add the armour to the combo box
         }
 
         // Create purchase button
-        JButton purchaseButton = new JButton("Purchase");
+        JButton purchaseButton = new JButton("Purchase"); // Confirm armour selection
         purchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 purchaseArmour();
-            }
+            } // On click
         });
 
-        JButton exitButton = new JButton("Exit Shop");
+        JButton exitButton = new JButton("Exit Shop"); // Exit the frame
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 hideArmourShop();
-            }
+            } // Hide the frame
         });
 
-        JPanel newPanel = new JPanel(new BorderLayout(20, 10));
-        newPanel.add(armourComboBox, BorderLayout.SOUTH);
+        JPanel newPanel = new JPanel(new BorderLayout(20, 10)); // Add spacing between
+        newPanel.add(armourComboBox, BorderLayout.SOUTH); // Add the combo box to the panel
 
-        JPanel buttonPanel = new JPanel(new BorderLayout());
-        buttonPanel.add(purchaseButton, BorderLayout.NORTH);
-        buttonPanel.add(exitButton, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel(new BorderLayout()); // Create a panel for the buttons
+        buttonPanel.add(purchaseButton, BorderLayout.NORTH); // Add the purchase button
+        buttonPanel.add(exitButton, BorderLayout.SOUTH); // Add the exit button
 
         // The following code distributes nameAndDescriptions, balanceLabel and armourComboBox and Purchase Armour using getContentPane and BorderLayout.
         armourShopPanel.add(namesAndDescriptions, BorderLayout.NORTH);
@@ -116,13 +119,13 @@ public class ArmourShop {
         armourShopFrame.add(armourShopSideBar.getPanel(), BorderLayout.EAST);
     }
 
-    private String returnStringWithSpaces(String string, int length) {
-        int spaces = length - string.length();
-        String newString = "";
+    private String returnStringWithSpaces(String string, int length) { // THIS RETURNS HTML SPACES
+        int spaces = length - string.length(); // Length of the string
+        String newString = ""; // Initialize
         for (int i = 0; i < spaces-1; i++) { // Minus 1 just because
-            newString += "&nbsp;";
+            newString += "&nbsp;"; // Add a space
         }
-        return newString;
+        return newString; // Return the string
     }
 
     private void purchaseArmour() {
@@ -164,8 +167,12 @@ public class ArmourShop {
         armourShopFrame.setVisible(false); // OK
     }
 
+    //TESTING
+    /*
     public static void main(String[] args) {
         new ArmourShop();
         showArmourShop();
     }
+
+     */
 }

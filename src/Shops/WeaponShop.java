@@ -13,7 +13,12 @@ import static AnnaTools.Updater.updateAllSidePanels;
 
 public class WeaponShop {
 
-    public static SideBar weaponShopSideBar = new SideBar();
+    public static SideBar weaponShopSideBar = new SideBar(); // The sidebar for the weapon shop
+
+    /*
+    THE PRICES OF THE WEAPONS CHANGE BY DIFFICULTY LEVEL. THE HARDER YOUR
+    DIFFICULTY IS THE LESS POWERFUL YOUR WEAPONS ARE.
+     */
 
     public static Weapon[] weaponList = { //An array of all available weapons in the shop
             new Weapon("Dagger",
@@ -71,6 +76,9 @@ public class WeaponShop {
         namesAndDescriptions.setFocusable(false); //nocursor
         namesAndDescriptions.setContentType("text/html");
 
+        /* THE FOLLOWING CODE WRITES HTML FORMATTED DESCRIPTIONS
+         * FOR THE NAMESANDDESCRIPTIONSSTRING THIS IS CODE TO DISPLAY
+         * ALL POSSIBLE ITEMS TO BUY*/
         nameAndDescriptionsString += "<html><body style='font-family: PT Mono; font-size: 10.5px;'>" +
                 "<div style='background-color: #9AD1D4;'>";
         nameAndDescriptionsString += "<br>&nbsp;&nbsp;------------------------------------------------------------&nbsp;<br> " +
@@ -89,11 +97,12 @@ public class WeaponShop {
         nameAndDescriptionsString += "&nbsp;&nbsp;------------------------------------------------------------ <br><br>";
         nameAndDescriptionsString += "</div></body></html>";
         namesAndDescriptions.setText(nameAndDescriptionsString);
+        // End of HTML formatted descriptions ---------------------------------------------
 
         // Display available weapons in a combo box
-        weaponComboBox = new JComboBox<>();
-        for (Weapon weapon : weaponList) {
-            weaponComboBox.addItem(weapon.name + " - $" + weapon.price);
+        weaponComboBox = new JComboBox<>(); //initialize COMBO BOX
+        for (Weapon weapon : weaponList) { //for each weapon in the weapon list
+            weaponComboBox.addItem(weapon.name + " - $" + weapon.price); //add the weapon name and price to the combo box
         }
 
         // Create purchase button
@@ -101,7 +110,7 @@ public class WeaponShop {
         purchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                purchaseWeapon();
+                purchaseWeapon(); //on click
             }
         });
 
@@ -109,11 +118,11 @@ public class WeaponShop {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                hideWeaponShop();
+                hideWeaponShop(); //on click
             }
         });
 
-        JPanel newPanel = new JPanel(new BorderLayout(20, 10));
+        JPanel newPanel = new JPanel(new BorderLayout(20, 10)); //new panel
         newPanel.add(weaponComboBox, BorderLayout.SOUTH);
 
         JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -129,13 +138,13 @@ public class WeaponShop {
         weaponShopFrame.add(weaponShopSideBar.getPanel(), BorderLayout.EAST);
     }
 
-    private String returnStringWithSpaces(String string, int length) {
+    private String returnStringWithSpaces(String string, int length) { //returns a string with spaces
         int spaces = length - string.length();
-        String newString = "";
+        String newString = ""; //start off with nothing
         for (int i = 0; i < spaces-1; i++) { //minus 1 just ebcause
-            newString += "&nbsp;";
+            newString += "&nbsp;"; //add the space
         }
-        return newString;
+        return newString; //return the string
     }
     private void purchaseWeapon() {
         // Get the selected weapon
@@ -176,8 +185,8 @@ public class WeaponShop {
         weaponShopFrame.setVisible(false); //ok
     }
 
-    public static void main(String[] args) {
+    //TESTING public static void main(String[] args) {
        // new WeaponShop();
        // showWeaponShop();
-    }
+    //}
 }

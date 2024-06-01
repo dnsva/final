@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import static AnnaTools.Updater.updateAllSidePanels;
 
 public class Apothecary {
-    public static SideBar apothecarySideBar = new SideBar();
+    public static SideBar apothecarySideBar = new SideBar(); //the sidebar for the apothecary shop
 
     public static Item[] medicineList = { //An array of all available medicines in the shop
             new HealingMedicine("Herb Bandage", 10, 10),
@@ -46,11 +46,15 @@ public class Apothecary {
         JEditorPane namesAndDescriptions = new JEditorPane();
         namesAndDescriptions.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
 
-        String nameAndDescriptionsString = "";
+        String nameAndDescriptionsString = ""; //create string to store all the names and descriptions
 
         namesAndDescriptions.setEditable(false);
         namesAndDescriptions.setFocusable(false); //nocursor
         namesAndDescriptions.setContentType("text/html");
+
+        /* THE FOLLOWING CODE WRITES HTML FORMATTED DESCRIPTIONS
+        * FOR THE NAMESANDDESCRIPTIONSSTRING THIS IS CODE TO DISPLAY
+        * ALL POSSIBLE ITEMS TO BUY*/
 
         nameAndDescriptionsString += "<html><body style='font-family: PT Mono; font-size: 12px;'>" +
                 "<div style='background-color: #9AD1D4;'>";
@@ -83,31 +87,33 @@ public class Apothecary {
         nameAndDescriptionsString += "</div></body></html>";
         namesAndDescriptions.setText(nameAndDescriptionsString);
 
+        //------THE HTML FORMATTING STUFF ENDS HERE -------------------
+
         // Display available medicines in a combo box
-        apothecaryComboBox = new JComboBox<>();
-        for (Item medicine : medicineList) {
-            apothecaryComboBox.addItem(medicine.name + " - $" + medicine.price);
+        apothecaryComboBox = new JComboBox<>(); //initialize
+        for (Item medicine : medicineList) { //for all medicines in the list
+            apothecaryComboBox.addItem(medicine.name + " - $" + medicine.price); //add the medicine to the combo box
         }
 
         // Create purchase button
-        JButton purchaseButton = new JButton("Purchase");
+        JButton purchaseButton = new JButton("Purchase"); //initialize purchse button
         purchaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                purchaseMedicine();
+                purchaseMedicine(); //on click
             }
         });
 
-        JButton exitButton = new JButton("Exit Shop");
+        JButton exitButton = new JButton("Exit Shop"); //initialize exit button
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                hideApothecary();
+                hideApothecary(); //on click
             }
         });
 
-        JPanel newPanel = new JPanel(new BorderLayout(20, 10));
-        newPanel.add(apothecaryComboBox, BorderLayout.SOUTH);
+        JPanel newPanel = new JPanel(new BorderLayout(20, 10)); //add spacing between
+        newPanel.add(apothecaryComboBox, BorderLayout.SOUTH); //add the combo box to the panel
 
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.add(purchaseButton, BorderLayout.NORTH);
@@ -122,13 +128,13 @@ public class Apothecary {
         apothecaryFrame.add(apothecarySideBar.getPanel(), BorderLayout.EAST);
     }
 
-    private String returnStringWithSpaces(String string, int length) {
-        int spaces = length - string.length();
-        String newString = "";
+    private String returnStringWithSpaces(String string, int length) { //THIS RETURNS HTML SPACES
+        int spaces = length - string.length(); //length of the string
+        String newString = ""; //initialize
         for (int i = 0; i < spaces-1; i++) { //minus 1 just because
-            newString += "&nbsp;";
+            newString += "&nbsp;"; //add a space
         }
-        return newString;
+        return newString; //return the string
     }
 
     private void purchaseMedicine() {
@@ -144,10 +150,10 @@ public class Apothecary {
         if (GameVars.balance >= selectedMedicine.price) { //Check if the player has enough balance to purchase the medicine
             GameVars.balance -= selectedMedicine.price; //Deduct the price from the balance
 
-            if(selectedMedicine instanceof HealingMedicine){
-                GameVars.inventory.add((HealingMedicine) selectedMedicine);
-            } else if (selectedMedicine instanceof SanityMedicine){
-                GameVars.inventory.add((SanityMedicine) selectedMedicine);
+            if(selectedMedicine instanceof HealingMedicine){ //If the selected medicine is a healing medicine
+                GameVars.inventory.add((HealingMedicine) selectedMedicine); //Add the medicine to the inventory and cast
+            } else if (selectedMedicine instanceof SanityMedicine){ //If the selected medicine is a sanity medicine
+                GameVars.inventory.add((SanityMedicine) selectedMedicine); //Add the medicine to the inventory and cast
             }
             // Update the sidebar as now the inventory has changed and the balance has changed
             updateAllSidePanels();
@@ -167,8 +173,12 @@ public class Apothecary {
         apothecaryFrame.setVisible(false); //ok
     }
 
+    //TESTING:
+    /*
     public static void main(String[] args) {
         new Apothecary();
         showApothecary();
     }
+
+     */
 }

@@ -54,15 +54,15 @@ public class MapGUI {
 
         mapTitleEditorPane = new JEditorPane(); //intialize
         mapTitleEditorPane.setContentType("text/html"); //make format be html...
-        mapTitleEditorPane.setText(Map.getMapTitle()); //use map class functin to get the ascii art
+        mapTitleEditorPane.setText(Map.getMapTitle()); //use map class function to get the ascii art
         mapTitleEditorPane.setEditable(false); //cannot be editable
         mapTitleEditorPane.setBackground(Color.black); //set panel background to be black
 
-        mapAsciiPanel.add(mapTitleEditorPane);
-        mapAsciiPanel.add(mapEditorPane);
-        mapAsciiPanel.add(mapLegendEditorPane);
+        mapAsciiPanel.add(mapTitleEditorPane); //add the title at the top
+        mapAsciiPanel.add(mapEditorPane); //then the actual map
+        mapAsciiPanel.add(mapLegendEditorPane); //and finally just the legend
 
-        JButton exitButton = new JButton("Exit");
+        JButton exitButton = new JButton("Exit"); //for going back to main menu
 
         /*
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -70,110 +70,96 @@ public class MapGUI {
         DO THIS
         JButton b=new JButton(new ImageIcon("D:\\icon.png"));
          */
-        exitButton.addActionListener(new ActionListener() {
+        exitButton.addActionListener(new ActionListener() { //when exit clicked
             @Override
-            public void actionPerformed(ActionEvent e) {
-                Game.HomeVillage.showHomeVillage();
-                hideMapGUI();
-
+            public void actionPerformed(ActionEvent e) { //on click override
+                Game.HomeVillage.showHomeVillage(); //go back to the home village
+                hideMapGUI(); //hide all the map stuff
             }
         });
 
-        JButton upButton = new JButton("Up");
-        upButton.setSize(100, 100);
+        JButton upButton = new JButton("Up"); //button to go up
+        upButton.setSize(100, 100); //size
         upButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Map.moveUp();
-                updateMapGUIAscii();
+                Map.moveUp(); //go up
+                updateMapGUIAscii(); //update display
             }
         });
 
-        JButton downButton = new JButton("Down");
+        JButton downButton = new JButton("Down"); //button to go down
         downButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Map.moveDown();
-                updateMapGUIAscii();
+                Map.moveDown(); //go down
+                updateMapGUIAscii(); // update display
             }
         });
 
-        JButton leftButton = new JButton("Left");
+        JButton leftButton = new JButton("Left"); //button to go left
         leftButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Map.moveLeft();
-                updateMapGUIAscii();
+                Map.moveLeft(); //move left
+                updateMapGUIAscii(); //update display
             }
         });
 
-        JButton rightButton = new JButton("Right");
+        JButton rightButton = new JButton("Right"); //button to go right
         rightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Map.moveRight();
-                updateMapGUIAscii();
+                Map.moveRight(); //go right
+                updateMapGUIAscii(); //update display
             }
         });
 
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 3));
-        buttonPanel.setBackground(Color.black);
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3)); //left, up/down, right
+        buttonPanel.setBackground(Color.black); //black bg
 
-        buttonPanel.add(leftButton);
+        buttonPanel.add(leftButton);  //add it at the left
 
-        JPanel buttonPanelUpDown = new JPanel(new GridLayout(2, 1));
+        JPanel buttonPanelUpDown = new JPanel(new GridLayout(2, 1)); //for up and down
         buttonPanelUpDown.setBackground(Color.black);
-        buttonPanelUpDown.add(upButton);
-        buttonPanelUpDown.add(downButton);
+        buttonPanelUpDown.add(upButton); //up at the top
+        buttonPanelUpDown.add(downButton); //down at the bottom
 
-        buttonPanel.add(buttonPanelUpDown);
+        buttonPanel.add(buttonPanelUpDown); //add up down collectively in col 2
 
-        //rightButton.setSize(100, 100);
-        buttonPanel.add(rightButton);
-
-       // buttonPanel.add(exitButton);
+        buttonPanel.add(rightButton); //add right in column 3
 
         //---------------------
 
-        mapAsciiPanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT));
+        mapAsciiPanel.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT)); //size
 
-        mapAsciiPanel.add(buttonPanel);
+        mapAsciiPanel.add(buttonPanel); //up down left right
 
-        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT); //centered
 
-      //  JPanel exitAndHelpPanel = new JPanel();
+        JPanel exitAndHelpPanel = new JPanel(new GridLayout(2, 1)); //exit is on top help is on the bottom
 
-      //  mapAsciiPanel.add(exitButton);
-
-        JPanel exitAndHelpPanel = new JPanel(new GridLayout(2, 1));
-
-        JButton helpButton = new JButton("Help");
+        JButton helpButton = new JButton("Help"); //specific to the dungeon
         helpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //create a pop up that says:
-                /*
-                Beat the final boss to win the game. Use the shops to buy items and equip armour and weapons from the inventory.
-                If your health or sanity reaches 0, or your hunger reaches 100, you will die and become a ghost.
-                 */
                 JOptionPane.showMessageDialog(null, "Use the buttons to move.");
             }
         });
         //mapAsciiPanel.add(helpButton);
-        helpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        helpButton.setHorizontalAlignment(SwingConstants.CENTER);
+        helpButton.setAlignmentX(Component.CENTER_ALIGNMENT); //center
+        helpButton.setHorizontalAlignment(SwingConstants.CENTER); //center
 
-        exitAndHelpPanel.add(exitButton);
-        exitAndHelpPanel.add(helpButton);
+        exitAndHelpPanel.add(exitButton); //add the exit
+        exitAndHelpPanel.add(helpButton); //add the help
 
-        exitAndHelpPanel.setBackground(Color.black);
+        exitAndHelpPanel.setBackground(Color.black); //you know how it goes
 
-        mapAsciiPanel.add(exitAndHelpPanel);
+        mapAsciiPanel.add(exitAndHelpPanel); //add these both to the entire panel
 
+        mapFrame.add(mapAsciiPanel, BorderLayout.WEST); //all the ascii stuff goes left
 
-        mapFrame.add(mapAsciiPanel, BorderLayout.WEST);
-
-
-        //make the sidebar labels white for this one
+        /* This makes all the sidebar labels white because the background on the sidebar will be black */
         mapGUISideBar.healthLabel.setForeground(Color.white);
         mapGUISideBar.sanityLabel.setForeground(Color.white);
         mapGUISideBar.hungerLabel.setForeground(Color.white);
@@ -184,30 +170,28 @@ public class MapGUI {
         mapGUISideBar.defenseLabel.setForeground(Color.white);
         mapGUISideBar.dayLabel.setForeground(Color.white);
 
+        mapGUISideBar.setColor("#000000"); //make the sidebar black
+        mapGUISideBar.updatePanel(); //update to show changes
 
+        mapFrame.add(mapGUISideBar.getPanel(), BorderLayout.EAST); //add the sidebar
 
-        mapGUISideBar.setColor("#000000");
-        mapGUISideBar.updatePanel();
-
-        mapFrame.add(mapGUISideBar.getPanel(), BorderLayout.EAST);
-
-        mapFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT));
+        mapFrame.setPreferredSize(new Dimension(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT)); //size
         //mapFrame.pack();
     }
 
-    public static void showMapGUI(){
-        mapFrame.setVisible(true);
+    public static void showMapGUI(){ //show the frame
+        mapFrame.setVisible(true); //show the frame
     }
 
-    public static void hideMapGUI(){
-
-        mapFrame.setVisible(false);
-
+    public static void hideMapGUI(){ //hide the frame
+        mapFrame.setVisible(false); //hide the frame
     }
 
-    public static void updateMapGUIAscii(){
-        mapEditorPane.setText(Map.getMapAsciiString());
+    public static void updateMapGUIAscii(){ //reset all the text with each move
+        mapEditorPane.setText(Map.getMapAsciiString()); //just setText again
     }
+
+    /* FOR TESTING
     public static void main(String[] args){
         //new GameSlots.SlotInfo();
 
@@ -230,6 +214,6 @@ public class MapGUI {
           //  m.moveRight();
             //updateMapGUIAscii();
         //}
-    }
+    }*/
 
 }

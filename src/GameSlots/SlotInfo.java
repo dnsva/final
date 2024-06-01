@@ -14,50 +14,52 @@ import java.util.Date;
 
 public class SlotInfo {
 
-    private static String slotName;
-    private static String slotDifficulty;
-    public static String slotCreationDate;
-    private static String slotCharacter;
+    private static String slotName; // Slot name
+    private static String slotDifficulty; // Slot difficulty
+    public static String slotCreationDate; // Slot creation date
+    private static String slotCharacter; // Slot character
 
-    private static JFrame slotInfoFrame = new JFrame();
-    private static DefaultListModel<String> slotListModel = new DefaultListModel<>();
-    private static JList<String> slotList = new JList<>(slotListModel);
+    private static JFrame slotInfoFrame = new JFrame(); // Slot info frame
+    private static DefaultListModel<String> slotListModel = new DefaultListModel<>(); // Slot list model
+    private static JList<String> slotList = new JList<>(slotListModel); // Slot list
 
-    private static final int WINDOWWIDTH = 500;
-    private static final int WINDOWHEIGHT = 300;
-    public static final String SAVE_FILE_PATH = "src/GameSlots/GameSave.txt";
+    private static final int WINDOWWIDTH = 500; // Window width
+    private static final int WINDOWHEIGHT = 300; // Window height
+    public static final String SAVE_FILE_PATH = "src/GameSlots/GameSave.txt"; // Save file path
 
     public SlotInfo() {
         // Create save file if it doesn't exist
         File file = new File(SAVE_FILE_PATH);
-        if (!file.exists()) {
+        if (!file.exists()) {  //if the file doesnt already exist
             try {
-                file.createNewFile();
-            } catch (IOException e) {
+                file.createNewFile(); //create a new one
+            } catch (IOException e) { //so that you dont have to throw anything
                 System.out.println("ERROR FILES");
             }
         } else {
-            loadSlotFromFile();
+            loadSlotFromFile(); //call fn
         }
 
-        slotInfoFrame.setTitle("By Anna Denisova");
-        slotInfoFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT);
-        slotInfoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        slotInfoFrame.setLocationRelativeTo(null);
-        slotInfoFrame.getContentPane().setLayout(new BorderLayout());
+        slotInfoFrame.setTitle("By Anna Denisova"); //title
+        slotInfoFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT); //size
+        slotInfoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //close setting
+        slotInfoFrame.setLocationRelativeTo(null); //center
+        slotInfoFrame.getContentPane().setLayout(new BorderLayout()); //layout
 
         JPanel listPanel = new JPanel(new BorderLayout());
         listPanel.setBorder(BorderFactory.createTitledBorder("Slot"));
         listPanel.add(new JScrollPane(slotList));
         slotInfoFrame.getContentPane().add(listPanel, BorderLayout.CENTER);
-        listPanel.setBackground(Color.decode("#9AD1D4"));
+        listPanel.setBackground(Color.decode("#9AD1D4")); //set background color
 
+        /* The following code creates 4 buttons to be used in a grid layout */
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
         JButton selectButton = new JButton("Select Slot");
         JButton addButton = new JButton("Add Slot");
         JButton deleteButton = new JButton("Delete Slot");
         JButton renameButton = new JButton("Rename Slot");
 
+        /* The following code adds 4 buttons to the panel */
         buttonPanel.add(selectButton);
         buttonPanel.add(addButton);
         buttonPanel.add(deleteButton);
@@ -65,168 +67,181 @@ public class SlotInfo {
 
         selectButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                selectSlot();
+                selectSlot(); //call fn
             }
         });
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                addSlot();
+                addSlot(); //call fn
             }
         });
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                deleteSlot();
+                deleteSlot(); //call fn
             }
         });
         renameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                renameSlot();
+                renameSlot(); //call fn
             }
         });
 
-        slotInfoFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+        slotInfoFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH); //add all the buttons to the bottom
     }
 
-    public static void showInfoFrame() {
-        slotInfoFrame.setVisible(true);
+    public static void showInfoFrame() { //show the frame
+        slotInfoFrame.setVisible(true); //set visible
     }
 
-    public static void hideInfoFrame() {
-        slotInfoFrame.setVisible(false);
+    public static void hideInfoFrame() { //hide the frame
+        slotInfoFrame.setVisible(false); //set invisible
     }
 
-    public static void selectSlot() {
-        if (slotName != null) {
-            hideInfoFrame();
-            GameVars.slotNameLocal = slotName;
-            GameVars.difficultyLevel = slotDifficulty;
-            GameVars.characterType = slotCharacter;
-            new HomeVillage();
-            Game.HomeVillage.showHomeVillage();
+    public static void selectSlot() { //select the slot
+        if (slotName != null) { //if there is a slot
+            hideInfoFrame(); //hide the frame
+            GameVars.slotNameLocal = slotName; //set the slot name
+            GameVars.difficultyLevel = slotDifficulty; //set the difficulty level
+            GameVars.characterType = slotCharacter; //set the character type
+            new HomeVillage(); //create a new home village
+            Game.HomeVillage.showHomeVillage(); //show the home village
         } else {
+            //ERROR MESSAGE:
             JOptionPane.showMessageDialog(slotInfoFrame, "Please add a slot first", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public static void addSlot() {
-        if (slotName != null) {
+    public static void addSlot() { //create a new slot!!!
+        if (slotName != null) { //if there is already a slot
+            //ERROR MESSAGE
             JOptionPane.showMessageDialog(slotInfoFrame, "You can only have one slot", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        ImageIcon icon1 = new ImageIcon("src/GameSlots/31_chocolatecake_dish.png");
-        ImageIcon icon2 = new ImageIcon("src/GameSlots/23_cheesecake_dish.png");
+        ImageIcon icon1 = new ImageIcon("src/GameSlots/31_chocolatecake_dish.png"); //icon
+        ImageIcon icon2 = new ImageIcon("src/GameSlots/23_cheesecake_dish.png"); //icon
 
+        //get the name of the slot
         Object nameObj = JOptionPane.showInputDialog(slotInfoFrame, "Enter slot name:", "Slot Name", JOptionPane.QUESTION_MESSAGE, icon1, null, null);
-        if (nameObj == null) return;
-        String name = (String) nameObj;
-        if (name.trim().isEmpty()) {
+        if (nameObj == null) return; //if the name is null
+        String name = (String) nameObj; //set the name
+        if (name.trim().isEmpty()) { //if the name is empty
+            //ERROR MESSAGE
             JOptionPane.showMessageDialog(slotInfoFrame, "Slot name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String[] difficultyOptions = {"Easy", "Medium", "Hard"};
+        String[] difficultyOptions = {"Easy", "Medium", "Hard"}; //difficulty options
+        //have a little drop down with the difficulties
         String difficulty = (String) JOptionPane.showInputDialog(slotInfoFrame, "Select difficulty:", "Difficulty", JOptionPane.QUESTION_MESSAGE, icon2, difficultyOptions, difficultyOptions[0]);
-        if (difficulty == null) return;
+        if (difficulty == null) return; //if the difficulty is null
 
-        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date()); //get the date
 
-        JFrame characterSelectFrame = new JFrame();
-        characterSelectFrame.setVisible(true);
-        characterSelectFrame.setTitle("By Anna Denisova");
-        characterSelectFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT + 370);
-        characterSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        characterSelectFrame.setLocationRelativeTo(null);
-        characterSelectFrame.getContentPane().setLayout(new BorderLayout());
-        hideInfoFrame();
+        JFrame characterSelectFrame = new JFrame(); //initialize
+        characterSelectFrame.setVisible(true); //set visible
+        characterSelectFrame.setTitle("By Anna Denisova"); //title
+        characterSelectFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT + 370); //size
+        characterSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //close setting
+        characterSelectFrame.setLocationRelativeTo(null); //center
+        characterSelectFrame.getContentPane().setLayout(new BorderLayout()); //layout
+        hideInfoFrame(); //hide the frame
 
-        String[] characterNames = {"Wizard", "Mime", "Warrior", "Doctor", "Farmer"};
-        final String[] selectedCharacter = {null};
+        String[] characterNames = {"Wizard", "Mime", "Warrior", "Doctor", "Farmer"}; //character names
+        final String[] selectedCharacter = {null}; //selected character
 
-        JPanel characterSelectionPanel = new JPanel();
-        JEditorPane namesAndDescriptions = new JEditorPane();
-        namesAndDescriptions.setContentType("text/html");
-        namesAndDescriptions.setText(getCharacterDescriptions());
-        namesAndDescriptions.setEditable(false);
-        characterSelectionPanel.add(namesAndDescriptions);
-        characterSelectionPanel.setPreferredSize(new Dimension(WINDOWWIDTH, WINDOWHEIGHT + 370));
+        JPanel characterSelectionPanel = new JPanel(); //initialize
+        JEditorPane namesAndDescriptions = new JEditorPane(); //initialize
+        namesAndDescriptions.setContentType("text/html"); //set type
+        namesAndDescriptions.setText(getCharacterDescriptions()); //set text
+        namesAndDescriptions.setEditable(false); //set editable
+        characterSelectionPanel.add(namesAndDescriptions); //add to panel
+        characterSelectionPanel.setPreferredSize(new Dimension(WINDOWWIDTH, WINDOWHEIGHT + 370)); //set size
 
-        JPanel buttonPanel = new JPanel();
-        ButtonGroup group = new ButtonGroup();
-        for (String characterName : characterNames) {
-            JRadioButton button = new JRadioButton(characterName);
+        JPanel buttonPanel = new JPanel(); //initialize
+        ButtonGroup group = new ButtonGroup(); //initialize
+        for (String characterName : characterNames) { //for each character name
+            JRadioButton button = new JRadioButton(characterName); //initialize the buttons
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    selectedCharacter[0] = ((JRadioButton) e.getSource()).getText();
+                    selectedCharacter[0] = ((JRadioButton) e.getSource()).getText(); //set the selected character
                 }
             });
-            group.add(button);
-            buttonPanel.add(button);
+            group.add(button); //add the button to the group so that only ONE button can be SELECTED AT ONCE
+            buttonPanel.add(button); //add it to the panel
         }
 
-        JButton confirmButton = new JButton("Confirm");
+        JButton confirmButton = new JButton("Confirm"); //initialize
         confirmButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (selectedCharacter[0] != null) {
+            public void actionPerformed(ActionEvent e) { //on click
+                if (selectedCharacter[0] != null) { //if a character is selected
+                    //ask for confirmation
                     int confirmation = JOptionPane.showConfirmDialog(characterSelectFrame, "Confirm selection of " + selectedCharacter[0] + "?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                    if (confirmation == JOptionPane.YES_OPTION) {
-                        slotName = name;
-                        slotDifficulty = difficulty;
-                        slotCreationDate = date;
-                        slotCharacter = selectedCharacter[0];
-
+                    if (confirmation == JOptionPane.YES_OPTION) { //confirmed
+                        slotName = name; //set the slot name
+                        slotDifficulty = difficulty; //set the difficulty
+                        slotCreationDate = date; //set the date
+                        slotCharacter = selectedCharacter[0]; //set the character
+                        //the following adds the new slot to display
                         slotListModel.addElement(String.format("%s (%s) (%s) - Created on: %s", name, difficulty, selectedCharacter[0], date));
-                        writeSlotToFile();
-                        showInfoFrame();
+                        writeSlotToFile(); //write to the file!!
+                        showInfoFrame(); //alright
                         characterSelectFrame.setVisible(false);
                     }
                 } else {
+                    //ERROR MESSAGE
                     JOptionPane.showMessageDialog(characterSelectFrame, "Please select a character!");
                 }
             }
         });
 
-        buttonPanel.add(confirmButton);
-        characterSelectFrame.getContentPane().add(characterSelectionPanel, BorderLayout.CENTER);
-        characterSelectFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.add(confirmButton); //add the confirm button
+        characterSelectFrame.getContentPane().add(characterSelectionPanel, BorderLayout.CENTER); //add the character selection panel
+        characterSelectFrame.getContentPane().add(buttonPanel, BorderLayout.SOUTH); //add the button panel
     }
 
-    public static void deleteSlot() {
-        if (slotName != null) {
-            slotListModel.clear();
-            slotName = null;
-            slotDifficulty = null;
-            slotCreationDate = null;
-            slotCharacter = null;
-            clearSlotFile();
+    public static void deleteSlot() { //delete the slot
+        if (slotName != null) { //if there is a slot
+            slotListModel.clear(); //clear the list model
+            slotName = null; //set the slot name to null
+            slotDifficulty = null; //set the difficulty to null
+            slotCreationDate = null; //set the creation date to null
+            slotCharacter = null; //set the character to null
+            clearSlotFile(); //clear the slot file
         } else {
+            //ERROR MESSAGE:
             JOptionPane.showMessageDialog(slotInfoFrame, "Please select a slot first", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public static void renameSlot() {
-        if (slotName != null) {
+    public static void renameSlot() { //rename the slot
+        if (slotName != null) { //if there is a slot
             ImageIcon icon = new ImageIcon("src/GameSlots/91_strawberrycake_dish.png");
+            //POP UP:
             Object newNameObj = JOptionPane.showInputDialog(slotInfoFrame, "Enter new name for the slot", "New Slot Name", JOptionPane.QUESTION_MESSAGE, icon, null, null);
-            if (newNameObj == null) return;
-            String newName = (String) newNameObj;
+            if (newNameObj == null) return; //if the name is null
+            String newName = (String) newNameObj; //set the new name
             if (newName.trim().isEmpty()) {
+                //ERROR MESSAGE
                 JOptionPane.showMessageDialog(slotInfoFrame, "Slot name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            slotName = newName;
+            slotName = newName; //set the slot name
+            //the following code sets the date
             slotListModel.set(0, String.format("%s (%s) (%s) - Created on: %s", newName, slotCharacter, slotDifficulty, slotCreationDate));
-            renameSlotFile(newName);
+            renameSlotFile(newName); //rename the slot FILE
         } else {
+            //ERROR MESSAGE
             JOptionPane.showMessageDialog(slotInfoFrame, "Please select a slot first", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public static void renameSlotFile(String newName) {
-        File file = new File(SAVE_FILE_PATH);
-        if (!file.exists()) {
+    public static void renameSlotFile(String newName) { //rename the slot file
+        File file = new File(SAVE_FILE_PATH); //initialize
+        if (!file.exists()) { //if the file doesnt exist
+            //error
             System.out.println("File does not exist.");
             return;
         }
@@ -237,9 +252,9 @@ public class SlotInfo {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = reader.readLine()) != null) {
-                lines.add(line);
+                lines.add(line); //read in everything
             }
-            reader.close();
+            reader.close(); //close the file
 
             // Modify the first line
             if (!lines.isEmpty()) {
@@ -247,39 +262,41 @@ public class SlotInfo {
             }
 
             // Write the modified content back to the file
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            for (String modifiedLine : lines) {
-                writer.write(modifiedLine);
-                writer.newLine();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file)); //initialize
+            for (String modifiedLine : lines) { //for each line
+                writer.write(modifiedLine); //write the line
+                writer.newLine(); //new line
             }
-            writer.close();
+            writer.close(); //close the file
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    private static void writeSlotToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE_PATH))) {
+    private static void writeSlotToFile() { //write the slot to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE_PATH))) { //initialize
+            //write the basic 4 line info:
             writer.write(slotName + "\n" + slotDifficulty + "\n" + slotCharacter + "\n" + slotCreationDate);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void clearSlotFile() {
+    private static void clearSlotFile() { //clear the slot file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE_PATH))) {
-            writer.write("");
+            writer.write(""); //this clears EVERYTHING
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void loadSlotFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(SAVE_FILE_PATH))) {
-            slotName = reader.readLine();
-            slotDifficulty = reader.readLine();
-            slotCharacter = reader.readLine();
-            slotCreationDate = reader.readLine();
-            if (slotName != null) {
+    private static void loadSlotFromFile() { //load the slot from the file
+        try (BufferedReader reader = new BufferedReader(new FileReader(SAVE_FILE_PATH))) { //initialize
+            slotName = reader.readLine(); //read the lines
+            slotDifficulty = reader.readLine(); //read the lines
+            slotCharacter = reader.readLine(); //read the lines
+            slotCreationDate = reader.readLine(); //read the lines
+            if (slotName != null) { //if there is a slot
+                //add to the list
                 slotListModel.addElement(String.format("%s (%s) (%s) - Created on: %s", slotName, slotDifficulty, slotCharacter, slotCreationDate));
             }
         } catch (IOException e) {
@@ -288,6 +305,7 @@ public class SlotInfo {
     }
 
     private static String getCharacterDescriptions() {
+        /* The following code is html formatted code with all the character options */
         return "<html><body style='font-family: PT Mono; font-size: 9px;'>" +
                 "<div style='background-color: #9AD1D4;'>" +
                 "<p><b>&nbsp;&nbsp;WIZARD</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>" +
@@ -313,8 +331,9 @@ public class SlotInfo {
                 "</div></body></html>";
     }
 
+    /* FOR TESTING
     public static void main(String[] args) {
         new SlotInfo();
         showInfoFrame();
-    }
+    }*/
 }

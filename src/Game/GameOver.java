@@ -11,13 +11,14 @@ import AnnaTools.Fonts;
 import Shops.*;
 
 public class GameOver {
-    public static void checkGameOver() {
+    public static void checkGameOver() { //check if the game is over
 
-        if (GameVars.sanity <= 0 || GameVars.health <= 0 || GameVars.hunger >= 100) {
+        if (GameVars.sanity <= 0 || GameVars.health <= 0 || GameVars.hunger >= 100) { //if sanity is 0 or health is 0 or hunger is 100
 
-            GameVars.isGhost = true;
+            GameVars.isGhost = true; //set the player to be a ghost
 
             //set everything invisible:
+            /* The following code sets everything invisible */
             Quest10.hideQuest10();
             Quest20.hideQuest20();
             Quest30.hideQuest30();
@@ -33,62 +34,62 @@ public class GameOver {
 
             //create a frame that says game over and after OK set home village visible
 
-            JFrame gameOverFrame = new JFrame("By Anna Denisova");
-            gameOverFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT);
-            gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            gameOverFrame.setLocationRelativeTo(null);
-            gameOverFrame.getContentPane().setLayout(new BorderLayout());
+            JFrame gameOverFrame = new JFrame("By Anna Denisova"); //initialize
+            gameOverFrame.setSize(GameVars.WINDOWWIDTH + GameVars.SIDEBARWIDTH, GameVars.WINDOWHEIGHT); //set size
+            gameOverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //close setting
+            gameOverFrame.setLocationRelativeTo(null); //center
+            gameOverFrame.getContentPane().setLayout(new BorderLayout()); //make layout border
 
-            JPanel gameOverPanel = new JPanel();
-            gameOverPanel.setLayout(new BoxLayout(gameOverPanel, BoxLayout.Y_AXIS));
-            gameOverPanel.setBackground(Color.decode("#2C5530"));
+            JPanel gameOverPanel = new JPanel(); //new panel
+            gameOverPanel.setLayout(new BoxLayout(gameOverPanel, BoxLayout.Y_AXIS)); //vertical layout
+            gameOverPanel.setBackground(Color.decode("#2C5530")); //set background color
 
-            JLabel gameOverLabel = new JLabel("Game Over");
-            gameOverLabel.setFont(Fonts.panicFont);
-            gameOverLabel.setForeground(Color.WHITE);
-            gameOverLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            JLabel gameOverLabel = new JLabel("Game Over"); //label
+            gameOverLabel.setFont(Fonts.panicFont); //set font
+            gameOverLabel.setForeground(Color.WHITE); //set color
+            gameOverLabel.setAlignmentX(Component.CENTER_ALIGNMENT); //center
             gameOverLabel.setBorder(BorderFactory.createEmptyBorder(120, 10, 50, 10)); // More room for the title
-            gameOverPanel.add(gameOverLabel);
+            gameOverPanel.add(gameOverLabel); //add to panel
 
-            String gameOverDesc = "You have died because ";
-            if (GameVars.sanity <= 0) {
-                gameOverDesc += "you have lost your sanity.";
-            } else if (GameVars.health <= 0) {
-                gameOverDesc += "you have lost your health.";
-            } else if (GameVars.hunger >= 100) {
-                gameOverDesc += "you have starved to death.";
+            String gameOverDesc = "You have died because "; //description
+            if (GameVars.sanity <= 0) { //if sanity is 0
+                gameOverDesc += "you have lost your sanity."; //add to description
+            } else if (GameVars.health <= 0) { //if health is 0
+                gameOverDesc += "you have lost your health."; //add to description
+            } else if (GameVars.hunger >= 100) { //if hunger is 100
+                gameOverDesc += "you have starved to death."; //add to description
             }
-            JLabel gameOverLabel2 = new JLabel(gameOverDesc);
-            gameOverLabel2.setForeground(Color.WHITE);
-            gameOverLabel2.setFont(new Font("Arial", Font.PLAIN, 20));
-            gameOverLabel2.setBorder(BorderFactory.createEmptyBorder(30, 10, 30, 10));
-            gameOverLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
-            gameOverPanel.add(gameOverLabel2);
+            JLabel gameOverLabel2 = new JLabel(gameOverDesc); //label
+            gameOverLabel2.setForeground(Color.WHITE); //set color
+            gameOverLabel2.setFont(new Font("Arial", Font.PLAIN, 20)); //set font
+            gameOverLabel2.setBorder(BorderFactory.createEmptyBorder(30, 10, 30, 10)); //add space
+            gameOverLabel2.setAlignmentX(Component.CENTER_ALIGNMENT); //center
+            gameOverPanel.add(gameOverLabel2); //add to panel
 
-            JLabel ghostLabel = new JLabel("You are now a ghost.");
-            ghostLabel.setForeground(Color.WHITE);
-            ghostLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-            ghostLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            ghostLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            gameOverPanel.add(ghostLabel);
+            JLabel ghostLabel = new JLabel("You are now a ghost."); //label
+            ghostLabel.setForeground(Color.WHITE); //set color
+            ghostLabel.setFont(new Font("Arial", Font.PLAIN, 20)); //set font
+            ghostLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); //add space
+            ghostLabel.setAlignmentX(Component.CENTER_ALIGNMENT); //center
+            gameOverPanel.add(ghostLabel); //add to panel
 
-            JButton okButton = new JButton("OK");
-            okButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-            okButton.addActionListener(new ActionListener() {
+            JButton okButton = new JButton("OK"); //button
+            okButton.setAlignmentX(Component.CENTER_ALIGNMENT); //center
+            okButton.addActionListener(new ActionListener() { //on click
                 @Override
-                public void actionPerformed(ActionEvent e) {
-                    gameOverFrame.setVisible(false);
-                    HomeVillage.showHomeVillage();
+                public void actionPerformed(ActionEvent e) { //on click
+                    gameOverFrame.setVisible(false); //hide the frame
+                    HomeVillage.showHomeVillage(); //show the home village
                 }
             });
 
             // Add vertical glue to ensure even spacing
-            gameOverPanel.add(Box.createVerticalGlue());
-            gameOverPanel.add(okButton);
-            gameOverPanel.add(Box.createVerticalGlue());
+            gameOverPanel.add(Box.createVerticalGlue()); //add space
+            gameOverPanel.add(okButton); //add button
+            gameOverPanel.add(Box.createVerticalGlue()); //add space
 
-            gameOverFrame.add(gameOverPanel, BorderLayout.CENTER);
-            gameOverFrame.setVisible(true);
+            gameOverFrame.add(gameOverPanel, BorderLayout.CENTER); //add panel
+            gameOverFrame.setVisible(true); //set visible
         }
     }
 }

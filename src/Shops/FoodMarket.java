@@ -17,7 +17,7 @@ import static AnnaTools.Updater.updateAllSidePanels;
 
 public class FoodMarket {
 
-    public static SideBar foodMarketSideBar = new SideBar();
+    public static SideBar foodMarketSideBar = new SideBar(); // The sidebar for the food market
 
     public Food[] foodList = { // An array of all available food in the shop
             new Food("Carrots", 1, 5),
@@ -34,7 +34,7 @@ public class FoodMarket {
 
     public static JFrame foodMarketFrame; // The most important thing in this entire file
     private JComboBox<String> foodMarketComboBox; // A combo box that displays available food
-    private JTextField searchField;
+    private JTextField searchField; // A text field to search for food
 
     public FoodMarket() {
 
@@ -54,12 +54,15 @@ public class FoodMarket {
         JEditorPane namesAndDescriptions = new JEditorPane();
         namesAndDescriptions.setSize(GameVars.WINDOWWIDTH, GameVars.WINDOWHEIGHT);
 
-        String nameAndDescriptionsString = "";
+        String nameAndDescriptionsString = ""; // Create string to store all the names and descriptions
 
         namesAndDescriptions.setEditable(false);
         namesAndDescriptions.setFocusable(false); // No cursor
         namesAndDescriptions.setContentType("text/html");
 
+        /* The following code writes HTML formatted descriptions
+         * for the namesAndDescriptionsString this is code to display
+         * all possible items to buy*/
         nameAndDescriptionsString += "<html><body style='font-family: PT Mono; font-size: 12px;'>" +
                 "<div style='background-color: #9AD1D4;'>";
         nameAndDescriptionsString += "<br>&nbsp;&nbsp;------------------------------------------------&nbsp;<br> " +
@@ -85,21 +88,25 @@ public class FoodMarket {
         nameAndDescriptionsString += "&nbsp;&nbsp;------------------------------------------------ <br><br>";
         nameAndDescriptionsString += "</div></body></html>";
         namesAndDescriptions.setText(nameAndDescriptionsString);
+        // End of HTML formatted descriptions ---------------------------------------------
 
         // Search field
         searchField = new JTextField();
-        searchField.setText("SEARCH HERE");
+        searchField.setText("SEARCH HERE"); //inital text in the search field
+        /* THIS KEY ADAPTER MAKES IT SO THAT THE FOOD LIST IS FILETERED
+        WITH EVERY NEW LETTER ADDITION
+         */
         searchField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                filterFoodList();
+                filterFoodList(); //FIND THE THINGS THAT MATCH AND SELECT THEM
             }
         });
 
         // Display available food in a combo box
         foodMarketComboBox = new JComboBox<>();
         for (Food foodItem : foodList) {
-            foodMarketComboBox.addItem(foodItem.name + " - $" + foodItem.price);
+            foodMarketComboBox.addItem(foodItem.name + " - $" + foodItem.price); // Add the food to the combo box
         }
 
         // Create purchase button
@@ -119,6 +126,7 @@ public class FoodMarket {
             }
         });
 
+        /* THE FOLLOWING CODE ADDS EVERYTHING TO PANELS */
         JPanel newPanel = new JPanel(new BorderLayout());
         newPanel.add(searchField, BorderLayout.NORTH);
         newPanel.add(foodMarketComboBox, BorderLayout.CENTER);
@@ -136,13 +144,13 @@ public class FoodMarket {
         foodMarketFrame.add(foodMarketSideBar.getPanel(), BorderLayout.EAST);
     }
 
-    private String returnStringWithSpaces(String string, int length) {
-        int spaces = length - string.length();
-        StringBuilder newString = new StringBuilder();
-        for (int i = 0; i < spaces - 1; i++) { // Minus 1 just because
-            newString.append("&nbsp;");
+    private String returnStringWithSpaces(String string, int length) { // THIS RETURNS HTML SPACES
+        int spaces = length - string.length(); // Length of the string
+        String newString = ""; // Initialize
+        for (int i = 0; i < spaces-1; i++) { // Minus 1 just because
+            newString += "&nbsp;"; // Add a space
         }
-        return newString.toString();
+        return newString; // Return the string
     }
 
     private void purchaseFood() {
@@ -168,17 +176,17 @@ public class FoodMarket {
         }
     }
 
-    private void filterFoodList() {
-        String searchText = searchField.getText().toLowerCase();
-        List<String> filteredItems = new ArrayList<>();
+    private void filterFoodList() { // THIS FILTERS THE FOOD LIST
+        String searchText = searchField.getText().toLowerCase(); // Get the search text
+        List<String> filteredItems = new ArrayList<>(); // Create a list to store the filtered items
 
-        for (Food foodItem : foodList) {
-            if (foodItem.name.toLowerCase().contains(searchText)) {
-                filteredItems.add(foodItem.name + " - $" + foodItem.price);
+        for (Food foodItem : foodList) { // For all food items
+            if (foodItem.name.toLowerCase().contains(searchText)) { // If the food item name contains the search text
+                filteredItems.add(foodItem.name + " - $" + foodItem.price); // Add the food item to the filtered items
             }
         }
 
-        foodMarketComboBox.setModel(new DefaultComboBoxModel<>(filteredItems.toArray(new String[0])));
+        foodMarketComboBox.setModel(new DefaultComboBoxModel<>(filteredItems.toArray(new String[0]))); // Set the combo box model to the filtered items
     }
 
     public static void showFoodMarket() { // THIS SHOWS THE FRAME
@@ -190,8 +198,12 @@ public class FoodMarket {
         foodMarketFrame.setVisible(false); // OK
     }
 
+    // TESTING
+    /*
     public static void main(String[] args) {
         new FoodMarket();
         showFoodMarket();
     }
+
+     */
 }

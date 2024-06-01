@@ -1,4 +1,31 @@
-jkjkkjlklj
+ok
 Easy
-Doctor
+Warrior
 2024-05-31
+0 0 0 1 0 0 1 0 
+0 -1 0 -1 -1 -1 -1 -1 
+4 -1 0 0 0 1 0 0 
+-1 -1 -1 -1 -1 -1 -1 1 
+0 0 0 1 0 0 0 0 
+0
+3
+1
+4
+false
+false
+true
+true
+true
+true
+Weapon;Axe;15;For smashing enemies;15;15,Weapon;Katana;37;Imported from Japan;30;20,Armour;Silver;50;20,Food;Cake;10;10,Key;Key 1,HealingMedicine;Herb Bandage;10;10,Key;Key 2,Key;Key 3,SanityMedicine;Ancient Mushroom;30;-5,Key;Treasure: The friends you made the along the way,
+false
+70
+40
+20
+10063
+4
+15
+45
+20
+Weapon;Katana;37;Imported from Japan;30;20
+Armour;Silver;50;20
